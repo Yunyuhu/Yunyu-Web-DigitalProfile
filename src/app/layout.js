@@ -48,9 +48,9 @@ export default function RootLayout({ children }) {
             </Link>
             <h1 className="mt-2 font-bold">胡芸毓 Yunyu Hu</h1>
             <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2">
-              就讀於國立政治大學數位內容學程碩士班，專注於人機互動與人工智慧溝通意圖的研究。具資訊管理背景，關注科技如何回應社會的複雜性議題，並致力於打造更具共感力的數位體驗。
+            從資管出發，進一步於數位內容碩士深耕人機互動的溝通意圖研究。熱衷科技如何回應社會的複雜議題，並致力於打造更具共感力的數位體驗。
             </p>
-            <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2">相信每一次的設計都將始於理解，忠於感受。</p>
+            {/* <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2">相信每一次的設計都將始於理解，忠於感受。</p> */}
             
 
             
