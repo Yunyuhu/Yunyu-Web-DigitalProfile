@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full h-screen justify-center items-center gap-6 p-6 rounded-2xl">
+    <div className="flex flex-col w-full h-screen justify-center items-center gap-6 p-6 rounded-2xl">
 
       {/* TrueFocus 動畫字句 */}
       <div className="text-center">
@@ -33,16 +33,15 @@ export default function Home() {
           相信每一次的設計都將始於理解，忠於感受。
         </p>
       </div>
-  
-      {/* 愛心計數區塊 */}
+      {/* 愛心區塊 */}
       <div
-        className="cursor-pointer flex flex-col justify-center items-center"
-        onClick={addHeart}
-      >
-        <Image src={HeartImg} className="w-[68px]" alt="heart" />
-        <div className="text-xl mt-2">{heart}</div>
+          className="cursor-pointer flex flex-col justify-center items-center"
+          onClick={addHeart}
+        >
+          <Image src={HeartImg} className="w-[68px]" alt="heart" />
+          <div className="text-l mt-2 font-semibold">{heart}</div>
+        </div>
       </div>
-    </div>
   );
   
 }
