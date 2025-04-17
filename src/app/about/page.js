@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import AvatarImg from "@/../public/Avatar.jpg";
 
 export default function About() {
   const skills = [
