@@ -23,7 +23,7 @@ export default function About() {
           <div className="bg-[#fcfcfc] rounded-xl p-4 shadow-sm">
             <h2 className="font-semibold mb-2">簡介 / Bio</h2>
             <p className="text-sm text-gray-700 leading-relaxed">
-              Yunyu is a master's student in Digital Content and Technologies at National Chengchi University. With a background in Information Management and a strong interest in empathetic AI design, she has participated in various cross-disciplinary projects ranging from gender-based issue summarization bots to immersive VR interfaces for social sensing. Through hands-on collaboration with research labs and design communities, Yunyu aspires to create digital services that not only solve problems but also understand people.
+              Yunyu is a master&apos;s student in Digital Content and Technologies at National Chengchi University. With a background in Information Management and a strong interest in empathetic AI design, she has participated in various cross-disciplinary projects ranging from gender-based issue summarization bots to immersive VR interfaces for social sensing. Through hands-on collaboration with research labs and design communities, Yunyu aspires to create digital services that not only solve problems but also understand people.
             </p>
           </div>
 
