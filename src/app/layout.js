@@ -4,7 +4,7 @@ import Image from "next/image";
 import AvatarImg from "@/../public/Avatar.jpg";
 import Link from "next/link";
 
-import { Mail, Linkedin, Instagram } from "lucide-react";
+import { Mail, Linkedin, Instagram,UserCircle, Sparkles,BookOpenCheck,LayoutDashboard} from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
                 />
               </div>
             </Link>
-
+            <h1 className="mt-2 font-bold">胡芸毓 Yunyu Hu</h1>
             <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2">
               就讀於國立政治大學數位內容學程碩士班，專注於人機互動與人工智慧溝通意圖的研究。具資訊管理背景，關注科技如何回應社會的複雜性議題，並致力於打造更具共感力的數位體驗。
             </p>
@@ -76,21 +76,51 @@ export default function RootLayout({ children }) {
 
             {/* 頁面切換 */}
             <div className="w-full flex flex-col gap-2">
-              
+              {/* About Me */}
+              {/* About Me */}
               <Link href="/about">
-                {/* <div className="w-full h-[84px] bg-gray-300 rounded-xl">About</div> */}
-                <div className={`w-full h-[84px] bg-gray-300 rounded-xl`}>About</div>
+                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                  <UserCircle className="w-5 h-5 text-gray-600 mr-3" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-sm">關於我</span>
+                    <span className="text-xs text-gray-500">About Me</span>
+                  </div>
+                </div>
               </Link>
 
-              <Link href="/cate-web">
-                <div className="w-full h-[84px] bg-gray-300 rounded-xl">Cate-Web</div>
+              {/* Interests */}
+              <Link href="/interests">
+                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                  <Sparkles className="w-5 h-5 text-gray-600 mr-3" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-sm">興趣</span>
+                    <span className="text-xs text-gray-500">Interests</span>
+                  </div>
+                </div>
               </Link>
 
-              <Link href="/cate-painting">
-                <div className="w-full h-[84px] bg-gray-300 rounded-xl">Cate-Painting</div>
+              {/* Projects */}
+              <Link href="/projects">
+                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                  <LayoutDashboard className="w-5 h-5 text-gray-600 mr-3" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-sm">專案（UX、開發）</span>
+                    <span className="text-xs text-gray-500">Projects (UX & Dev)</span>
+                  </div>
+                </div>
               </Link>
-              
-              
+
+              {/* Research */}
+              <Link href="/research">
+                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                  <BookOpenCheck className="w-5 h-5 text-gray-600 mr-3" />
+                  <div className="flex flex-col leading-tight">
+                    <span className="font-semibold text-sm">參與研究活動</span>
+                    <span className="text-xs text-gray-500">Research Involvement</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* <div className="w-full h-[84px] bg-gray-300 rounded-xl">作品分類三</div>
               <div className="w-full h-[84px] bg-gray-300 rounded-xl">作品分類一</div>
               <div className="w-full h-[84px] bg-gray-300 rounded-xl">作品分類二</div>
