@@ -173,17 +173,17 @@ export default function About() {
       {
         year: "2022",
         title: "大專院校資訊應用服務創新競賽",
-        description: "展出DeeplLink, 資訊應用組 IPv4 第一名",
+        description: "展出DeepLink, 資訊應用組 IPv4 第一名",
       },
       {
         year: "2022",
         title: "全國大專院校智慧創新暨跨域整合創作競賽",
-        description: "展出DeeplLink, 獲得最佳注目獎",
+        description: "展出DeepLink, 獲得最佳注目獎",
       },
       {
         year: "2022",
         title: "輔仁大學資訊管理學系＿專題評分",
-        description: "展出DeeplLink, 獲得專題優秀組別獎，並成為系上服務平台（持續營運中）",
+        description: "展出DeepLink, 獲得專題優秀組別獎，並成為系上服務平台（持續營運中）",
       },
     ]
   }
