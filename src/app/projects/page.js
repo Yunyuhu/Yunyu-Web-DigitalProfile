@@ -70,6 +70,7 @@ const projects = [
 
 export default function Projects() {
   return (
+    // overflow-y-auto
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
       <div className="flex flex-col w-full">
         <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">專案 / Projects</h1>
@@ -79,7 +80,7 @@ export default function Projects() {
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
-      <div className="max-h-full overflow-y-auto px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
+      <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
         {projects.map((project, index) => {
           const spanClass =
             index === 0 || index === 1 ? "md:col-span-6" :
