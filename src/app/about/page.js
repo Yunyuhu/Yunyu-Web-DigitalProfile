@@ -76,59 +76,117 @@ export default function About() {
       { year: "2019", description: "富邦產險實習生" },
     ],
     research: [
-      { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》" },
-      { year: "2024", description: "TAICHI DEMO - FlexiTouch" },
-      { year: "2022", description: "科技部大專生研究計畫 - 自主學習平台研究" },
-      {
-        year: "2021",
-        description: "TANET & NCS 學術研討會發表",
+      { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》"},
+      { year: "2024", description: "TAICHI DEMO -《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
+      { year: "2022", description: "科技部大專生研究計畫 -《探索使用線上自主學習平台關鍵因素之個案研究》" },
+      { year: "2021", description: "TANET & NCS 學術研討會發表：" ,
         details: [
-          "｜《支付習慣影響數位振興券使用意願之研究》",
-          "｜《疫情對行動支付使用情形之影響》",
-        ],
-      },
+        "｜《支付習慣影響數位振興券使用意願之研究》",
+        "｜《疫情對行動支付使用情形之影響》"
+      ]},
     ],
     community: [
       { year: "2024", description: "OpenHCI 24th 技術TA" },
-      {
-        year: "2023",
-        description: "DeepLink 公關與活動企劃",
-        details: ["｜ 協辦25場、主辦5場分享會"],
-      },
-      {
-        year: "2019",
-        description: "攝影社寒期攝影訓練活動 _ 總召",
-        details: ["｜ 舉辦80人兩天一夜營隊"],
+      { year: "2023", description: "DeepLink 營運公關與活動企劃",
+        details:["｜ 協辦25場、主辦5場分享會"]
+       },
+      { year: "2019", description: "攝影社寒期攝影訓練活動 _ 總召",
+        details:["｜ 舉辦80人兩天一夜的營隊活動"]
       },
       { year: "2019", description: "攝影社 _ 活動幹部" },
     ],
     projects: [
       {
-        year: "2025",
-        title: "健保快易通 Redesign",
-        description: "重構健保資訊介面與架構",
-        tags: ["UX", "健康", "介面設計"],
+      year: "2025",
+      title: "健保快易通 Redesign",
+      description: "以慢性病與一般民眾為對象，重構健保資訊介面與架構",
+      tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
       },
       {
-        year: "2024",
-        title: "FlexiTouch",
-        description: "軟性裝置互動設計",
-        tags: ["Best Demo", "柔性材質", "觸控"],
+      year: "2024",
+      title: "FlexiTouch：軟性裝置互動設計",
+      description: "探索柔性材質觸控互動，設計按壓與拉伸的情境體驗",
+      tags: ["TAICHI Best Demo", "League of VR", "遊戲互動設計", "柔性裝置"]
       },
-    ],
+      {
+      year: "2024",
+      title: "WallGuard：牆面危害 AI 識別系統",
+      description: "導入 YOLO 與風險模型，打造即時牆面危害辨識原型",
+      tags: ["AI識別", "InnoFest 展出", "建築巡檢", "YOLO"]
+      },
+      {
+      year: "2024",
+      title: "政大場地管理系統 Redesign",
+      description: "優化場地借用平台，提升分類清晰度與操作流程",
+      tags: ["UX Redesign", "資訊架構", "流程優化"]
+      },
+      {
+      year: "2023",
+      title: "iHarbor 長照服務設計",
+      description: "以照護者與眷屬的醫病照護關係為核心，設計共享資訊與照護透明化工具",
+      tags: ["長照設計", "醫病溝通", "服務設計"]
+      },
+      {
+      year: "2023",
+      title: "Tears of Ancestors：2D 遊戲",
+      description: "結合探索與打怪的雙機制，進入創意設計競賽決賽",
+      tags: ["遊戲腳本", "對話設計", "遊戲開發", "決賽入選"]
+      },
+      {
+      year: "2021–2023",
+      title: "DeepLink（畢業專題＿產學合作）",
+      description: "以線上 Webinar 知識分享為切口，打造數位互動履歷平台",
+      tags: ["產學合作", "履歷設計", "獲多項獎項", "補助計畫"]
+      }
+      ],
     awards: [
       {
         year: "2024",
         title: "TAICHI Demo",
-        description: "展出 FlexiTouch，獲選為 Best Demo",
+        description: "展出 FlexiTouch，獲選為2024年 Best Demo",
       },
       {
         year: "2024",
-        title: "League of VR",
-        description: "獲選最佳技術獎",
+        title: "League of VR Final",
+        description: "展出 FlexiTouch，獲選最佳技術獎",
       },
-    ],
-  };
+      {
+        year: "2024",
+        title: "InnoFest@ICI",
+        description: "展出建築牆面危害圖像辨識系統",
+      },
+      {
+        year: "2024",
+        title: "AI Junior Award",
+        description: "展出 iHarbo，進入決選",
+      },
+      {
+        year: "2023",
+        title: "台灣大專院校創意遊戲設計競賽",
+        description: "展出 Tears of Ancestors，進入決選",
+      },
+      {
+        year: "2023",
+        title: "文化科技發展協會「文化科技創意提案」",
+        description: "獲兩間企業推薦，進入協會獎決選",
+      },
+      {
+        year: "2022",
+        title: "大專院校資訊應用服務創新競賽",
+        description: "展出DeeplLink, 資訊應用組 IPv4 第一名",
+      },
+      {
+        year: "2022",
+        title: "全國大專院校智慧創新暨跨域整合創作競賽",
+        description: "展出DeeplLink, 獲得最佳注目獎",
+      },
+      {
+        year: "2022",
+        title: "輔仁大學資訊管理學系＿專題評分",
+        description: "展出DeeplLink, 獲得專題優秀組別獎，並成為系上服務平台（持續營運中）",
+      },
+    ]
+  }
 
   return (
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
@@ -207,7 +265,7 @@ export default function About() {
               className="w-full border border-gray-300 text-sm rounded-lg p-2 mb-4"
             >
               <option value="work">💼 工作與教學</option>
-              <option value="projects">💻 專案設計</option>
+              <option value="projects">💻 專案設計與開發</option>
               <option value="research">🧪 研究與發表</option>
               <option value="awards">🏆 獲獎展出</option>
               <option value="community">🤝 社群參與</option>
@@ -218,7 +276,7 @@ export default function About() {
           <div className="hidden sm:flex">
             <TabsList className="flex flex-wrap justify-start gap-2 mb-4">
               <TabsTrigger value="work">💼 工作與教學</TabsTrigger>
-              <TabsTrigger value="projects">💻 專案設計</TabsTrigger>
+              <TabsTrigger value="projects">💻 專案設計與開發</TabsTrigger>
               <TabsTrigger value="research">🧪 研究與發表</TabsTrigger>
               <TabsTrigger value="awards">🏆 獲獎展出</TabsTrigger>
               <TabsTrigger value="community">🤝 社群參與</TabsTrigger>
