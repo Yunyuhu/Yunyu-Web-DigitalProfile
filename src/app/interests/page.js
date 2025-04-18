@@ -21,7 +21,10 @@ export default function Interests() {
         </h3>
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
-      <CircularGallery></CircularGallery>
+      <div className="w-full h-[400px] sm:h-[500px] md:h-[650px] lg:h-[700px] mt-6">
+        <CircularGallery />
+      </div>
+
     
       {/* <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
         
