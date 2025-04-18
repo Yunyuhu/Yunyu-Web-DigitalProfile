@@ -75,11 +75,10 @@ export default function RootLayout({ children }) {
 
 
             {/* 頁面切換 */}
-            <div className="w-full flex flex-col gap-2">
-              {/* About Me */}
+            <div className="w-full flex flex-col gap-4">
               {/* About Me */}
               <Link href="/about">
-                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                <div className="w-full h-[60px] bg-[#f7f7f7] hover:bg-[#edf6f7] rounded-xl shadow-sm flex items-center px-4 transition">
                   <UserCircle className="w-5 h-5 text-gray-600 mr-3" />
                   <div className="flex flex-col leading-tight">
                     <span className="font-semibold text-sm">關於我</span>
@@ -90,7 +89,7 @@ export default function RootLayout({ children }) {
 
               {/* Interests */}
               <Link href="/interests">
-                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                <div className="w-full h-[60px] bg-[#f7f7f7] hover:bg-[#edf6f7] rounded-xl shadow-sm flex items-center px-4 transition">
                   <Sparkles className="w-5 h-5 text-gray-600 mr-3" />
                   <div className="flex flex-col leading-tight">
                     <span className="font-semibold text-sm">興趣</span>
@@ -101,7 +100,7 @@ export default function RootLayout({ children }) {
 
               {/* Projects */}
               <Link href="/projects">
-                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                <div className="w-full h-[60px] bg-[#f7f7f7] hover:bg-[#edf6f7] rounded-xl shadow-sm flex items-center px-4 transition">
                   <LayoutDashboard className="w-5 h-5 text-gray-600 mr-3" />
                   <div className="flex flex-col leading-tight">
                     <span className="font-semibold text-sm">專案（UX、開發）</span>
@@ -112,7 +111,7 @@ export default function RootLayout({ children }) {
 
               {/* Research */}
               <Link href="/research">
-                <div className="w-full h-[60px] bg-[#fcfcfc] hover:bg-[#e3f1f2] rounded-xl shadow-sm flex items-center px-4 transition">
+                <div className="w-full h-[60px] bg-[#f7f7f7] hover:bg-[#edf6f7] rounded-xl shadow-sm flex items-center px-4 transition">
                   <BookOpenCheck className="w-5 h-5 text-gray-600 mr-3" />
                   <div className="flex flex-col leading-tight">
                     <span className="font-semibold text-sm">參與研究活動</span>

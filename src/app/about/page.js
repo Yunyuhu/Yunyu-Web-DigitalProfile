@@ -1,7 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import AvatarImg from "@/../public/Avatar.jpg";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { motion } from "framer-motion";
@@ -73,9 +71,9 @@ export default function About() {
       { year: "2019", description: "富邦產險實習生" },
     ],
     research: [
-      { year: "進行中", description: "碩論 - 《人機互動與 AI 溝通意圖研究》"},
-      { year: "2024", description: "TAICHI DEMO：《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
-      { year: "2022", description: "科技部大專生研究計畫：《探索使用線上自主學習平台關鍵因素之個案研究》" },
+      { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》"},
+      { year: "2024", description: "TAICHI DEMO -《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
+      { year: "2022", description: "科技部大專生研究計畫 -《探索使用線上自主學習平台關鍵因素之個案研究》" },
       { year: "2021", description: "TANET & NCS 學術研討會發表：" ,
         details: [
         "｜《支付習慣影響數位振興券使用意願之研究》",
@@ -84,8 +82,13 @@ export default function About() {
     ],
     community: [
       { year: "2024", description: "OpenHCI 24th 技術TA" },
-      { year: "2023", description: "DeepLink 營運公關與活動企劃，協辦25場、主辦5場分享會" },
-      { year: "2023", description: "寒假影像創作訓練營召集與營運" },
+      { year: "2023", description: "DeepLink 營運公關與活動企劃",
+        details:["｜ 協辦25場、主辦5場分享會"]
+       },
+      { year: "2019", description: "攝影社寒期攝影訓練活動 _ 總召",
+        details:["｜ 舉辦80人兩天一夜的營隊活動"]
+      },
+      { year: "2019", description: "攝影社 _ 活動幹部" },
     ],
     projects: [
       {
@@ -134,13 +137,13 @@ export default function About() {
     awards: [
       {
         year: "2024",
-        title: "TAICHI 展出 FlexiTouch",
-        description: "獲選為2024年 Best Demo",
+        title: "TAICHI Demo",
+        description: "展出 FlexiTouch，獲選為2024年 Best Demo",
       },
       {
         year: "2024",
         title: "League of VR Final",
-        description: "展出 FlexiTouch，獲最佳技術獎",
+        description: "展出 FlexiTouch，獲選最佳技術獎",
       },
       {
         year: "2024",
@@ -165,13 +168,18 @@ export default function About() {
       {
         year: "2022",
         title: "大專院校資訊應用服務創新競賽",
-        description: "資訊應用組第一名",
+        description: "展出DeeplLink, 資訊應用組 IPv4 第一名",
       },
       {
         year: "2022",
         title: "全國大專院校智慧創新暨跨域整合創作競賽",
-        description: "獲得最佳注目獎",
-      }
+        description: "展出DeeplLink, 獲得最佳注目獎",
+      },
+      {
+        year: "2022",
+        title: "輔仁大學資訊管理學系＿專題評分",
+        description: "展出DeeplLink, 獲得專題優秀組別獎，並成為系上服務平台（持續營運中）",
+      },
     ]
       
   }
@@ -253,8 +261,8 @@ export default function About() {
               className="w-full border border-gray-300 text-sm rounded-lg p-2"
             >
               <option value="work">💼 工作與教學</option>
-              <option value="research">🧪 研究與發表</option>
               <option value="projects">💻 專案設計</option>
+              <option value="research">🧪 研究與發表</option>
               <option value="awards">🏆 獲獎展出</option>
               <option value="community">🤝 社群參與</option>
             </select>
@@ -263,8 +271,8 @@ export default function About() {
           <div className="hidden sm:flex">
           <TabsList className="flex flex-wrap justify-start gap-2 mb-4">
               <TabsTrigger value="work">💼 工作與教學</TabsTrigger>
-              <TabsTrigger value="research">🧪 研究與發表</TabsTrigger>
               <TabsTrigger value="projects">💻 專案設計</TabsTrigger>
+              <TabsTrigger value="research">🧪 研究與發表</TabsTrigger>
               <TabsTrigger value="awards">🏆獲獎展出</TabsTrigger>
               <TabsTrigger value="community">🤝 社群參與</TabsTrigger>
             </TabsList>
@@ -273,11 +281,11 @@ export default function About() {
           <TabsContent value="work">
             <Card><CardContent className="py-4">{timelineItems(data.work)}</CardContent></Card>
           </TabsContent>
-          <TabsContent value="research">
-            <Card><CardContent className="py-4">{timelineItems(data.research)}</CardContent></Card>
-          </TabsContent>
           <TabsContent value="projects">
             <Card><CardContent className="py-4">{timelineItems(data.projects)}</CardContent></Card>
+          </TabsContent>
+          <TabsContent value="research">
+            <Card><CardContent className="py-4">{timelineItems(data.research)}</CardContent></Card>
           </TabsContent>
           <TabsContent value="awards">
             <Card><CardContent className="py-4">{timelineItems(data.awards)}</CardContent></Card>
