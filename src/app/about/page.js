@@ -105,7 +105,7 @@ export default function About() {
       },
       {
       year: "2024",
-      title: "牆面危害 AI 識別系統",
+      title: "WallGuard：牆面危害 AI 識別系統",
       description: "導入 YOLO 與風險模型，打造即時牆面危害辨識原型",
       tags: ["AI識別", "InnoFest 展出", "建築巡檢", "YOLO"]
       },
