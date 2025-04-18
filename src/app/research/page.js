@@ -26,8 +26,8 @@ export default function Research() {
 
       <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
         
-      <div className="grid grid-cols-1 sm:grid-cols-3 w-full gap-4 h-[33vh] sm:h-[33vh]">
-          <div className={`bg-gray-200 sm:col-span-1 rounded-2xl relative overflow-hidden`} 
+      <div className="grid grid-cols-1 sm:grid-cols-5 w-full gap-4 h-[33vh] sm:h-[33vh]">
+          <div className={`bg-gray-200 sm:col-span-3 rounded-2xl relative overflow-hidden`} 
 
               style={
                 { backgroundImage: `url(${Painting2.src})`, 
@@ -38,7 +38,7 @@ export default function Research() {
           </div>
 
 
-          <div className="bg-gray-200 rounded-2xl"
+          <div className="bg-gray-200 sm:col-span-2 rounded-2xl"
           
             style={
               { backgroundImage: `url(${Painting4.src})`, 
