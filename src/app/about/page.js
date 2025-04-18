@@ -91,7 +91,7 @@ export default function About() {
         details:["｜ 協辦25場、主辦5場分享會"]
        },
       { year: "2019", description: "攝影社寒期攝影訓練活動 _ 總召",
-        details:["｜ 舉辦80人兩天一夜的營隊活動"]
+        details:["｜ 舉辦80人兩天一夜的營隊"]
       },
       { year: "2019", description: "攝影社 _ 活動幹部" },
     ],
