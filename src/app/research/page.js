@@ -22,7 +22,7 @@ const research = [
   {
     year: "2024",
     title: "OpenHCI 24th",
-    description: "作為技術 TA ，帶領學員以互動科技解決永續議題中的衣物再生的議題",
+    description: "作為技術 TA ，帶領學員以互動科技解決永續環保中衣物再生的議題",
     image: OpenHCI,
   },
   {

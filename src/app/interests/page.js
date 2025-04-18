@@ -1,11 +1,6 @@
 "use client";
 
 import CircularGallery from "@/components/TextAnimations/CircularGallery";
-import Painting1 from "@/image/interests/food.jpg";
-import Painting2 from "@/image/interests/punking.jpg";
-import Painting3 from "@/image/interests/spider.jpg";
-import Painting4 from "@/image/interests/sunset.jpg";
-import Painting5 from "@/image/interests/eye.jpg";
 
 export default function Interests() {
 
