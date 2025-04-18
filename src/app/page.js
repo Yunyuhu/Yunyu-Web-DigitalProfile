@@ -1,11 +1,8 @@
 "use client"
-
 import Image from "next/image";
-import AvatarImg from "@/../public/Avatar.jpg";
 import HeartImg from "@/../public/heart.png";
 import { useState } from "react";
 import TrueFocus from '../components/TextAnimations/TrueFocus';
-import Squares from '../components/TextAnimations/Squares';
   
 export default function Home() {
   const [heart, setHeart] = useState(0);
@@ -39,7 +36,7 @@ export default function Home() {
           onClick={addHeart}
         >
           <Image src={HeartImg} className="w-[68px]" alt="heart" />
-          <div className="text-l mt-2 font-semibold">{heart}</div>
+          <div className="text-gray-400 mt-2 font-semibold">{heart}</div>
         </div>
       </div>
   );
