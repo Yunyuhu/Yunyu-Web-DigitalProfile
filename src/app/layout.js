@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
                 <div className="w-full h-[60px] bg-[#f7f7f7] hover:bg-[#edf6f7] rounded-xl shadow-sm flex items-center px-4 transition">
                   <LayoutDashboard className="w-5 h-5 text-gray-600 mr-3" />
                   <div className="flex flex-col leading-tight">
-                    <span className="font-semibold text-sm">專案（UX、開發）</span>
+                    <span className="font-semibold text-sm">專案</span>
                     <span className="text-xs text-gray-500">Projects (UX & Dev)</span>
                   </div>
                 </div>
