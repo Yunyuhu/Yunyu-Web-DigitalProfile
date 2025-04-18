@@ -1,8 +1,11 @@
-import Painting1 from "@/image/interests/food.jpg"
-import Painting2 from "@/image/interests/punking.jpg"
-import Painting3 from "@/image/interests/spider.jpg"
-import Painting4 from "@/image/interests/sunset.jpg"
-import Painting5 from "@/image/interests/eye.jpg"
+"use client";
+
+import CircularGallery from "@/components/TextAnimations/CircularGallery";
+import Painting1 from "@/image/interests/food.jpg";
+import Painting2 from "@/image/interests/punking.jpg";
+import Painting3 from "@/image/interests/spider.jpg";
+import Painting4 from "@/image/interests/sunset.jpg";
+import Painting5 from "@/image/interests/eye.jpg";
 
 export default function Interests() {
 
@@ -18,8 +21,9 @@ export default function Interests() {
         </h3>
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
+      <CircularGallery></CircularGallery>
     
-      <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
+      {/* <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
         
       <div className="grid grid-cols-1 sm:grid-cols-5 w-full gap-4 h-[33vh] sm:h-[33vh]">
           <div className={`bg-gray-200 sm:col-span-2 rounded-2xl relative overflow-hidden`} 
@@ -78,7 +82,7 @@ export default function Interests() {
           >
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
