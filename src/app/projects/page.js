@@ -75,7 +75,7 @@ export default function Projects() {
         <h1 className="text-2xl font-bold">專案 / Projects</h1>
         <h3 className="text-sm text-gray-600 mt-2">
           以下是我近年參與的重要專案，涵蓋數位健康、互動設計與AI應用等多項領域。
-          </h3>
+        </h3>
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
