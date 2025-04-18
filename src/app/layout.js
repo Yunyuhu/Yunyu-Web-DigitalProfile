@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
         <div className="w-screen h-screen overflow-y-auto flex flex-col sm:flex-row gap-5 bg-gray-200 p-8">
 
           <div className=" min-w-[320px] w-full sm:w-[320px] h-full rounded-2xl bg-white flex 
-          justify-start items-center flex-col p-[30px] pt-[80px] overflow-y-auto overflow-x-hidden">
+          justify-start items-center flex-col p-[30px] pt-[80px] ">
             
             <Link href="/">
               <div className="w-[100px] h-[100px] rounded-full overflow-hidden shadow-md transition hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:scale-105 cursor-pointer">
