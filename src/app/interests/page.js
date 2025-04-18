@@ -23,8 +23,8 @@ export default function CatePainting() {
         </h1>
         <h3 className="text-sm text-gray-600 mt-2">
           INFJ，熱愛踩點各種好吃地圖（偏愛鹹食和酒精），可頌拯救世界！樂於和人群相處，但更會對一些奇妙且浪漫的小事感興趣。
-          <div className="w-full h-px bg-gray-200 mt-4" />
         </h3>
+        <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
       <div className="flex flex-col w-full gap-4 mt-3" >
