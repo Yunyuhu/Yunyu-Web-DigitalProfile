@@ -14,6 +14,7 @@ import Painting2 from "@/image/interests/punking.jpg";
 import Painting3 from "@/image/interests/spider.jpg";
 import Painting4 from "@/image/interests/sunset.jpg";
 import Painting5 from "@/image/interests/eye.jpg";
+import Painting6 from "@/image/interests/alcohol.jpg"
 
 
 function debounce(func, wait) {
@@ -340,6 +341,7 @@ class App {
         { image: Painting3.src, text: 'Spider' },
         { image: Painting4.src, text: 'Sunset & bird 🪶' },
         { image: Painting5.src, text: 'Eye ball 👀' },
+        { image: Painting6.src, text: 'Alchohol 🍸' },
       ]
       
     const galleryItems = items && items.length ? items : defaultItems
