@@ -1,12 +1,10 @@
-import Painting1 from "@/image/food.jpg"
-import Painting2 from "@/image/punking.jpg"
-import Painting3 from "@/image/spider.jpg"
-import Painting4 from "@/image/sunset.jpg"
-import Painting5 from "@/image/eye.jpg"
+import Painting1 from "@/image/interests/food.jpg"
+import Painting2 from "@/image/interests/punking.jpg"
+import Painting3 from "@/image/interests/spider.jpg"
+import Painting4 from "@/image/interests/sunset.jpg"
+import Painting5 from "@/image/interests/eye.jpg"
 
-export default function CatePainting() {
-
-  let dog = "bg-red-200";
+export default function Interests() {
 
   return (
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
@@ -51,7 +49,6 @@ export default function CatePainting() {
             }
 
           >
-            {/* 內容二 */}
           </div>
           
         </div>
@@ -66,7 +63,6 @@ export default function CatePainting() {
             }
           
           >
-            {/* 內容四 */}
           </div>
           <div className="bg-gray-200 rounded-2xl"
           
@@ -77,7 +73,6 @@ export default function CatePainting() {
             }
           
           >
-            {/* 內容五 */}
           </div>
           <div className="bg-gray-200 rounded-2xl"
           
@@ -88,7 +83,6 @@ export default function CatePainting() {
             }
           
           >
-            {/* 內容六 */}
           </div>
         </div>
       </div>
