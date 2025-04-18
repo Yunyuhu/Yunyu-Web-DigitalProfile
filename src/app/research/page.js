@@ -24,7 +24,7 @@ export default function Research() {
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
-      <div className="max-h-full overflow-y-auto px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
+      <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl" >
         
       <div className="grid grid-cols-1 sm:grid-cols-3 w-full gap-4 h-[33vh] sm:h-[33vh]">
           <div className={`bg-gray-200 sm:col-span-1 rounded-2xl relative overflow-hidden`} 

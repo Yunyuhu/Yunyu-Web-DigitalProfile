@@ -197,7 +197,7 @@ export default function About() {
         </h3>
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
-      <div className="max-h-full overflow-y-auto px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
+      <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
 
 
         {/* Bio & Education */}
