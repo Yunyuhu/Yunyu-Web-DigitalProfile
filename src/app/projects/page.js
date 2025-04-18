@@ -72,8 +72,11 @@ export default function Projects() {
   return (
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
       <div className="flex flex-col w-full">
-        <h1 className="text-2xl font-bold">專案作品</h1>
-        <h3>以下是我近年參與的重要專案，涵蓋數位健康、互動設計與AI應用等多項領域。</h3>
+        <h1 className="text-2xl font-bold">專案 / Projects</h1>
+        <h3 className="text-sm text-gray-600 mt-2">
+          以下是我近年參與的重要專案，涵蓋數位健康、互動設計與AI應用等多項領域。
+          </h3>
+        <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full auto-rows-[1fr]">

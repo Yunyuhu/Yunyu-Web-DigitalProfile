@@ -186,8 +186,19 @@ export default function About() {
   
 
   return (
-    <div className="w-full h-full bg-white flex justify-center items-center rounded-2xl overflow-hidden">
+    <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
+      
+      <div className="flex flex-col w-full">
+        <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">
+          關於我 / About me
+        </h1>
+        <h3 className="text-sm text-gray-600 mt-2">
+          從人與科技的互動中尋找靈感，這裡記錄著我一路走來的足跡。
+        </h3>
+        <div className="w-full h-px bg-gray-200 mt-4" />
+      </div>
       <div className="max-h-full overflow-y-auto px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
+
 
         {/* Bio & Education */}
         <div className="space-y-4">
