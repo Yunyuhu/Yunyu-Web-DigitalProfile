@@ -15,7 +15,7 @@ const projects = [
     title: "健保快易通 Redesign",
     description: "以慢性病與一般民眾為對象，重構健保資訊介面與架構",
     image: NhiImg,
-    url: "https://your-nhi-project-link.com",
+    url: "https://reurl.cc/gRG60z",
     tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
   },
   {
@@ -23,15 +23,15 @@ const projects = [
     title: "FlexiTouch：軟性裝置互動設計",
     description: "探索柔性材質觸控互動，設計按壓與拉伸的情境體驗",
     image: FlexiImg,
-    url: "https://your-flexitouch-demo.com",
+    url: "https://youtu.be/zUyFzP0OjnA",
     tags: ["TAICHI Best Demo", "League of VR", "遊戲互動設計", "柔性裝置"]
   },
   {
     year: "2024",
-    title: "牆面危害 AI 識別系統",
+    title: "WallGuard:牆面危害 AI 識別系統",
     description: "導入 YOLO 與風險模型，打造即時牆面危害辨識原型",
     image: WallImg,
-    url: "https://your-wall-ai-project.com",
+    url: "https://youtu.be/pVikml-YPsw",
     tags: ["AI識別", "InnoFest 展出", "建築巡檢", "YOLO"]
   },
   {
@@ -39,7 +39,7 @@ const projects = [
     title: "政大場地管理系統 Redesign",
     description: "優化場地借用平台，提升分類清晰度與操作流程",
     image: VenueImg,
-    url: "https://your-nccu-venue-redesign.com",
+    url: "https://reurl.cc/zq1DoV",
     tags: ["UX Redesign", "資訊架構", "流程優化"]
   },
   {
@@ -47,7 +47,7 @@ const projects = [
     title: "iHarbor 長照服務設計",
     description: "以照護者與眷屬的醫病照護關係為核心，設計共享資訊與照護透明化工具",
     image: IHarborImg,
-    url: "https://your-iharbor-project.com",
+    url: "https://www.youtube.com/watch?v=1JmtzLllJCA",
     tags: ["長照設計", "醫病溝通", "服務設計"]
   },
   {
@@ -55,7 +55,7 @@ const projects = [
     title: "Tears of Ancestors：2D 遊戲",
     description: "結合探索與打怪的雙機制，進入創意設計競賽決賽",
     image: TearsImg,
-    url: "https://your-2d-game-link.com",
+    url: "https://youtu.be/utajysQgYvw",
     tags: ["遊戲腳本", "對話設計", "遊戲開發", "決賽入選"]
   },
   {
@@ -63,7 +63,7 @@ const projects = [
     title: "DeepLink（畢業專題＿產學合作）",
     description: "以線上 Webinar 知識分享為切口，打造數位互動履歷平台",
     image: DeepLinkImg,
-    url: "https://your-deeplink-project.com",
+    url: "https://deeplink.tw/#/",
     tags: ["產學合作", "履歷設計", "獲多項獎項", "補助計畫"]
   }
 ];
