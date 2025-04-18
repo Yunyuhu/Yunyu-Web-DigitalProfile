@@ -143,6 +143,29 @@ export default function About() {
       </div>
 
       <div className="max-h-full px-6 py-8 space-y-6 text-gray-800 w-full max-w-5xl">
+         {/* Bio & Education */}
+        <div className="flex flex-wrap gap-4">
+          {/* <div className=" rounded-xl p-4 ">
+            <h2 className="font-semibold mb-2">簡介 / Bio</h2>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Yunyu is a master&apos;s student in Digital Content and Technologies at National Chengchi University. With a background in Information Management and a strong interest in AI design, she has participated in various cross-disciplinary projects ranging from gender-based issue summarization bots to immersive VR interfaces for social sensing. Through hands-on collaboration with research labs and design communities, Yunyu aspires to create digital services that not only solve problems but also understand people.
+            </p>
+          </div> */}
+
+          <div className=" rounded-xl ">
+            <h2 className="font-semibold mb-2">學歷 / Education</h2>
+            <div className="mb-4 p-3 rounded-lg border border-gray-200 bg-white">
+              <p className="text-sm text-gray-800 font-medium">國立政治大學 數位內容學分學程碩士（2023–Now）</p>
+              <p className="text-sm text-gray-500">M.S. Student, Graduate Program in Digital Content and Technologies, NCCU</p>
+            </div>
+            <div className="p-3 rounded-lg border border-gray-200 bg-white">
+              <p className="text-sm text-gray-800 font-medium">輔仁大學 資訊管理學系學士（2019–2023），GPA 3.8</p>
+              <p className="text-sm text-gray-800 font-medium">輔仁大學 電子商務學分學程</p>
+              <p className="text-sm text-gray-500">B.S. in Information Management & E-Commerce Program, Fu Jen Catholic University</p>
+            </div>
+          </div>
+          
+        </div>
         {/* Skills & Interests */}
         <div className="flex flex-wrap gap-4">
           <div className="bg-[#fcfcfc] rounded-xl p-4 shadow-sm flex-1 min-w-[240px]">
