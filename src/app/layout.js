@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         
-        <div className="w-screen h-screen overflow-y-auto flex flex-col sm:flex-row gap-5 bg-gray-200 p-8">
+        <div className="w-screen h-full sm:h-screen overflow-y-auto flex flex-col sm:flex-row gap-5 p-4 sm:p-8 box-border bg-[linear-gradient(to_top,_#f2f2f2_0%,_#dee9ea_100%)]">
 
           <div className=" min-w-[320px] w-full sm:w-[320px] h-full rounded-2xl bg-white flex 
           justify-start items-center flex-col p-[30px] pt-[80px] ">
