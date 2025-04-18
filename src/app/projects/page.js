@@ -1,13 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import NhiImg from "@/image/nhi.png";
-import FlexiImg from "@/image/flexitouch.png";
-import WallImg from "@/image/wall-ai.png";
-import VenueImg from "@/image/nccu-venue.png";
-import IHarborImg from "@/image/iharbor.png";
-import TearsImg from "@/image/tears-of-ancestors.png";
-import DeepLinkImg from "@/image/deeplink.png";
+import NhiImg from "@/image/projects/nhi.png";
+import FlexiImg from "@/image/projects/flexitouch.png";
+import WallImg from "@/image/projects/wall-ai.png";
+import VenueImg from "@/image/projects/nccu-venue.png";
+import IHarborImg from "@/image/projects/iharbor.png";
+import TearsImg from "@/image/projects/tears-of-ancestors.png";
+import DeepLinkImg from "@/image/projects/deeplink.png";
 
 const projects = [
   {
