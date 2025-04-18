@@ -79,7 +79,7 @@ export default function About() {
       { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》"},
       { year: "2024", description: "TAICHI DEMO -《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
       { year: "2022", description: "科技部大專生研究計畫 -《探索使用線上自主學習平台關鍵因素之個案研究》" },
-      { year: "2021", description: "TANET & NCS 學術研討會發表：" ,
+      { year: "2021", description: "台灣網際網路研討會TANET曁全國計算機會議NCS：" ,
         details: [
         "｜《支付習慣影響數位振興券使用意願之研究》",
         "｜《疫情對行動支付使用情形之影響》"
