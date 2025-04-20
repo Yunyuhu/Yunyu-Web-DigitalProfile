@@ -210,7 +210,7 @@ export default function About() {
             </p>
           </div> */}
 
-          <div className=" rounded-xl ">
+          <div className="flex flex-col w-full rounded-xl ">
             <h2 className="font-semibold mb-2">學歷 / Education</h2>
             <div className="mb-4 p-3 rounded-lg border border-gray-200 bg-white">
               <p className="text-sm text-gray-800 font-medium">國立政治大學 數位內容學分學程碩士（2023–Now）</p>
