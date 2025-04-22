@@ -8,8 +8,20 @@ import VenueImg from "@/image/projects/nccu-venue.png";
 import IHarborImg from "@/image/projects/iharbor.png";
 import TearsImg from "@/image/projects/tears-of-ancestors.png";
 import DeepLinkImg from "@/image/projects/deeplink.png";
+import Onetwothree from "@/image/projects/onetwothree.png";
+import Zooly from "@/image/projects/zooly.png";
+
+
 
 const projects = [
+  {
+    year: "2025",
+    title: "Zooly：臺北市立動物園動物認養 AI Bot",
+    description: "角色設計涵蓋語言風格、互動步驟、角色個性與文件培訓模組，引導使用者了解臺北市立動物園的動物認養流程，並傳遞保育價值。",
+    image: Zooly,
+    url: "https://reurl.cc/lzyb7q",
+    tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
+  },
   {
     year: "2025",
     title: "健保快易通 Redesign",
@@ -18,6 +30,14 @@ const projects = [
     url: "https://reurl.cc/gRG60z",
     tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
   },
+  // {
+  //   year: "2024",
+  //   title: "衣二衫Action：永續穿搭互動裝置設計｜OpenHCI'24 技術TA ",
+  //   description: "協助學員完成以「促進二手衣永續行為」為核心的互動裝置。從訪談與行為觀察出發，最終以 Unity AR、LED 燈光與感測器等打造的多感官互動裝置，能根據穿著風格呈現專屬視覺特效、燈光、氣味與音樂",
+  //   image: Onetwothree,
+  //   url: "https://reurl.cc/RYe7Wg",
+  //   tags: ["HCI", "互動設計", "永續設計", "使用者研究"]
+  // },
   {
     year: "2024",
     title: "FlexiTouch：軟性裝置互動設計",
@@ -82,9 +102,13 @@ export default function Projects() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full auto-rows-[1fr]">
         {projects.map((project, index) => {
           const spanClass =
-            index === 0 || index === 1 ? "md:col-span-6" :
-            index === 2 || index === 3 || index === 4 ? "md:col-span-4" :
-            "md:col-span-6";
+            index === 0 || index === 1 ||index === 2 ? "md:col-span-4" :
+            index === 3 || index === 4 ? "md:col-span-6" :
+            "md:col-span-4";
+
+            // index === 0 || index === 1 ? "md:col-span-6" :
+            // index === 2|| index === 3 || index === 4 ? "md:col-span-4" :
+            // "md:col-span-6";
 
           return (
             
