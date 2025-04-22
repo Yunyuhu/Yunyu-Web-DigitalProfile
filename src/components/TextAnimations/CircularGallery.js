@@ -338,7 +338,7 @@ class App {
     const defaultItems = [
         { image: Painting1.src, text: 'Croissant 🥐' },
         { image: Painting2.src, text: 'DCT 🎃' },
-        { image: Painting3.src, text: 'Spider' },
+        { image: Painting3.src, text: 'Spider🕷️' },
         { image: Painting4.src, text: 'Sunset & bird 🪶' },
         { image: Painting5.src, text: 'Eye ball 👀' },
         { image: Painting6.src, text: 'Alchohol 🍸' },
