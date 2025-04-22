@@ -73,7 +73,6 @@ export default function About() {
       { year: "2023", description: "北祥金融科技實習生" },
       { year: "2022", description: "行動裝置課程 TA" },
       { year: "2021", description: "資管系機房工讀生" },
-      { year: "2019", description: "富邦產險實習生" },
     ],
     research: [
       { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》"},
