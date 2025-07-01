@@ -100,7 +100,6 @@ export default function About() {
         title: "Mizuto：AI Robot 智慧水壺",
         description:
           "以日常健康為核心打造的 AI 智慧水壺，具備機器人角色設計與 AI 互動設計。",
-        image: MizutoImg,
         url: "https://reurl.cc/paqqjr",
         tags: ["智慧裝置", "AI Robot", "健康習慣", "互動設計", "機器人設計"]
       },
@@ -109,7 +108,6 @@ export default function About() {
         title: "AI介入設計流程的重新評估（以健保快易通專案為例）",
         description:
           "針對原有設計流程重新以 AI 工具生成製作，並重新作設計評估。",
-        image: AIUXImg,
         url: "https://reurl.cc/5K76jM",
         tags: ["AI設計介入", "設計流程反思", "健保快易通", "設計輔助工具"]
       },
@@ -118,7 +116,6 @@ export default function About() {
         title: "Zooly：臺北市立動物園動物認養 AI Bot",
         description:
           "設計動物型 Agent 引導使用者了解臺北市立動物園的動物認養流程，並傳遞保育價值。",
-        image: Zooly,
         url: "https://reurl.cc/lzyb7q",
         tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
       },
