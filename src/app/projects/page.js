@@ -110,7 +110,7 @@ const projects = [
 export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   const filteredProjects = projects.filter((project) => {
     const term = searchTerm.trim();
