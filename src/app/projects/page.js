@@ -209,7 +209,7 @@ export default function Projects() {
             <button
               key={i}
               onClick={() => handlePageChange(i + 1)}
-              className={`px-3 py-1 text-sm rounded border ${currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-100"}`}
+              className={`px-3 py-1 text-sm rounded border ${currentPage === i + 1 ? "bg-green-700 text-white" : "bg-gray-100"}`}
             >
               {i + 1}
             </button>
