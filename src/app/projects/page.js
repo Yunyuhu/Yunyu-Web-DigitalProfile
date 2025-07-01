@@ -44,7 +44,7 @@ const projects = [
   {
     year: "2025",
     title: "健保快易通 Redesign",
-    description: "以慢性病與一般民眾為對象，重構健保資訊介面與架構",
+    description: "從資訊架構與流程優化角度出發，針對慢性病患者與一般民眾的使用情境，重新設計健保快易通的核心介面。聚焦於用藥紀錄、就醫查詢與保費繳納三大服務，透過使用者研究發掘實際痛點，並提出模組化資訊呈現與主動提醒機制，提升民眾自主管理健康的能力與信任度。",
     image: NhiImg,
     url: "https://reurl.cc/OY87KR",
     tags: ["使用者研究", "健康資料整合", "介面設計", "主動賦能"]
@@ -60,7 +60,7 @@ const projects = [
   {
     year: "2024",
     title: "FlexiTouch：軟性裝置互動設計",
-    description: "探索柔性材質觸控互動，設計按壓與拉伸的情境體驗",
+    description: "以探索柔性材質的人機互動潛力為目標，設計一系列具回饋性的觸控操作原型。專案結合按壓與拉伸兩種情境，透過電阻變化控制互動回應，並以遊戲化方式提升體驗感與參與度，獲 TAICHI Best Demo 肯定。",
     image: FlexiImg,
     url: "https://youtu.be/zUyFzP0OjnA",
     tags: ["Taichi Best Demo", "League of VR", "遊戲互動設計", "柔性裝置"]
@@ -68,7 +68,7 @@ const projects = [
   {
     year: "2024",
     title: "WallGuard:牆面危害 AI 識別系統",
-    description: "因應台灣高地震頻率與建築老化問題，本專案針對民眾對於住家牆面安全意識偏低的現象，開發即時牆面危害辨識系統，並串接生成式 API 展示可延伸發展的個別情境應用。",
+    description: "因應台灣高地震頻率與建築老化問題，本專案針對民眾對於住家牆面安全意識偏低的現象，開發即時牆面危害辨識系統，並串接生成式 API 展示可延伸發展的個別情境應用，如租屋查驗、保險理賠評估等。",
     image: WallImg,
     url: "https://youtu.be/pVikml-YPsw",
     tags: ["AI識別", "InnoFest 展出", "建築巡檢", "YOLO"]
@@ -76,7 +76,7 @@ const projects = [
   {
     year: "2024",
     title: "政大場地管理系統 Redesign",
-    description: "優化場地借用平台，提升分類清晰度與操作流程",
+    description: "針對政大校內使用者對場地借用系統的操作困擾進行深入訪談與任務觀察，發現原有平台存在分類不清、流程冗長等問題。專案重新設計資訊架構、導覽結構與篩選機制，使申請與審核流程更為簡明清楚，提升行政效率與使用體驗。",
     image: VenueImg,
     url: "https://reurl.cc/zq1DoV",
     tags: ["UX Redesign", "資訊架構", "流程優化"]
@@ -92,7 +92,7 @@ const projects = [
   {
     year: "2023",
     title: "Tears of Ancestors：2D 遊戲",
-    description: "結合探索與打怪的雙機制，進入創意設計競賽決賽",
+    description: "以族群歷史為背景的敘事型 2D 遊戲，結合探索與打怪兩種機制，玩家在穿梭記憶場景的過程中逐步理解祖先的故事與衝突背景。成功進入創意設計競賽決賽階段，並獲評審團肯定。",
     image: TearsImg,
     url: "https://youtu.be/utajysQgYvw",
     tags: ["遊戲腳本", "對話設計", "遊戲開發", "決賽入選"]
@@ -100,7 +100,7 @@ const projects = [
   {
     year: "2021–2023",
     title: "DeepLink（畢業專題＿產學合作）",
-    description: "以線上 Webinar 知識分享為切口，打造數位互動履歷平台",
+    description: "以線上 Webinar 知識分享為切口，打造數位互動履歷平台。一站式整合活動發想、直播與成果紀錄，支援同步與非同步互動機制，協助講者累積數位影響力與履歷內容，並應用於人才媒合與個人品牌經營場景。",
     image: DeepLinkImg,
     url: "https://deeplink.tw/#/",
     tags: ["產學合作", "履歷設計", "獲多項獎項", "補助計畫","Web"]
