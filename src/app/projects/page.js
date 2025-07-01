@@ -60,7 +60,7 @@ const projects = [
   {
     year: "2024",
     title: "FlexiTouch：軟性裝置互動設計",
-    description: "以探索柔性材質的人機互動潛力為目標，設計一系列具回饋性的觸控操作原型。專案結合按壓與拉伸兩種情境，透過電阻變化控制互動回應，並以遊戲化方式提升體驗感與參與度，獲 TAICHI Best Demo 肯定。",
+    description: "以探索柔性材質的人機互動潛力為目標，設計一系列具回饋性的觸控操作原型。專案結合按壓與拉伸兩種情境，透過電阻變化控制互動回應，並以遊戲化方式提升體驗感與參與度，獲TaiChi Best Demo 肯定。",
     image: FlexiImg,
     url: "https://youtu.be/zUyFzP0OjnA",
     tags: ["Taichi Best Demo", "League of VR", "遊戲互動設計", "柔性裝置"]
