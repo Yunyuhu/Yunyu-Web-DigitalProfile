@@ -11,8 +11,8 @@ import TearsImg from "@/image/projects/tears-of-ancestors.png";
 import DeepLinkImg from "@/image/projects/deeplink.png";
 import Onetwothree from "@/image/projects/onetwothree.png";
 import Zooly from "@/image/projects/zooly.png";
-import AIUXImg from "@/image/projects/NhiImg.png"
-import MizutoImg from "@/image/projects/mizuto.png"
+import AIUXImg from "@/image/projects/NhiImg.png";
+import MizutoImg from "@/image/projects/mizuto.png";
 
 
 
