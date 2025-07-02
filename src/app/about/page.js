@@ -105,9 +105,9 @@ export default function About() {
       },
       {
         year: "2025",
-        title: "捷伴AI MetroMate",
+        title: "捷伴AI：MetroMate",
         description: "針對通勤族設計的 AI 智慧旅伴，支援路線提醒、異動通知與客製化旅遊推薦，提升移動過程的資訊流暢與生活探索。",
-        tags: ["智慧旅伴", "交通資訊設計", "旅遊推薦"]
+        tags: ["智慧旅伴", "通勤設計","交通資訊設計"]
       },
       {
         year: "2025",
