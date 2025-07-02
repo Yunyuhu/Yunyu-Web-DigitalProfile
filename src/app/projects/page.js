@@ -13,7 +13,7 @@ import Onetwothree from "@/image/projects/onetwothree.png";
 import Zooly from "@/image/projects/zooly.png";
 import AIUXImg from "@/image/projects/NhiImg.png";
 import MizutoImg from "@/image/projects/mizuto.png";
-
+import MetroMateImg from "@/image/projects/metromate.png";
 
 
 const projects = [
@@ -24,6 +24,14 @@ const projects = [
     image: MizutoImg, 
     url: "https://reurl.cc/paqqjr",
     tags: ["智慧裝置", "AI Robot", "健康習慣", "互動設計", "機器人設計"]
+  },
+  {
+    year: "2025",
+    title: "捷伴AI MetroMate",
+    description: "針對通勤族設計的 AI 智慧旅伴原型，結合台北捷運使用情境，提供路線提醒、路程異動通知與客製化旅遊建議。透過使用者輸入的目的與偏好，系統能即時調整推薦站點與旅遊內容，協助通勤者在日常移動中也能發掘生活的彈性與樂趣。",
+    image: MetroMateImg, 
+    url: "https://reurl.cc/Om71jD", 
+    tags: ["智慧旅伴", "通勤設計", "路線提醒", "旅遊推薦", "交通資訊設計"]
   },
   {
     year: "2025",
