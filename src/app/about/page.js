@@ -66,6 +66,7 @@ export default function About() {
 
   const data = {
     work: [
+      { year: "2025", description: "設計研究院 TDRI - 設計研發組實習生" },
       { year: "2025", description: "FreeSEED R2_UX Designer" },
       { year: "2025", description: "設計思考與人工智慧課程TA" },
       { year: "2024", description: "政大周嘉年教授 - MR創意實驗室 RA" },
