@@ -76,7 +76,7 @@ export default function About() {
       { year: "2021", description: "資管系機房工讀生" },
     ],
     research: [
-      { year: "進行中", description: "碩論 -《人機互動與 AI 溝通意圖研究》"},
+      { year: "進行中", description: "碩論 -《Exploring the Impact of Communicating Intentions on Trust and Collaboration in Human-AI Interaction》"},
       { year: "2024", description: "TAICHI DEMO -《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
       { year: "2022", description: "科技部大專生研究計畫 -《探索使用線上自主學習平台關鍵因素之個案研究》" },
       { year: "2021", description: "台灣網際網路研討會TANET曁全國計算機會議NCS：" ,
