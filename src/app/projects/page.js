@@ -17,9 +17,17 @@ import MetroMateImg from "@/image/projects/metromate.png";
 import JellyfishImg from "@/image/projects/jellyfish-robot.jpg";
 import LizardImg from "@/image/projects/lizard-robot.jpg";
 import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
+import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 
 
 const projects = [
+  {
+    year: "2026",
+    title: "記憶迷宮 Memory Maze",
+    description: "以迷宮理論為建構邏輯，打造可互動的 3D Unity 場景，讓抽象的記憶轉化為可行走、可迷失、可重新尋路的空間經驗，並透過虛實整合裝置呈現於展場，探索記憶具現化與空間敘事的可能。",
+    image: MemoryMazeImg,
+    tags: ["Unity", "3D互動場景", "裝置藝術", "虛實整合", "清華大學未來實驗室"]
+  },
   {
     year: "2026",
     title: "機器人設計：水母 Jellyfish Robot",
