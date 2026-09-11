@@ -59,7 +59,28 @@ const research = [
     image: TANET,
   },
 ];
+
+// 每行交替排列：寬列（md:col-span-6，一列 2 個）與窄列（md:col-span-4，一列 3 個）
+function getSpanClasses(count) {
+  const classes = [];
+  let index = 0;
+  let row = 0;
+  while (index < count) {
+    const isWideRow = row % 2 === 0;
+    const spanClass = isWideRow ? "md:col-span-6" : "md:col-span-4";
+    const itemsInRow = isWideRow ? 2 : 3;
+    for (let i = 0; i < itemsInRow && index < count; i++) {
+      classes.push(spanClass);
+      index++;
+    }
+    row++;
+  }
+  return classes;
+}
+
 export default function Research() {
+  const spanClasses = getSpanClasses(research.length);
+
   return (
       <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
         <div className="flex flex-col w-full">
@@ -72,9 +93,8 @@ export default function Research() {
   
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full auto-rows-[1fr]">
           {research.map((research, index) => {
-            const spanClass =
-              index === 0 || index === 1 ? "md:col-span-6" : "md:col-span-4" ;
-  
+            const spanClass = spanClasses[index];
+
             return (
               
                 <a
