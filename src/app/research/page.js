@@ -46,12 +46,12 @@ const research = [
     description: "作為技術 TA ，帶領學員以互動科技解決永續環保中衣物再生的議題",
     image: OpenHCI,
   },
-  {
-    year: "2024",
-    title: "AI & Robot 課堂研究",
-    description: "AI 的權力與地位是否影響人類的信任感",
-    image: AIpower,
-  },
+  // {
+  //   year: "2024",
+  //   title: "AI & Robot 課堂研究",
+  //   description: "AI 的權力與地位是否影響人類的信任感",
+  //   image: AIpower,
+  // },
   {
     year: "2021",
     title: "台灣網際網路研討會TANET曁全國計算機會議NCS",
