@@ -66,6 +66,8 @@ export default function About() {
 
   const data = {
     work: [
+      { year: "2026", description: "人機互動設計課程 TA" },
+      { year: "2025", description: "人機互動設計課程 TA" },
       { year: "2025", description: "設計研究院 TDRI - 設計研發組實習生" },
       { year: "2025", description: "FreeSEED R2_UX Designer" },
       { year: "2025", description: "設計思考與人工智慧課程TA" },
@@ -107,7 +109,7 @@ export default function About() {
       {
         year: "2026",
         title: "機器人設計：蜥蜴 Lizard Robot",
-        description: "設計具表情與動作機構的蜥蜴型機器人，結合機械結構與角色化外型",
+        description: "設計動作機構的蜥蜴型機器人，結合機械結構與角色化外型",
         tags: ["機器人設計", "機構設計", "清華大學未來實驗室"]
       },
       {

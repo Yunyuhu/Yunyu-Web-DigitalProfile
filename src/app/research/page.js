@@ -5,8 +5,29 @@ import LeagueOfVRfinal from "@/image/research/LeagueOfVRfinal.jpg"
 import AIpower from "@/image/research/AIpower.jpg"
 import TANET from "@/image/research/TANET.jpg"
 import OpenHCI from "@/image/research/OpenHCI.jpg"
+import TAICHI25 from "@/image/research/taichi25.jpg"
+import TriUniversitySymposium from "@/image/research/tri-university-symposium.jpg"
+import TDRI2025 from "@/image/research/tdri-2025.jpg"
 
 const research = [
+  {
+    year: "2025.11",
+    title: "2025 SNU-UTokyo-NCCU Joint Symposium",
+    description: "受國立政治大學推薦代表出席，於首爾國立大學、東京大學與政治大學三校聯合發表會中發表個人研究論文",
+    image: TriUniversitySymposium,
+  },
+  {
+    year: "2025.8",
+    title: "TAICHI'25 - InclusiGen",
+    description: "第十一屆台灣人機互動研討會，發表個人論文架構構想",
+    image: TAICHI25,
+  },
+  {
+    year: "2025",
+    title: "TDRI 2025 暑期實習生成果發表",
+    description: "設計研究院 TDRI 設計研發組實習成果發表",
+    image: TDRI2025,
+  },
   {
     year: "2024",
     title: "League of VR Final",
