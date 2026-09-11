@@ -18,7 +18,7 @@ const research = [
   },
   {
     year: "2025.8",
-    title: "TAICHI'25 - InclusiGen",
+    title: "TAICHI'25",
     description: "第十一屆台灣人機互動研討會，發表個人論文架構構想",
     image: TAICHI25,
   },
@@ -36,8 +36,8 @@ const research = [
   },
   {
     year: "2024",
-    title: "TAICHI Demo",
-    description: "展出 FlexiTouch，獲選為2024年 Best Demo",
+    title: "TAICHI'24 Demo",
+    description: "第十屆台灣人機互動研討會，展出 FlexiTouch，獲選為2024年 Best Demo",
     image: TAICHIdemo,
   },
   {
