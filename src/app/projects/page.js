@@ -16,7 +16,7 @@ import MizutoImg from "@/image/projects/mizuto.png";
 import MetroMateImg from "@/image/projects/metromate.png";
 import JellyfishImg from "@/image/projects/jellyfish-robot.jpg";
 import LizardImg from "@/image/projects/lizard-robot.jpg";
-import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
+// import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
 import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 
 
