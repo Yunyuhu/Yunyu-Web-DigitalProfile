@@ -77,6 +77,8 @@ export default function About() {
     ],
     research: [
       { year: "進行中", description: "碩論 -《Exploring the Impact of Communicating Intentions on Trust and Collaboration in Human-AI Interaction》"},
+      { year: "2025.11", description: "受國立政治大學推薦代表出席，於日本東京大學、韓國首爾國立大學與台灣政治大學三校聯合論文發表會中發表個人研究論文" },
+      { year: "2025", description: "TAICHI 研討會 - 發表個人論文架構構想" },
       { year: "2024", description: "TAICHI DEMO -《FlexiTouch-Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback.》" },
       { year: "2022", description: "科技部大專生研究計畫 -《探索使用線上自主學習平台關鍵因素之個案研究》" },
       { year: "2021", description: "台灣網際網路研討會TANET曁全國計算機會議NCS：" ,
@@ -96,6 +98,30 @@ export default function About() {
       { year: "2019", description: "攝影社 _ 活動幹部" },
     ],
     projects: [
+      {
+        year: "2026",
+        title: "機器人設計：水母 Jellyfish Robot",
+        description: "以水母為原型的互動機器人設計，探索柔性外型與觸手結構的造型與動態表現",
+        tags: ["機器人設計", "互動裝置", "清華大學未來實驗室"]
+      },
+      {
+        year: "2026",
+        title: "機器人設計：蜥蜴 Lizard Robot",
+        description: "設計具表情與動作機構的蜥蜴型機器人，結合機械結構與角色化外型",
+        tags: ["機器人設計", "機構設計", "清華大學未來實驗室"]
+      },
+      {
+        year: "2026",
+        title: "多維參數化3D建模",
+        description: "以參數化演算方式生成骨骼狀多維結構，並列印成裝置藝術與可穿戴飾品系列",
+        tags: ["參數化建模", "3D列印", "生成設計", "清華大學未來實驗室"]
+      },
+      {
+        year: "2026",
+        title: "記憶迷宮 Unity 開發",
+        description: "以 Unity 開發互動式記憶迷宮體驗，探索空間敘事與使用者記憶路徑設計",
+        tags: ["Unity", "遊戲開發", "互動敘事", "清華大學未來實驗室"]
+      },
       {
         year: "2025",
         title: "Mizuto：AI Robot 智慧水壺",
@@ -245,6 +271,10 @@ export default function About() {
             <div className="mb-4 p-3 rounded-lg border border-gray-200 bg-white">
               <p className="text-sm text-gray-800 font-medium">國立政治大學 數位內容學分學程碩士（2023–Now）</p>
               <p className="text-sm text-gray-500">M.S. Student, Graduate Program in Digital Content and Technologies, NCCU</p>
+            </div>
+            <div className="mb-4 p-3 rounded-lg border border-gray-200 bg-white">
+              <p className="text-sm text-gray-800 font-medium">北京清華大學 美術學院信息藝術設計系 交換生（2026.01–2026.06）</p>
+              <p className="text-sm text-gray-500">Exchange Student, Dept. of Information Art & Design, Academy of Arts & Design, Tsinghua University — 參與未來實驗室 Future Lab</p>
             </div>
             <div className="p-3 rounded-lg border border-gray-200 bg-white">
               <p className="text-sm text-gray-800 font-medium">輔仁大學 資訊管理學系學士（2019–2023），GPA 3.8</p>

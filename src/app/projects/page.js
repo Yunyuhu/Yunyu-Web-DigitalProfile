@@ -14,9 +14,33 @@ import Zooly from "@/image/projects/zooly.png";
 import AIUXImg from "@/image/projects/NhiImg.png";
 import MizutoImg from "@/image/projects/mizuto.png";
 import MetroMateImg from "@/image/projects/metromate.png";
+import JellyfishImg from "@/image/projects/jellyfish-robot.jpg";
+import LizardImg from "@/image/projects/lizard-robot.jpg";
+import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
 
 
 const projects = [
+  {
+    year: "2026",
+    title: "機器人設計：水母 Jellyfish Robot",
+    description: "以水母為原型的互動機器人設計，探索柔性外型與觸手結構的造型與動態表現，思考生物型態轉譯為機構設計的可能性。",
+    image: JellyfishImg,
+    tags: ["機器人設計", "互動裝置", "清華大學未來實驗室"]
+  },
+  {
+    year: "2026",
+    title: "機器人設計：蜥蜴 Lizard Robot",
+    description: "設計具表情與動作機構的蜥蜴型機器人，結合 Arduino 控制、機械結構與角色化外型，打造具生命感的桌上型互動裝置。",
+    image: LizardImg,
+    tags: ["機器人設計", "機構設計", "清華大學未來實驗室"]
+  },
+  {
+    year: "2026",
+    title: "多維參數化3D建模",
+    description: "以參數化演算方式生成骨骼狀多維結構，並列印成一系列裝置藝術與可穿戴飾品，於展覽中呈現生成設計與手作工藝的結合。",
+    image: ParametricImg,
+    tags: ["參數化建模", "3D列印", "生成設計", "清華大學未來實驗室"]
+  },
   {
     year: "2025",
     title: "Mizuto：AI Robot 智慧水壺",
