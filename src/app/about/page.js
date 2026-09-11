@@ -284,7 +284,6 @@ export default function About() {
               <p className="text-sm text-gray-500">B.S. in Information Management & E-Commerce Program, Fu Jen Catholic University</p>
             </div>
           </div>
-          
         </div>
         {/* Skills & Interests */}
         <div className="flex flex-wrap gap-4">
