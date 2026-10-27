@@ -9,7 +9,7 @@
 | 頁面 | 路徑 | 內容 |
 |---|---|---|
 | 首頁 | `/` | 個人標語與動態字句 |
-| 關於我 | `/about` | 學歷、技能專長、研究主題，以及工作與教學、專案、研究與發表、獲獎展出、社群參與的時間軸 |
+| 關於我 | `/about` | 學歷、專長與研究方向，以及工作與教學、專案、研究與發表、獲獎展出、社群參與的時間軸 |
 | 興趣 | `/interests` | 生活興趣與環形相片牆 |
 | 專案 | `/projects` | 專案列表，可搜尋並分頁，精選專案排在最前面 |
 | 專案詳細頁 | `/projects/[slug]` | 單一專案的重點、技術與方法、相關資源（影片、簡報、原型等） |
@@ -90,7 +90,7 @@ npm run dev
 
 ### 其他頁面
 
-- 關於我：[`src/app/about/page.js`](src/app/about/page.js) 裡的 `skillGroups`（技能）、`researchInterests`（研究主題）、`experience`（工作與教學，由新到舊排列）與 `data`（研究、獲獎、社群）。
+- 關於我：[`src/app/about/page.js`](src/app/about/page.js) 裡的 `skillGroups`（技術分組）與 `focusAreas`（研究方向，`skills` 對應技術、`evidence` 是相關專案或經歷），由 [`SkillMap`](src/components/SkillMap.js) 畫成可互動的對應圖、`experience`（工作與教學，由新到舊排列）與 `data`（研究、獲獎、社群）。
 - 研究與活動：[`src/app/research/page.js`](src/app/research/page.js)。
 
 ## 流量分析

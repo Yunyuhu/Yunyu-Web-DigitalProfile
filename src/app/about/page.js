@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import SkillMap from "@/components/SkillMap";
 
 // 「查看專案」固定放在每一列的右側，各分頁同一種樣式；手機只留箭頭，避免擠壓左側文字
 const ProjectLink = ({ href }) => (
@@ -118,18 +119,82 @@ const TABS = [
 export default function About() {
   const [activeTab, setActiveTab] = useState("work");
 
-  // 每項技能只出現在一個分類；語言併入實際使用的領域，不另列「程式語言」
+  // 專長地圖的右側：技術依類型分組，工程類放前面並加重底色；每一項都至少對應到一個方向
   const skillGroups = [
-    { label: "設計與研究", items: ["使用者研究", "實驗設計", "問卷與統計分析", "Figma"] },
-    { label: "前端與互動", items: ["JavaScript", "React", "React Native", "Unity", "HTML/CSS"] },
-    { label: "後端與資料", items: ["Python", "FastAPI", "MySQL", "Firebase", "AWS", "Streamlit", "Git"] },
-    { label: "AI 與硬體", items: ["YOLO", "生成式 AI API", "Arduino"] },
+    {
+      label: "程式與系統開發",
+      emphasis: true,
+      items: ["Python", "JavaScript", "FastAPI", "React", "React Native", "pygame", "Unity", "Arduino", "感測器整合", "MySQL", "Firebase", "AWS", "Git"],
+    },
+    {
+      label: "資料與 AI",
+      emphasis: true,
+      items: ["資料清理", "統計檢定", "事件紀錄設計", "Streamlit 儀表板", "YOLO", "電腦視覺", "生成式 AI API", "AI 文字分類"],
+    },
+    {
+      label: "研究與設計方法",
+      items: ["實驗設計", "問卷設計", "使用者研究", "服務設計", "資訊架構", "Figma", "對話設計"],
+    },
   ];
 
-  // 只放研究方向；方法類（使用者研究）已列在技能，生活興趣在「興趣」頁
-  const researchInterests = [
-    "Human–AI Collaboration", "Empathetic Interaction Design",
-    "AI for Social Good", "Digital Mental Health", "Interactive Narrative"
+  // 專長地圖的左側：每個方向寫實際做了什麼、用到哪些技術（skills 對應右側）、以哪些專案或經歷為證
+  const focusAreas = [
+    {
+      id: "collaboration",
+      title: "人機協作",
+      en: "Human–AI Collaboration",
+      summary: "自行開發 pygame 即時協作系統、FastAPI 後端與 Streamlit 分析工具，研究人與 AI 如何表達、理解彼此的意圖",
+      skills: ["實驗設計", "問卷設計", "Python", "pygame", "FastAPI", "資料清理", "統計檢定", "事件紀錄設計", "Streamlit 儀表板"],
+      evidence: [{ label: "碩士論文", href: "/projects/coordination-intent-thesis" }],
+    },
+    {
+      id: "ai",
+      title: "AI 應用",
+      en: "AI for Social Good",
+      summary: "實作 YOLO 即時辨識管線並串接生成式 AI API，把 AI 用在民眾日常的真實問題",
+      skills: ["Python", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
+      evidence: [
+        { label: "WallGuard", href: "/projects/wallguard" },
+        { label: "Zooly", href: "/projects/zooly" },
+        { label: "MetroMate", href: "/projects/metromate" },
+      ],
+    },
+    {
+      id: "fullstack",
+      title: "全端開發",
+      en: "Full-stack Development",
+      summary: "從銀行專案的前後端實作、AI API 文字分類，到本網站的開發與部署",
+      skills: ["JavaScript", "React", "React Native", "MySQL", "Firebase", "AWS", "Git", "AI 文字分類"],
+      evidence: [
+        { label: "北祥全端實習" },
+        { label: "台灣設計研究院實習" },
+        { label: "本網站原始碼", href: "https://github.com/Yunyuhu/Yunyu-Web-DigitalProfile" },
+      ],
+    },
+    {
+      id: "immersive",
+      title: "沉浸式與實體互動",
+      en: "Immersive & Physical Interaction",
+      summary: "整合 Unity 場景與 Arduino 感測，打造結合空間、敘事與觸覺的互動體驗",
+      skills: ["Unity", "Arduino", "感測器整合", "對話設計"],
+      evidence: [
+        { label: "FlexiTouch", href: "/projects/flexitouch" },
+        { label: "Memory Maze", href: "/projects/memory-maze" },
+        { label: "Tears of Ancestors", href: "/projects/tears-of-ancestors" },
+      ],
+    },
+    {
+      id: "empathy",
+      title: "共感互動與服務設計",
+      en: "Empathetic Interaction Design",
+      summary: "從使用者處境出發，重新設計服務流程、資訊架構與介面",
+      skills: ["使用者研究", "服務設計", "資訊架構", "Figma"],
+      evidence: [
+        { label: "健保快易通", href: "/projects/nhi-app-redesign" },
+        { label: "iHarbor", href: "/projects/iharbor" },
+        { label: "政大場地管理系統", href: "/projects/nccu-venue-redesign" },
+      ],
+    },
   ];
 
   // 工作與教學合併成一條時間軸，由新到舊（進行中的排最前面）；每筆最多兩點，動詞開頭、有數字的放數字
@@ -144,16 +209,6 @@ export default function About() {
       ],
     },
     {
-      period: "2025.03–至今",
-      role: "UX 設計師",
-      org: "FreeSEED R2｜台灣在地 LLM 計畫",
-      points: [
-        "負責社群主頁改版與社群遊戲設計，依使用者研究規劃介面流程與參與機制。",
-        "將互動構想做成可操作的原型，作為團隊開發討論與使用者驗證的依據。",
-      ],
-      tags: ["使用者研究", "UI／UX 設計", "遊戲設計", "Figma"],
-    },
-    {
       period: "2025.07–2025.08",
       role: "設計研發組 實習生",
       org: "財團法人台灣設計研究院 TDRI",
@@ -162,6 +217,16 @@ export default function About() {
         "串接 AI API 進行評論情緒辨識與內容分類，把非結構化文字轉為可分析的資料。",
       ],
       tags: ["競品分析", "情境規劃", "AI API"],
+    },
+    {
+      period: "2025.03–2025.07",
+      role: "UX 設計師",
+      org: "FreeSEED R2｜台灣在地 LLM 計畫",
+      points: [
+        "負責社群主頁改版與社群遊戲設計，依使用者研究規劃介面流程與參與機制。",
+        "將互動構想做成可操作的原型，作為團隊開發討論與使用者驗證的依據。",
+      ],
+      tags: ["使用者研究", "UI／UX 設計", "遊戲設計", "Figma"],
     },
     {
       period: "2025.02–2025.06",
@@ -346,42 +411,12 @@ export default function About() {
           </div>
         </section>
 
-        {/* Skills & Interests */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <section className="md:col-span-3 bg-[#fcfcfc] rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold mb-3">技能專長 / Skills</h2>
-            <div className="space-y-2.5">
-              {skillGroups.map((group) => (
-                <div key={group.label} className="flex flex-col sm:flex-row sm:items-start gap-1.5 sm:gap-3">
-                  <p className="text-xs text-gray-500 sm:w-20 sm:shrink-0 sm:pt-1">{group.label}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <span
-                        key={item}
-                        className="bg-[#e1eafe] text-gray-700 px-3 py-1 text-xs rounded-full border border-gray-300 transition-transform hover:-translate-y-0.5"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section className="md:col-span-2 bg-[#fcfcfc] rounded-xl p-4 shadow-sm">
-            <h2 className="font-semibold mb-3">研究主題 / Research Interests</h2>
-            <div className="flex flex-wrap gap-2">
-              {researchInterests.map((item) => (
-                <span
-                  key={item}
-                  className="bg-[#e3f1f2] text-gray-700 px-3 py-1 text-xs rounded-full border border-gray-300 transition-transform hover:-translate-y-0.5"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </section>
-        </div>
+        {/* Skills & Research：方向與技術互相對應，滑過任一邊會畫出連線 */}
+        <section>
+          <h2 className="font-semibold">專長與研究方向 / Skills & Research</h2>
+          <p className="text-xs text-gray-500 mt-1 mb-4">滑過（手機點選）任一方向或技術，查看兩者如何對應。</p>
+          <SkillMap areas={focusAreas} groups={skillGroups} />
+        </section>
 
         {/* TABS */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
