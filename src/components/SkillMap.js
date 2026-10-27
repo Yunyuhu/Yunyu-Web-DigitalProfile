@@ -2,16 +2,25 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import DecodeText from "@/components/DecodeText";
 
-const DESKTOP = "(min-width: 768px)";
+const mono = "font-[family-name:var(--font-geist-mono)]";
+
+// 分支走線的垂直位置：列的上內距 8px ＋ 節點高度 52px 的一半
+const TRACE_Y = 34;
+
+// 進場時序（秒）：面板往下展開 → 掃描線 → 主幹長出 → 各分支依序展開 → 技術逐一出現
+const EXPAND = 0.6;
+const TRUNK_AT = EXPAND + 0.15;
+const rowAt = (index) => EXPAND + 0.45 + index * 0.14;
 
 // 依證據類型顯示：站內專案、外部連結，或沒有連結的經歷
 const Evidence = ({ item }) => {
   if (item.href?.startsWith("/")) {
     return (
-      <Link href={item.href} className="group inline-flex items-center gap-0.5 text-teal-700 hover:text-teal-900">
+      <Link href={item.href} className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
         {item.label}
         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
       </Link>
@@ -19,192 +28,245 @@ const Evidence = ({ item }) => {
   }
   if (item.href) {
     return (
-      <a href={item.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-0.5 text-teal-700 hover:text-teal-900">
+      <a href={item.href} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
         {item.label}
         <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </a>
     );
   }
-  return <span className="text-gray-600">{item.label}</span>;
+  return <span className="text-slate-400">{item.label}</span>;
 };
 
-// 專長地圖：左側是方向，右側是技術。滑過（手機點選）任一邊，另一邊對應的項目會亮起並畫出連線；
-// 還沒互動前，桌機版會自動輪流展示每個方向
+// 技能樹：核心沿主幹分出各個方向，每個方向接上它用到的技術。
+// 平常只露出標題列，捲動到這裡時往下展開並播放解析動畫；滑過分支會點亮該分支，點選才展開說明與相關專案；
+// 滑過技術時，所有用到它的分支一起亮起
 export default function SkillMap({ areas, groups }) {
-  const [active, setActive] = useState(null); // { kind: "area" | "skill", id }
-  const [lines, setLines] = useState([]);
-  const [touched, setTouched] = useState(false);
-  const wrapRef = useRef(null);
-  const areaEls = useRef({});
-  const skillEls = useRef({});
-  const inView = useInView(wrapRef, { amount: 0.35 });
+  const [activeId, setActiveId] = useState(areas[0].id);
+  const [hoverId, setHoverId] = useState(null);
+  const [hoverSkill, setHoverSkill] = useState(null);
+  const [rowTops, setRowTops] = useState({});
+  const [introDone, setIntroDone] = useState(false);
+  const panelRef = useRef(null);
+  const treeRef = useRef(null);
+  const rowEls = useRef({});
+  const inView = useInView(panelRef, { once: true, amount: 0.6 });
   const reduceMotion = useReducedMotion();
+  const booted = inView || reduceMotion;
+  const show = booted ? "on" : "off";
 
-  const linked = (area, skill) =>
-    active?.kind === "area" ? active.id === area.id && area.skills.includes(skill) : active?.id === skill && area.skills.includes(skill);
-  const areaOn = (area) =>
-    active?.kind === "area" ? active.id === area.id : Boolean(active) && area.skills.includes(active.id);
-  const skillOn = (skill) => areas.some((area) => linked(area, skill));
+  const engineering = new Set(groups.filter((group) => group.emphasis).flatMap((group) => group.items));
+  const focusId = hoverId ?? activeId;
+  const lit = (area) => (hoverSkill ? area.skills.includes(hoverSkill) : area.id === focusId);
+  const lastId = areas[areas.length - 1].id;
+  const doneAt = rowAt(areas.length) + 0.3;
 
-  const interact = (next) => {
-    setTouched(true);
-    setActive(next);
-  };
-
+  // 進場動畫播完後，之後的亮暗切換都不再延遲
   useEffect(() => {
-    if (touched || reduceMotion || !inView || !window.matchMedia(DESKTOP).matches) return;
-    let index = 0;
-    setActive({ kind: "area", id: areas[0].id });
-    const timer = setInterval(() => {
-      index = (index + 1) % areas.length;
-      setActive({ kind: "area", id: areas[index].id });
-    }, 2600);
-    return () => clearInterval(timer);
-  }, [touched, reduceMotion, inView, areas]);
+    if (!booted) return;
+    const timer = setTimeout(() => setIntroDone(true), reduceMotion ? 0 : (doneAt + 0.3) * 1000);
+    return () => clearTimeout(timer);
+  }, [booted, reduceMotion, doneAt]);
 
-  // 連線座標依實際版面計算，視窗或內容尺寸改變時重算
+  // 主幹長度與光點位置依各分支的實際位置計算
   useLayoutEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-    const draw = () => {
-      if (!active || !window.matchMedia(DESKTOP).matches) {
-        setLines([]);
-        return;
-      }
-      const box = wrap.getBoundingClientRect();
-      const next = [];
+    const measure = () => {
+      const next = {};
       areas.forEach((area) => {
-        area.skills.forEach((skill) => {
-          const a = areaEls.current[area.id];
-          const s = skillEls.current[skill];
-          if (!linked(area, skill) || !a || !s) return;
-          const ar = a.getBoundingClientRect();
-          const sr = s.getBoundingClientRect();
-          next.push({
-            id: `${area.id}-${skill}`,
-            x1: ar.right - box.left,
-            y1: ar.top + ar.height / 2 - box.top,
-            x2: sr.left - box.left,
-            y2: sr.top + sr.height / 2 - box.top,
-          });
-        });
+        const el = rowEls.current[area.id];
+        if (el) next[area.id] = el.offsetTop;
       });
-      setLines(next);
+      setRowTops(next);
     };
-    draw();
-    const observer = new ResizeObserver(draw);
-    observer.observe(wrap);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(treeRef.current);
     return () => observer.disconnect();
-    // linked 只依賴 active 與 areas
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, areas]);
+  }, [areas]);
 
   return (
-    <div
-      ref={wrapRef}
-      onMouseLeave={() => touched && setActive(null)}
-      className="relative grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-6 md:gap-12"
+    <motion.div
+      ref={panelRef}
+      initial="off"
+      animate={show}
+      className="relative overflow-hidden rounded-2xl bg-[#0b1517] p-5 sm:p-7 ring-1 ring-teal-400/20"
     >
-      <svg aria-hidden className="pointer-events-none absolute inset-0 z-0 hidden md:block w-full h-full overflow-visible">
-        {lines.map((line) => {
-          const mid = (line.x1 + line.x2) / 2;
-          const d = `M ${line.x1} ${line.y1} C ${mid} ${line.y1}, ${mid} ${line.y2}, ${line.x2} ${line.y2}`;
-          return (
-            <g key={line.id}>
-              <motion.path
-                d={d}
-                fill="none"
-                stroke="#99f6e4"
-                strokeWidth={1.5}
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 0.45, ease: "easeOut" }}
-              />
-              <path
-                d={d}
-                fill="none"
-                stroke="#0d9488"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeDasharray="1 11"
-                className="motion-safe:animate-[skill-flow_0.9s_linear_infinite]"
-              />
-              <circle cx={line.x2} cy={line.y2} r={3} fill="#0d9488" />
-            </g>
-          );
-        })}
-      </svg>
+      {/* 背景格線 */}
+      <motion.div
+        aria-hidden
+        variants={{ off: { opacity: 0 }, on: { opacity: 0.12, transition: { duration: 0.8 } } }}
+        className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(94,234,212,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(94,234,212,0.5)_1px,transparent_1px)] [background-size:28px_28px]"
+      />
+      {/* 進場時由上往下掃過一次的掃描線 */}
+      <motion.div
+        aria-hidden
+        variants={{
+          off: { top: "0%", opacity: 0 },
+          on: { top: "100%", opacity: [0, 1, 1, 0], transition: { delay: EXPAND * 0.5, duration: 1.1, ease: "easeInOut" } },
+        }}
+        className="pointer-events-none absolute inset-x-0 h-12 -translate-y-full bg-[linear-gradient(180deg,transparent,rgba(94,234,212,0.18))] border-b border-teal-300/60"
+      />
 
-      {/* 方向 */}
-      <div className="relative z-10 flex flex-col gap-3">
-        {areas.map((area) => {
-          const on = areaOn(area);
+      {/* 核心與圖例 */}
+      <div className="relative flex flex-wrap items-center gap-x-3 gap-y-2 mb-2">
+        <span className="relative flex h-3 w-3">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-60 motion-safe:animate-ping" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-teal-300 shadow-[0_0_10px_#5eead4]" />
+        </span>
+        <DecodeText
+          text="YUNYU.HU / SKILL TREE"
+          trigger={booted ? 1 : 0}
+          delay={150}
+          duration={700}
+          className={`${mono} text-xs tracking-[0.2em] text-teal-200`}
+        />
+        <motion.span
+          variants={{ off: { opacity: 0 }, on: { opacity: 1, transition: { delay: doneAt } } }}
+          className={`${mono} ml-auto flex items-center gap-3 text-[10px] text-slate-400`}
+        >
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-sm border border-teal-400/60 bg-teal-400/20" />
+            程式・系統・資料
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-sm border border-white/25" />
+            研究與設計方法
+          </span>
+        </motion.span>
+      </div>
+
+      {!booted && (
+        <p className={`${mono} relative text-[11px] text-slate-500`}>
+          &gt; 載入技能樹<span className="motion-safe:animate-pulse">▍</span>
+        </p>
+      )}
+      <motion.div
+        variants={{ off: { height: 0 }, on: { height: "auto", transition: { duration: EXPAND, ease: [0.22, 1, 0.36, 1] } } }}
+        className="relative overflow-hidden"
+      >
+      <div ref={treeRef} className="relative pl-6 pt-1" onMouseLeave={() => setHoverId(null)}>
+        {/* 主幹與沿主幹移動的訊號光點 */}
+        <motion.span
+          aria-hidden
+          variants={{ off: { scaleY: 0 }, on: { scaleY: 1, transition: { delay: TRUNK_AT, duration: 0.6, ease: "easeOut" } } }}
+          className="absolute left-[5px] top-0 w-px origin-top bg-teal-400/30"
+          style={{ height: (rowTops[lastId] ?? 0) + TRACE_Y }}
+        />
+        {booted && rowTops[focusId] !== undefined && !hoverSkill && (
+          <motion.span
+            aria-hidden
+            className="absolute left-[1.5px] h-2 w-2 rounded-full bg-teal-200 shadow-[0_0_12px_#5eead4]"
+            initial={{ top: 0, opacity: 0 }}
+            animate={{ top: rowTops[focusId] + TRACE_Y - 4, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 28, delay: introDone ? 0 : doneAt }}
+          />
+        )}
+
+        {areas.map((area, index) => {
+          const on = lit(area);
+          const open = area.id === activeId;
+          const at = rowAt(index);
           return (
             <div
               key={area.id}
-              ref={(el) => (areaEls.current[area.id] = el)}
-              tabIndex={0}
-              onMouseEnter={() => interact({ kind: "area", id: area.id })}
-              onFocus={() => interact({ kind: "area", id: area.id })}
-              onClick={() => interact({ kind: "area", id: area.id })}
-              className={`rounded-xl border bg-white p-4 outline-none transition-all duration-300 ${
-                on ? "border-teal-400 shadow-md shadow-teal-100 md:translate-x-1" : "border-gray-200"
-              } ${active && !on ? "opacity-60" : ""}`}
+              ref={(el) => (rowEls.current[area.id] = el)}
+              className="relative py-2"
+              onMouseEnter={() => setHoverId(area.id)}
             >
-              <p className="text-sm font-semibold text-gray-800">{area.title}</p>
-              <p className="text-xs text-gray-500">{area.en}</p>
-              <p className="text-sm text-gray-600 mt-2">{area.summary}</p>
-              {/* 手機沒有連線，直接列出用到的技術 */}
-              <p className="md:hidden flex flex-wrap text-xs text-teal-800 mt-2">
-                {area.skills.map((skill, i) => (
-                  <span key={skill} className="whitespace-nowrap">
-                    {skill}
-                    {i < area.skills.length - 1 && "・"}
-                  </span>
-                ))}
-              </p>
-              <div className="flex flex-wrap gap-x-3 gap-y-1 mt-2 text-sm">
-                {area.evidence.map((item) => (
-                  <Evidence key={item.label} item={item} />
-                ))}
+              {/* 主幹到節點的分支 */}
+              <motion.span
+                aria-hidden
+                variants={{ off: { scaleX: 0 }, on: { scaleX: 1, transition: { delay: at, duration: 0.25 } } }}
+                className={`absolute -left-[19px] h-px w-[19px] origin-left transition-colors duration-300 ${
+                  on
+                    ? "bg-[linear-gradient(90deg,#14b8a6,#ccfbf1,#14b8a6)] bg-[length:200%_100%] shadow-[0_0_8px_#2dd4bf] motion-safe:animate-[signal-flow_1.2s_linear_infinite]"
+                    : "bg-teal-400/30"
+                }`}
+                style={{ top: TRACE_Y }}
+              />
+
+              <div className="flex flex-col md:flex-row md:items-start gap-2 md:gap-0">
+                <motion.button
+                  type="button"
+                  variants={{ off: { opacity: 0, x: -8 }, on: { opacity: 1, x: 0, transition: { delay: at + 0.1, duration: 0.3 } } }}
+                  onClick={() => setActiveId(area.id)}
+                  onFocus={() => setHoverId(area.id)}
+                  onBlur={() => setHoverId(null)}
+                  aria-expanded={open}
+                  className={`md:w-64 min-h-[52px] shrink-0 flex flex-col justify-center rounded-lg border px-3 text-left outline-none transition-[border-color,background-color,box-shadow] duration-300 ${
+                    on
+                      ? "border-teal-300/80 bg-teal-400/15 shadow-[0_0_18px_rgba(45,212,191,0.25)]"
+                      : "border-white/10 bg-white/[0.03] hover:border-white/25"
+                  }`}
+                >
+                  <DecodeText
+                    text={`${String(index + 1).padStart(2, "0")} / ${area.en}`}
+                    trigger={booted ? 1 : 0}
+                    delay={(at + 0.1) * 1000}
+                    duration={500}
+                    className={`${mono} block truncate text-[10px] tracking-wider text-teal-300/70`}
+                  />
+                  <span className="block text-sm font-semibold text-white mt-0.5">{area.title}</span>
+                </motion.button>
+
+                {/* 節點到技術的走線（桌機） */}
+                <motion.span
+                  aria-hidden
+                  variants={{ off: { scaleX: 0 }, on: { scaleX: 1, transition: { delay: at + 0.25, duration: 0.2 } } }}
+                  className={`hidden md:block mt-[26px] h-px w-6 shrink-0 origin-left transition-colors duration-300 ${
+                    on ? "bg-teal-300 shadow-[0_0_6px_#2dd4bf]" : "bg-teal-400/25"
+                  }`}
+                />
+
+                <div className="flex flex-wrap gap-1.5 md:pt-[15px]">
+                  {area.skills.map((skill, i) => {
+                    const hot = hoverSkill === skill;
+                    const tone = hot
+                      ? "border-teal-200 bg-teal-300/30 text-white shadow-[0_0_14px_rgba(94,234,212,0.6)]"
+                      : engineering.has(skill)
+                        ? `border-teal-400/40 bg-teal-400/10 text-teal-100 ${on ? "shadow-[0_0_8px_rgba(45,212,191,0.25)]" : ""}`
+                        : "border-white/15 bg-white/[0.02] text-slate-300";
+                    return (
+                      <motion.span
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={booted ? { opacity: on || hot ? 1 : 0.6, scale: 1 } : { opacity: 0, scale: 0.85 }}
+                        transition={{ duration: 0.25, delay: introDone ? 0 : at + 0.35 + i * 0.03 }}
+                        onMouseEnter={() => setHoverSkill(skill)}
+                        onMouseLeave={() => setHoverSkill(null)}
+                        onClick={() => setHoverSkill((current) => (current === skill ? null : skill))}
+                        className={`${mono} cursor-default select-none rounded-md border px-2 py-0.5 text-[11px] transition-[border-color,background-color,box-shadow,color] duration-300 ${tone}`}
+                      >
+                        {skill}
+                      </motion.span>
+                    );
+                  })}
+                </div>
               </div>
+
+              {/* 點選後展開：說明與相關專案 */}
+              <AnimatePresence initial={false}>
+                {open && booted && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut", delay: introDone ? 0 : doneAt }}
+                    className="overflow-hidden md:pl-[17.5rem]"
+                  >
+                    <p className="text-sm text-slate-300 pt-2">{area.summary}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5 text-sm">
+                      {area.evidence.map((item) => (
+                        <Evidence key={item.label} item={item} />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
       </div>
-
-      {/* 技術 */}
-      <div className="relative z-10 flex flex-col gap-5 md:self-center">
-        {groups.map((group) => (
-          <div key={group.label}>
-            <p className="text-xs font-medium text-gray-500 mb-2">{group.label}</p>
-            <div className="flex flex-wrap gap-2">
-              {group.items.map((skill) => {
-                const on = skillOn(skill);
-                return (
-                  <span
-                    key={skill}
-                    ref={(el) => (skillEls.current[skill] = el)}
-                    tabIndex={0}
-                    onMouseEnter={() => interact({ kind: "skill", id: skill })}
-                    onFocus={() => interact({ kind: "skill", id: skill })}
-                    onClick={() => interact({ kind: "skill", id: skill })}
-                    className={`cursor-default select-none rounded-full border px-3 py-1 text-xs outline-none transition-all duration-300 ${
-                      on
-                        ? "bg-teal-600 border-teal-600 text-white scale-105"
-                        : group.emphasis
-                          ? "bg-[#e3f1f2] border-teal-100 text-gray-800"
-                          : "bg-white border-gray-300 text-gray-700"
-                    } ${active && !on ? "opacity-35" : ""}`}
-                  >
-                    {skill}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

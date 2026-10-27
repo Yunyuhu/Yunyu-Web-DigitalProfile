@@ -1,6 +1,8 @@
 "use client";
 
 import CircularGallery from "@/components/TextAnimations/CircularGallery";
+import DecodeText from "@/components/DecodeText";
+import { Fragment } from "@/components/Fragments";
 
 export default function Interests() {
 
@@ -9,7 +11,7 @@ export default function Interests() {
       
       <div className="flex flex-col w-full">
         <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">
-          興趣 / Interests
+          興趣 / <DecodeText text="Interests" /><Fragment id="interests" />
         </h1>
         <h3 className="text-sm text-gray-600 mt-2">
           INFJ，熱愛踩點各種好吃地圖（偏愛鹹食和酒精），可頌拯救世界！樂於和人群相處，但更會對一些奇妙且浪漫的小事感興趣。

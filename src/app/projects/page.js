@@ -6,6 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
+import DecodeText from "@/components/DecodeText";
+import { Fragment } from "@/components/Fragments";
 
 // 把游標在卡片內的位置寫進 CSS 變數，給柔光效果使用
 const trackSpotlight = (e) => {
@@ -44,7 +46,7 @@ export default function Projects() {
   return (
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
       <div className="flex flex-col w-full">
-        <h1 className="text-2xl font-bold">專案 / Projects</h1>
+        <h1 className="text-2xl font-bold">專案 / <DecodeText text="Projects" /><Fragment id="projects" /></h1>
         <h3 className="text-sm text-gray-600 mt-2">
           人機互動研究、AI 應用與軟硬體互動原型的作品，精選專案排在最前面。點選卡片可查看專案重點與相關資源。
         </h3>

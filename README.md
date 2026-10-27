@@ -46,6 +46,9 @@ src/
 │   ├── SidebarNav.js          # 頁面選單
 │   ├── Analytics.js           # Google Analytics 4
 │   ├── FadeIn.js              # 捲動到畫面內時淡入
+│   ├── SkillMap.js            # 關於我頁的技能樹（捲動到時播放解析動畫）
+│   ├── DecodeText.js          # 文字解碼效果（頁面標題、技能樹）
+│   ├── EasterEgg.js           # 彩蛋：藍圖模式
 │   ├── TextAnimations/        # 首頁動態字句、興趣頁相片牆
 │   └── ui/                    # 卡片與分頁元件
 ├── data/

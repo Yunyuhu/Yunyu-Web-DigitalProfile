@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import SkillMap from "@/components/SkillMap";
+import DecodeText from "@/components/DecodeText";
+import { Fragment } from "@/components/Fragments";
 
 // 「查看專案」固定放在每一列的右側，各分頁同一種樣式；手機只留箭頭，避免擠壓左側文字
 const ProjectLink = ({ href }) => (
@@ -151,9 +153,10 @@ export default function About() {
       id: "ai",
       title: "AI 應用",
       en: "AI for Social Good",
-      summary: "實作 YOLO 即時辨識管線並串接生成式 AI API，把 AI 用在民眾日常的真實問題",
-      skills: ["Python", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
+      summary: "串接 AI API 做評論情緒辨識與內容分類，實作 YOLO 即時辨識管線，把 AI 用在民眾日常的真實問題",
+      skills: ["Python", "AI 文字分類", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
       evidence: [
+        { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
         { label: "Zooly", href: "/projects/zooly" },
         { label: "MetroMate", href: "/projects/metromate" },
@@ -163,18 +166,17 @@ export default function About() {
       id: "fullstack",
       title: "全端開發",
       en: "Full-stack Development",
-      summary: "從銀行專案的前後端實作、AI API 文字分類，到本網站的開發與部署",
-      skills: ["JavaScript", "React", "React Native", "MySQL", "Firebase", "AWS", "Git", "AI 文字分類"],
+      summary: "從銀行專案的前後端實作，到本網站的開發與部署",
+      skills: ["JavaScript", "React", "React Native", "MySQL", "Firebase", "AWS", "Git"],
       evidence: [
         { label: "北祥全端實習" },
-        { label: "台灣設計研究院實習" },
         { label: "本網站原始碼", href: "https://github.com/Yunyuhu/Yunyu-Web-DigitalProfile" },
       ],
     },
     {
       id: "immersive",
       title: "沉浸式與實體互動",
-      en: "Immersive & Physical Interaction",
+      en: "Immersive & Physical",
       summary: "整合 Unity 場景與 Arduino 感測，打造結合空間、敘事與觸覺的互動體驗",
       skills: ["Unity", "Arduino", "感測器整合", "對話設計"],
       evidence: [
@@ -367,7 +369,7 @@ export default function About() {
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
       <div className="flex flex-col w-full">
         <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">
-          關於我 / About me
+          關於我 / <DecodeText text="About me" /><Fragment id="about" />
         </h1>
         <h3 className="text-sm text-gray-600 mt-2">
           從人與科技的互動中尋找靈感，這裡記錄著我一路走來的足跡。
@@ -414,7 +416,7 @@ export default function About() {
         {/* Skills & Research：方向與技術互相對應，滑過任一邊會畫出連線 */}
         <section>
           <h2 className="font-semibold">專長與研究方向 / Skills & Research</h2>
-          <p className="text-xs text-gray-500 mt-1 mb-4">滑過（手機點選）任一方向或技術，查看兩者如何對應。</p>
+          <p className="text-xs text-gray-500 mt-1 mb-4">點選分支查看說明與相關專案；滑過技術，看它支撐了哪些方向。</p>
           <SkillMap areas={focusAreas} groups={skillGroups} />
         </section>
 
