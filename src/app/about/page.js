@@ -171,6 +171,7 @@ export default function About() {
       evidence: [
         { label: "北祥全端實習" },
         { label: "本網站原始碼", href: "https://github.com/Yunyuhu/Yunyu-Web-DigitalProfile" },
+        { label: "DeepLink", href: "/projects/deeplink" },
       ],
     },
     {
