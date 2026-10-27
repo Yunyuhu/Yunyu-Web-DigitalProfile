@@ -5,7 +5,7 @@ import CircularGallery from "@/components/TextAnimations/CircularGallery";
 export default function Interests() {
 
   return (
-    <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
+    <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
       
       <div className="flex flex-col w-full">
         <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">

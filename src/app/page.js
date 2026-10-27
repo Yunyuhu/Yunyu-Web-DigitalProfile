@@ -14,7 +14,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col w-full h-screen justify-center items-center gap-6 p-6 rounded-2xl">
+    <div className="flex flex-col w-full min-h-[55vh] lg:h-full justify-center items-center gap-6 p-6 rounded-2xl">
 
       {/* TrueFocus 動畫字句 */}
       <div className="text-center">
