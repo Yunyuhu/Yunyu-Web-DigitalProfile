@@ -9,6 +9,8 @@ import OpenHCI from "@/image/research/OpenHCI.jpg"
 import TAICHI25 from "@/image/research/taichi25.jpg"
 import TriUniversitySymposium from "@/image/research/tri-university-symposium.jpg"
 import TDRI2025 from "@/image/research/tdri-2025.jpg"
+import DecodeText from "@/components/DecodeText";
+import { Fragment } from "@/components/Fragments";
 
 const research = [
   {
@@ -85,7 +87,7 @@ export default function Research() {
   return (
       <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
         <div className="flex flex-col w-full">
-          <h1 className="text-2xl font-bold">研究與活動 / Research and Activities</h1>
+          <h1 className="text-2xl font-bold">研究與活動 / <DecodeText text="Research and Activities" /><Fragment id="research" /></h1>
           <h3 className="text-sm text-gray-600 mt-2">
           探索科技與設計交會的邊界，在不同場域和切角中實踐。
           </h3>

@@ -119,9 +119,12 @@
   }
 }
 
-/* 專長地圖連線上的流動光點 */
-@keyframes skill-flow {
+/* 技能樹走線上流動的訊號 */
+@keyframes signal-flow {
+  from {
+    background-position: 100% 0;
+  }
   to {
-    stroke-dashoffset: -24;
+    background-position: -100% 0;
   }
 }

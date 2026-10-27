@@ -2,6 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Analytics from "@/components/Analytics";
+import EasterEgg from "@/components/EasterEgg";
+import { FragmentProgress } from "@/components/Fragments";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +40,8 @@ export default function RootLayout({ children }) {
 
         </div>
 
+        <FragmentProgress />
+        <EasterEgg />
         <Analytics />
       </body>
     </html>
