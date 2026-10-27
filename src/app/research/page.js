@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import FadeIn from "@/components/FadeIn"
 
 import TAICHIdemo from "@/image/research/TAICHIdemo.jpg"
 import LeagueOfVRfinal from "@/image/research/LeagueOfVRfinal.jpg"
@@ -60,14 +61,14 @@ const research = [
   },
 ];
 
-// 每行交替排列：寬列（md:col-span-6，一列 2 個）與窄列（md:col-span-4，一列 3 個）
+// md 起一列 2 個；xl 起每行交替排列寬列（一列 2 個）與窄列（一列 3 個），避免平板上卡片太窄
 function getSpanClasses(count) {
   const classes = [];
   let index = 0;
   let row = 0;
   while (index < count) {
     const isWideRow = row % 2 === 0;
-    const spanClass = isWideRow ? "md:col-span-6" : "md:col-span-4";
+    const spanClass = isWideRow ? "md:col-span-6 xl:col-span-6" : "md:col-span-6 xl:col-span-4";
     const itemsInRow = isWideRow ? 2 : 3;
     for (let i = 0; i < itemsInRow && index < count; i++) {
       classes.push(spanClass);
@@ -82,7 +83,7 @@ export default function Research() {
   const spanClasses = getSpanClasses(research.length);
 
   return (
-      <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-12 px-6 overflow-y-auto">
+      <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
         <div className="flex flex-col w-full">
           <h1 className="text-2xl font-bold">研究與活動 / Research and Activities</h1>
           <h3 className="text-sm text-gray-600 mt-2">
@@ -96,25 +97,22 @@ export default function Research() {
             const spanClass = spanClasses[index];
 
             return (
-              
-                <a
-                key={index}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group relative ${spanClass} col-span-1 rounded-2xl border shadow-md hover:shadow-lg transition-all bg-white overflow-hidden min-h-[260px] md:min-h-[260px] flex flex-col`}
+              <FadeIn key={index} className={`${spanClass} col-span-1 flex`} delay={(index % 3) * 0.06}>
+                <div
+                className="group relative w-full rounded-2xl border shadow-md hover:shadow-lg transition-all bg-white overflow-hidden min-h-[260px] flex flex-col"
                 >
-                {/* 圖片 */}
+                {/* 圖片：hover 時微微放大 */}
                 <div className="relative w-full h-full">
                     <Image
                     src={research.image}
                     alt={research.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                 </div>
 
                 {/* 覆蓋層：預設顯示，hover 時淡出 */}
-                <div className="absolute inset-0 bg-black/70 text-white opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-10 p-6 flex flex-col justify-end">
+                <div className="absolute inset-0 bg-black/70 text-white opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-10 p-5 sm:p-6 flex flex-col justify-end">
                     <h2 className="text-base font-semibold break-words mb-2">
                     {research.title}
                     </h2>
@@ -123,10 +121,8 @@ export default function Research() {
                     {research.year}
                     </span>
                 </div>
-                </a>
-
-           
-              
+                </div>
+              </FadeIn>
             );
           })}
         </div>
