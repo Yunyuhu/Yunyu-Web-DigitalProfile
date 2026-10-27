@@ -118,3 +118,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 專長地圖連線上的流動光點 */
+@keyframes skill-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
