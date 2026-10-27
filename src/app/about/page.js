@@ -153,7 +153,7 @@ export default function About() {
       id: "ai",
       title: "AI 應用",
       en: "AI for Social Good",
-      summary: "串接 AI API 做評論情緒辨識與內容分類，實作 YOLO 即時辨識管線，把 AI 用在民眾日常的真實問題",
+      summary: "串接 AI API 做評論情緒辨識與內容分類，實作 YOLO 即時辨識牆壁狀態，把 AI 用在民眾日常的真實問題",
       skills: ["Python", "AI 文字分類", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
       evidence: [
         { label: "台灣設計研究院實習" },
