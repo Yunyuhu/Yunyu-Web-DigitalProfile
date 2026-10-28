@@ -17,7 +17,7 @@ export default function SidebarNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full flex flex-col gap-2 lg:gap-4">
+    <nav className="w-full flex flex-col gap-2 lg:gap-4 short:gap-2">
       {NAV_ITEMS.map(({ href, label, en, icon: Icon }) => {
         const active = pathname === href || pathname.startsWith(`${href}/`);
         return (
@@ -34,7 +34,7 @@ export default function SidebarNav() {
                 transition={{ type: "spring", stiffness: 380, damping: 32 }}
               />
             )}
-            <span className="relative flex items-center h-[52px] lg:h-[60px] px-4">
+            <span className="relative flex items-center h-[52px] lg:h-[60px] short:h-[48px] px-4">
               <Icon
                 className={`w-5 h-5 mr-3 transition-transform group-hover:scale-110 ${active ? "text-teal-700" : "text-gray-600"}`}
               />

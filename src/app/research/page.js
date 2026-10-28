@@ -94,7 +94,7 @@ export default function Research() {
           <div className="w-full h-px bg-gray-200 mt-4" />
         </div>
   
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full auto-rows-[1fr]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 pb-4 w-full auto-rows-[1fr]">
           {research.map((research, index) => {
             const spanClass = spanClasses[index];
 

@@ -52,9 +52,10 @@ export default function Sidebar() {
   // 履歷頁是獨立的一張紙，不顯示側欄
   if (pathname.startsWith("/resume")) return null;
 
+  // 桌機：側欄和右側頁面一樣固定在視窗高度內；螢幕較矮時自動縮小（short），仍放不下才在側欄內捲動
   return (
-    <div className="w-full lg:w-[320px] lg:min-w-[320px] lg:h-full rounded-2xl bg-white flex
-    justify-start items-center flex-col p-5 sm:p-6 lg:p-[30px] lg:pt-[80px]">
+    <div className="w-full lg:w-[320px] lg:min-w-[320px] lg:h-full lg:overflow-y-auto lg:[scrollbar-width:thin] rounded-2xl bg-white flex
+    justify-start items-center flex-col p-5 sm:p-6 lg:p-[30px] lg:pt-[clamp(30px,9vh,80px)]">
 
       <div className="relative flex flex-col items-center w-full lg:w-auto">
         <Link
@@ -77,7 +78,7 @@ export default function Sidebar() {
               </motion.span>
             )}
           </AnimatePresence>
-          <div className="w-[100px] h-[100px] rounded-full overflow-hidden shadow-md transition hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:scale-105 cursor-pointer">
+          <div className="w-[100px] h-[100px] short:w-[72px] short:h-[72px] rounded-full overflow-hidden shadow-md transition hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:scale-105 cursor-pointer">
             <Image
               src={AvatarImg}
               alt="Avatar"
@@ -87,7 +88,7 @@ export default function Sidebar() {
         </Link>
         <div className="flex flex-col items-center">
           <h1 className="mt-2 font-bold">胡芸毓 Yunyu Hu</h1>
-          <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2">
+          <p className="max-w-[380px] text-center text-xs text-gray-700 mt-2 short:line-clamp-3">
           從資管出發，進一步於數位內容碩士深耕人機互動的溝通意圖研究。熱衷科技如何回應社會的複雜議題，並致力於打造更具共感力的數位體驗。
           </p>
         </div>
@@ -104,7 +105,7 @@ export default function Sidebar() {
       </div>
 
       {/* 社群連結 */}
-      <div className="flex gap-4 mt-4 lg:my-5 justify-center">
+      <div className="flex gap-4 mt-4 lg:my-5 short:my-3 justify-center">
         <a href="mailto:unayunyuhu@gmail.com" aria-label="Email">
           <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(100,100,100,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
             <Mail className="w-5 h-5 text-gray-600" />

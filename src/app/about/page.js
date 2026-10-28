@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
@@ -23,93 +22,98 @@ const ProjectLink = ({ href }) => (
   </Link>
 );
 
-// 一般時間軸：年份、標題、說明、補充條列、標籤，有 href 時右側附上「查看專案」
-const timelineItems = (items) => {
-  if (!Array.isArray(items)) return null;
-  return (
-    <div className="space-y-5">
-      {items.map((item, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: index * 0.06 }}
-          className="border-l-4 border-teal-500 pl-4 ml-2 flex items-center justify-between gap-3 sm:gap-6"
-        >
-          <div className="min-w-0 flex-1">
-            <p className="text-xs text-gray-500 mb-1">{item.year}</p>
-            {item.title && (
-              <p className="text-sm font-semibold text-gray-800">{item.title}</p>
-            )}
-            {item.description && (
-              <p className="text-sm text-gray-700 mt-0.5">{item.description}</p>
-            )}
-            {item.details && (
-              <ul className="list-disc pl-5 mt-1 space-y-0.5 text-sm text-gray-700">
-                {item.details.map((d, i) => (
-                  <li key={i}>{d}</li>
-                ))}
-              </ul>
-            )}
-            {item.tags && (
-              <div className="flex flex-wrap gap-2 mt-2">
-                {item.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="inline-block text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-          {item.href && <ProjectLink href={item.href} />}
-        </motion.div>
-      ))}
-    </div>
-  );
-};
+const Tags = ({ tags }) => (
+  <div className="flex flex-wrap gap-2">
+    {tags.map((tag) => (
+      <span key={tag} className="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full">
+        {tag}
+      </span>
+    ))}
+  </div>
+);
 
-// 經歷列表：職稱、單位、期間固定在同一位置，方便快速掃讀
-const experienceList = (items) => (
-  <div className="space-y-3">
+// 日期小標籤：跨年的專案在年份分組裡標出完整期間
+const DatePill = ({ children }) => (
+  <span className="shrink-0 whitespace-nowrap rounded bg-gray-100 px-1.5 py-px text-xs text-gray-600 tabular-nums">
+    {children}
+  </span>
+);
+
+const fadeUp = (index) => ({
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.35, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] },
+});
+
+// 單欄列表（工作與教學、研究與發表、社群參與）：外層分頁已經是框，條目之間只用細線分隔、不再包卡片；
+// 日期在標題左上方，和年份分組的年份同色呼應；下方依序是單位／說明、條列、標籤與「查看專案」
+const EntryList = ({ items }) => (
+  <ul className="divide-y divide-gray-100">
     {items.map((item, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: index * 0.05 }}
-        className="rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-teal-300"
-      >
-        <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-          <p className="text-sm font-semibold text-gray-800">{item.role}</p>
-          <p className="text-xs text-gray-500 shrink-0">{item.period}</p>
-        </div>
-        {item.org && <p className="text-sm text-gray-600 mt-0.5">{item.org}</p>}
-        {item.points?.length > 0 && (
+      <motion.li key={`${item.period ?? item.year}-${item.role ?? item.title}`} {...fadeUp(index)} className="group py-4 first:pt-0 last:pb-0">
+        <p className="text-xs font-semibold text-teal-800 tabular-nums">{item.period ?? item.year}</p>
+        <p className="mt-0.5 text-sm font-semibold text-gray-800 transition-colors group-hover:text-teal-800">{item.role ?? item.title}</p>
+        {(item.org ?? item.description) && <p className="text-sm text-gray-600 mt-0.5">{item.org ?? item.description}</p>}
+        {(item.points ?? item.details)?.length > 0 && (
           <ul className="list-disc pl-5 mt-2 space-y-1 text-sm text-gray-700 leading-relaxed">
-            {item.points.map((point, i) => (
-              <li key={i}>{point}</li>
+            {(item.points ?? item.details).map((point) => (
+              <li key={point}>{point}</li>
             ))}
           </ul>
         )}
         {(item.tags || item.href) && (
-          <div className="flex items-end justify-between gap-3 mt-3">
-            <div className="flex flex-wrap gap-2">
-              {item.tags?.map((tag) => (
-                <span key={tag} className="text-xs bg-teal-50 text-teal-700 px-2 py-0.5 rounded-full">
-                  {tag}
-                </span>
-              ))}
-            </div>
+          <div className="flex items-end justify-between gap-3 mt-2.5">
+            {item.tags ? <Tags tags={item.tags} /> : <span />}
             {item.href && <ProjectLink href={item.href} />}
           </div>
         )}
-      </motion.div>
+      </motion.li>
     ))}
-  </div>
+  </ul>
 );
+
+// 依年份分組（專案設計與開發、獲獎展出）：年份當小標題只出現一次；跨年的項目歸在結束那年，並標出完整期間
+const YearGroups = ({ items }) => {
+  const groups = [];
+  items.forEach((item) => {
+    const year = String(item.year).slice(-4);
+    const group = groups.find((g) => g.year === year);
+    if (group) group.items.push(item);
+    else groups.push({ year, items: [item] });
+  });
+  let index = 0;
+  return (
+    <div className="space-y-6">
+      {groups.map((group) => (
+        <section key={group.year}>
+          <h3 className="mb-2 flex items-center gap-3 text-sm font-semibold text-teal-800 tabular-nums">
+            {group.year}
+            <span className="h-px flex-1 bg-gray-200" />
+          </h3>
+          <ul className="space-y-3">
+            {group.items.map((item) => (
+              <motion.li key={item.title + item.description} {...fadeUp(index++)} className="group flex items-center justify-between gap-3 sm:gap-6">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-semibold text-gray-800 transition-colors group-hover:text-teal-800">
+                    {item.title}
+                    {item.year !== group.year && <span className="ml-2 align-middle"><DatePill>{item.year}</DatePill></span>}
+                  </p>
+                  {item.description && <p className="text-sm text-gray-600 mt-0.5">{item.description}</p>}
+                  {item.tags && (
+                    <div className="mt-1.5">
+                      <Tags tags={item.tags} />
+                    </div>
+                  )}
+                </div>
+                {item.href && <ProjectLink href={item.href} />}
+              </motion.li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+};
 
 const TABS = [
   { value: "work", label: "💼 工作與教學" },
@@ -207,6 +211,7 @@ export default function About() {
       period: "2025.09–2025.12、2026.09–至今",
       role: "「人機互動設計」課程助教",
       org: "國立政治大學",
+      tags: ["互動設計", "使用者研究", "使用者評估", "專題指導"],
       points: [
         "兩學期共支援 35 組、139 位學生的互動設計專題，涵蓋使用者研究、資訊架構、互動原型到使用者評估。",
         "批改作業並給予回饋，協助學生檢視需求、設計方案與測試結果是否一致。",
@@ -236,6 +241,7 @@ export default function About() {
       period: "2025.02–2025.06",
       role: "「設計思考與人工智慧」課程助教",
       org: "國立政治大學",
+      tags: ["設計思考", "AI 應用", "原型開發"],
       points: [
         "支援約 50 位學生的設計思考與 AI 應用實作，協助釐清使用情境與 AI 適合介入的任務。",
         "指導原型開發與實作除錯，協助學生完成可展示、可測試的應用原型。",
@@ -245,6 +251,7 @@ export default function About() {
       period: "2024",
       role: "技術助教",
       org: "OpenHCI 24th",
+      tags: ["Unity AR", "感測器整合", "技術指導"],
       points: ["指導學員團隊整合 Unity AR、LED 燈光與感測器，完成二手衣永續主題的多感官互動裝置《衣二衫 Action》。"],
       href: "/projects/secondhand-action",
     },
@@ -282,12 +289,14 @@ export default function About() {
       period: "2022.02–2022.06",
       role: "「行動裝置應用」課程助教",
       org: "天主教輔仁大學",
+      tags: ["React Native", "行動應用", "程式除錯"],
       points: ["支援全班以 React Native 開發行動應用，負責課堂技術說明、實作指導與程式除錯。"],
     },
     {
       period: "2021",
       role: "系所工讀生（機房）",
       org: "輔仁大學 資訊管理學系",
+      tags: ["電腦教室管理", "上機考監考"],
       points: [
         "管理系上電腦教室的進出登記，掌握教室與設備的使用狀況。",
         "協助程式設計上機考試監考，維持考場秩序與考試流程順暢。",
@@ -301,33 +310,44 @@ export default function About() {
         year: "2026",
         title: "碩士論文",
         description: "《探索協調意圖對人機協作的影響》Exploring the Effects of Coordination Intent on Human–AI Collaboration",
+        details: [
+          "以 2×2 組間實驗操弄人類與 AI 能否表達協調意圖，60 名參與者與 AI 完成 6 回合即時協作任務。",
+          "自建實驗系統與分析工具，結合問卷、逐筆協作過程數據與訪談，提出人機協調的設計建議。",
+        ],
         href: "/projects/coordination-intent-thesis",
       },
       {
         year: "2025.11",
         title: "2025 SNU–UTokyo–NCCU 三校聯合論文發表會（首爾）",
         description: "受國立政治大學推薦代表出席，與首爾大學、東京大學學生同場發表個人研究論文",
+        details: ["發表碩士論文的研究成果，主題是人類與 AI 在即時協作中表達協調意圖的作用。"],
       },
       {
         year: "2025.08",
         title: "TAICHI'25 第十一屆台灣人機互動研討會",
-        description: "發表碩士論文研究架構",
+        description: "發表碩士論文的研究架構構想",
+        details: ["說明為何要研究人機協作中的協調意圖，以及規劃中的實驗設計與研究問題。"],
       },
       {
         year: "2024",
         title: "TAICHI'24 Demo｜Best Demo",
-        description: "FlexiTouch: Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback",
+        description: "第十屆台灣人機互動研討會，展出 FlexiTouch 並獲選 Best Demo",
+        details: [
+          "以柔性材質的電阻變化同時偵測按壓與拉伸，即時轉為遊戲中的視覺與觸覺回饋。",
+          "Demo 論文：FlexiTouch: Simultaneous stretching and pressing of the soft material, generating both visual and haptic feedback",
+        ],
         href: "/projects/flexitouch",
       },
       {
         year: "2022.03",
         title: "科技部大專學生研究計畫",
         description: "《探索使用線上自主學習平台關鍵因素之個案研究》",
+        details: ["以個案研究探討使用者使用線上自主學習平台的關鍵因素。"],
       },
       {
         year: "2021.12",
         title: "TANET 台灣網際網路研討會暨 NCS 全國計算機會議",
-        description: "兩篇論文獲接受，受邀至東海大學發表",
+        description: "兩篇論文獲接受，受邀至東海大學發表，探討疫情期間的支付習慣與行動支付使用",
         details: ["《支付習慣影響數位振興券使用意願之研究》", "《疫情對行動支付使用情形之影響》"],
       },
     ],
@@ -382,7 +402,7 @@ export default function About() {
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
-      <div className="max-h-full sm:px-2 py-8 space-y-8 text-gray-800 w-full max-w-5xl">
+      <div className="sm:px-2 py-8 space-y-8 text-gray-800 w-full max-w-5xl">
         {/* Education */}
         <section>
           <h2 className="font-semibold mb-3">學歷 / Education</h2>
@@ -441,29 +461,35 @@ export default function About() {
             </select>
           </div>
 
-          {/* Desktop tabs */}
-          <div className="hidden sm:flex">
-            <TabsList className="flex flex-wrap h-auto justify-start gap-2 mb-4">
+          {/* Desktop tabs：底線式分頁列，內容直接接在下方，不另外包框 */}
+          <div className="hidden sm:block">
+            <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1 rounded-none border-b border-gray-200 bg-transparent p-0 mb-5">
               {TABS.map((tab) => (
-                <TabsTrigger key={tab.value} value={tab.value}>{tab.label}</TabsTrigger>
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className="-mb-px h-auto flex-none rounded-none border-0 border-b-2 border-transparent px-3 pb-2 pt-1 text-gray-500 hover:text-gray-800 data-[state=active]:border-teal-600 data-[state=active]:bg-transparent data-[state=active]:text-teal-800 data-[state=active]:shadow-none"
+                >
+                  {tab.label}
+                </TabsTrigger>
               ))}
             </TabsList>
           </div>
 
           <TabsContent value="work">
-            <Card><CardContent className="py-4">{experienceList(experience)}</CardContent></Card>
+            <EntryList items={experience} />
           </TabsContent>
           <TabsContent value="projects">
-            <Card><CardContent className="py-4">{timelineItems(data.projects)}</CardContent></Card>
+            <YearGroups items={data.projects} />
           </TabsContent>
           <TabsContent value="research">
-            <Card><CardContent className="py-4">{timelineItems(data.research)}</CardContent></Card>
+            <EntryList items={data.research} />
           </TabsContent>
           <TabsContent value="awards">
-            <Card><CardContent className="py-4">{timelineItems(data.awards)}</CardContent></Card>
+            <YearGroups items={data.awards} />
           </TabsContent>
           <TabsContent value="community">
-            <Card><CardContent className="py-4">{timelineItems(data.community)}</CardContent></Card>
+            <EntryList items={data.community} />
           </TabsContent>
         </Tabs>
       </div>
