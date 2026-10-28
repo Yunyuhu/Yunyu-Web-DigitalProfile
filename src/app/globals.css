@@ -128,3 +128,38 @@
     background-position: -100% 0;
   }
 }
+
+/* 履歷頁列印：A4 無邊界，只印紙張本身，並保留重點色 */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  /* 只有履歷頁：整份文件固定為一張 A4，避免多出空白頁 */
+  html:has(.resume-sheet),
+  html:has(.resume-sheet) body {
+    height: 297mm;
+    overflow: hidden;
+  }
+  /* 換頁淡入動畫還沒播完時列印，也不會印成半透明 */
+  html:has(.resume-sheet) body * {
+    opacity: 1 !important;
+  }
+  .resume-frame {
+    height: auto !important;
+  }
+  .resume-frame > div {
+    transform: none !important;
+  }
+  nextjs-portal {
+    display: none !important;
+  }
+  .resume-sheet {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

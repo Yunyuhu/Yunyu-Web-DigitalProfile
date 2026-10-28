@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       >
 
         {/* 1024px 以上側欄與內容並排；較窄時側欄在上方，頁面選單收合 */}
-        <div className="w-full min-h-screen lg:h-screen lg:overflow-y-auto flex flex-col lg:flex-row gap-4 lg:gap-5 p-3 sm:p-6 lg:p-8 box-border bg-[linear-gradient(to_top,_#f2f2f2_0%,_#dee9ea_100%)]">
+        <div className="w-full min-h-screen lg:h-screen lg:overflow-y-auto flex flex-col lg:flex-row gap-4 lg:gap-5 p-3 sm:p-6 lg:p-8 box-border bg-[linear-gradient(to_top,_#f2f2f2_0%,_#dee9ea_100%)] print:block print:h-auto print:min-h-0 print:overflow-visible print:p-0 print:bg-none">
 
           <Sidebar />
 

@@ -9,6 +9,7 @@ import { projects } from "@/data/projects";
 import SkillMap from "@/components/SkillMap";
 import DecodeText from "@/components/DecodeText";
 import { Fragment } from "@/components/Fragments";
+import ResumeButton from "@/components/ResumeButton";
 
 // 「查看專案」固定放在每一列的右側，各分頁同一種樣式；手機只留箭頭，避免擠壓左側文字
 const ProjectLink = ({ href }) => (
@@ -369,9 +370,12 @@ export default function About() {
   return (
     <div className="w-full h-full bg-white flex flex-col justify-start items-center rounded-2xl py-8 sm:py-12 px-4 sm:px-6 overflow-y-auto">
       <div className="flex flex-col w-full">
-        <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">
-          關於我 / <DecodeText text="About me" /><Fragment id="about" />
-        </h1>
+        <div className="flex flex-wrap items-center justify-between gap-3 max-w-5xl">
+          <h1 className="min-w-0 text-2xl font-bold">
+            關於我 / <DecodeText text="About me" /><Fragment id="about" />
+          </h1>
+          <ResumeButton />
+        </div>
         <h3 className="text-sm text-gray-600 mt-2">
           從人與科技的互動中尋找靈感，這裡記錄著我一路走來的足跡。
         </h3>
