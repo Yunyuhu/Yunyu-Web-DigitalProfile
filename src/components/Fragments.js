@@ -120,7 +120,7 @@ export function FragmentProgress() {
                 <p className="mt-1 text-slate-300">謝謝你把整個作品集都逛完了。想聊聊合作，或聽我分享人機協作的研究嗎？</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <a
-                    href="mailto:sandyfuoo68@gmail.com"
+                    href="mailto:unayunyuhu@gmail.com"
                     className="inline-flex items-center gap-1 rounded-full bg-teal-400 px-3 py-1 text-xs font-medium text-[#0b1517] hover:bg-teal-300"
                   >
                     <Mail className="h-3.5 w-3.5" />

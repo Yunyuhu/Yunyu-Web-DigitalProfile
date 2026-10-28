@@ -49,6 +49,9 @@ export default function Sidebar() {
     }
   };
 
+  // 履歷頁是獨立的一張紙，不顯示側欄
+  if (pathname.startsWith("/resume")) return null;
+
   return (
     <div className="w-full lg:w-[320px] lg:min-w-[320px] lg:h-full rounded-2xl bg-white flex
     justify-start items-center flex-col p-5 sm:p-6 lg:p-[30px] lg:pt-[80px]">
