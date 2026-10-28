@@ -441,7 +441,7 @@ export default function About() {
         {/* Skills & Research：方向與技術互相對應，滑過任一邊會畫出連線 */}
         <section>
           <h2 className="font-semibold">專長與研究方向 / Skills & Research</h2>
-          <p className="text-xs text-gray-500 mt-1 mb-4">點選分支查看說明與相關專案；滑過技術，看它支撐了哪些方向。</p>
+          <p className="text-xs text-gray-500 mt-1 mb-4">展開技能樹後，點選分支查看說明與相關專案；滑過技術，看它支撐了哪些方向。</p>
           <SkillMap areas={focusAreas} groups={skillGroups} />
         </section>
 

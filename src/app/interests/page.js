@@ -3,6 +3,8 @@
 import CircularGallery from "@/components/TextAnimations/CircularGallery";
 import DecodeText from "@/components/DecodeText";
 import { Fragment } from "@/components/Fragments";
+import KeywordPop from "@/components/KeywordPop";
+import { Croissant, Drumstick, MapPinned, Sparkles, Users, Wine } from "lucide-react";
 
 export default function Interests() {
 
@@ -13,8 +15,9 @@ export default function Interests() {
         <h1 className="max-h-full w-full max-w-5xl text-2xl font-bold">
           興趣 / <DecodeText text="Interests" /><Fragment id="interests" />
         </h1>
-        <h3 className="text-sm text-gray-600 mt-2">
-          INFJ，熱愛踩點各種好吃地圖（偏愛鹹食和酒精），可頌拯救世界！樂於和人群相處，但更會對一些奇妙且浪漫的小事感興趣。
+        {/* 帶虛線的關鍵字，滑過或點一下會冒出小圖示 */}
+        <h3 className="text-sm text-gray-600 mt-2 leading-relaxed">
+          INFJ，熱愛踩點各種<KeywordPop icon={MapPinned}>好吃地圖</KeywordPop>（偏愛<KeywordPop icon={Drumstick}>鹹食</KeywordPop>和<KeywordPop icon={Wine}>酒精</KeywordPop>），<KeywordPop icon={Croissant}>可頌</KeywordPop>拯救世界！樂於和<KeywordPop icon={Users}>人群</KeywordPop>相處，但更會對一些奇妙且<KeywordPop icon={Sparkles}>浪漫的小事</KeywordPop>感興趣。
         </h3>
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>

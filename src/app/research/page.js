@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import FadeIn from "@/components/FadeIn"
 
 import TAICHIdemo from "@/image/research/TAICHIdemo.jpg"
@@ -10,6 +9,7 @@ import TAICHI25 from "@/image/research/taichi25.jpg"
 import TriUniversitySymposium from "@/image/research/tri-university-symposium.jpg"
 import TDRI2025 from "@/image/research/tdri-2025.jpg"
 import DecodeText from "@/components/DecodeText";
+import ResearchCard from "@/components/ResearchCard";
 import { Fragment } from "@/components/Fragments";
 
 const research = [
@@ -20,7 +20,7 @@ const research = [
     image: TriUniversitySymposium,
   },
   {
-    year: "2025.8",
+    year: "2025.08",
     title: "TAICHI'25",
     description: "第十一屆台灣人機互動研討會，發表個人論文架構構想",
     image: TAICHI25,
@@ -100,30 +100,7 @@ export default function Research() {
 
             return (
               <FadeIn key={index} className={`${spanClass} col-span-1 flex`} delay={(index % 3) * 0.06}>
-                <div
-                className="group relative w-full rounded-2xl border shadow-md hover:shadow-lg transition-all bg-white overflow-hidden min-h-[260px] flex flex-col"
-                >
-                {/* 圖片：hover 時微微放大 */}
-                <div className="relative w-full h-full">
-                    <Image
-                    src={research.image}
-                    alt={research.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                </div>
-
-                {/* 覆蓋層：預設顯示，hover 時淡出 */}
-                <div className="absolute inset-0 bg-black/70 text-white opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-10 p-5 sm:p-6 flex flex-col justify-end">
-                    <h2 className="text-base font-semibold break-words mb-2">
-                    {research.title}
-                    </h2>
-                    <p className="text-sm mb-2 leading-snug">{research.description}</p>
-                    <span className="self-start text-[11px] font-medium bg-white text-black px-2 py-0.5 rounded-full mb-4">
-                    {research.year}
-                    </span>
-                </div>
-                </div>
+                <ResearchCard item={research} />
               </FadeIn>
             );
           })}
