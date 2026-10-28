@@ -2,8 +2,8 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
 import DecodeText from "@/components/DecodeText";
 
 const mono = "font-[family-name:var(--font-geist-mono)]";
@@ -11,7 +11,7 @@ const mono = "font-[family-name:var(--font-geist-mono)]";
 // 分支走線的垂直位置：列的上內距 8px ＋ 節點高度 52px 的一半
 const TRACE_Y = 34;
 
-// 進場時序（秒）：面板往下展開 → 掃描線 → 主幹長出 → 各分支依序展開 → 技術逐一出現
+// 展開時序（秒）：分隔線亮起、面板往下展開 → 掃描線 → 主幹長出 → 各分支依序展開 → 技術逐一出現
 const EXPAND = 0.6;
 const TRUNK_AT = EXPAND + 0.15;
 const rowAt = (index) => EXPAND + 0.45 + index * 0.14;
@@ -38,21 +38,26 @@ const Evidence = ({ item }) => {
 };
 
 // 技能樹：核心沿主幹分出各個方向，每個方向接上它用到的技術。
-// 平常只露出標題列，捲動到這裡時往下展開並播放解析動畫；滑過分支會點亮該分支，點選才展開說明與相關專案；
-// 滑過技術時，所有用到它的分支一起亮起
+// 平常收合成一條標題列，按「展開技能樹」才往下展開並播放解析動畫，可再收合；每次展開送一筆 GA4 事件。
+// 展開後滑過分支會點亮該分支，點選才展開說明與相關專案；滑過技術時，所有用到它的分支一起亮起
 export default function SkillMap({ areas, groups }) {
   const [activeId, setActiveId] = useState(areas[0].id);
   const [hoverId, setHoverId] = useState(null);
   const [hoverSkill, setHoverSkill] = useState(null);
   const [rowTops, setRowTops] = useState({});
   const [introDone, setIntroDone] = useState(false);
-  const panelRef = useRef(null);
+  const [open, setOpen] = useState(false);
   const treeRef = useRef(null);
   const rowEls = useRef({});
-  const inView = useInView(panelRef, { once: true, amount: 0.6 });
   const reduceMotion = useReducedMotion();
-  const booted = inView || reduceMotion;
-  const show = booted ? "on" : "off";
+  const booted = open;
+  const show = open ? "on" : "off";
+  const skillCount = new Set(groups.flatMap((group) => group.items)).size;
+
+  const toggle = () => {
+    if (!open) window.gtag?.("event", "skill_tree_open");
+    setOpen(!open);
+  };
 
   const engineering = new Set(groups.filter((group) => group.emphasis).flatMap((group) => group.items));
   const focusId = hoverId ?? activeId;
@@ -60,12 +65,15 @@ export default function SkillMap({ areas, groups }) {
   const lastId = areas[areas.length - 1].id;
   const doneAt = rowAt(areas.length) + 0.3;
 
-  // 進場動畫播完後，之後的亮暗切換都不再延遲
+  // 展開動畫播完後，之後的亮暗切換都不再延遲；收合時重設，下次展開會重播
   useEffect(() => {
-    if (!booted) return;
+    if (!open) {
+      setIntroDone(false);
+      return;
+    }
     const timer = setTimeout(() => setIntroDone(true), reduceMotion ? 0 : (doneAt + 0.3) * 1000);
     return () => clearTimeout(timer);
-  }, [booted, reduceMotion, doneAt]);
+  }, [open, reduceMotion, doneAt]);
 
   // 主幹長度與光點位置依各分支的實際位置計算
   useLayoutEffect(() => {
@@ -85,9 +93,12 @@ export default function SkillMap({ areas, groups }) {
 
   return (
     <motion.div
-      ref={panelRef}
       initial="off"
       animate={show}
+      variants={{
+        off: { boxShadow: "0 0 0px rgba(45,212,191,0)" },
+        on: { boxShadow: ["0 0 0px rgba(45,212,191,0)", "0 0 40px rgba(45,212,191,0.35)", "0 0 0px rgba(45,212,191,0)"], transition: { duration: 1.2 } },
+      }}
       className="relative overflow-hidden rounded-2xl bg-[#0b1517] p-5 sm:p-7 ring-1 ring-teal-400/20"
     >
       {/* 背景格線 */}
@@ -106,8 +117,8 @@ export default function SkillMap({ areas, groups }) {
         className="pointer-events-none absolute inset-x-0 h-12 -translate-y-full bg-[linear-gradient(180deg,transparent,rgba(94,234,212,0.18))] border-b border-teal-300/60"
       />
 
-      {/* 核心與圖例 */}
-      <div className="relative flex flex-wrap items-center gap-x-3 gap-y-2 mb-2">
+      {/* 核心與開合按鈕 */}
+      <div className="relative flex flex-wrap items-center gap-x-3 gap-y-2">
         <span className="relative flex h-3 w-3">
           <span className="absolute inline-flex h-full w-full rounded-full bg-teal-300 opacity-60 motion-safe:animate-ping" />
           <span className="relative inline-flex h-3 w-3 rounded-full bg-teal-300 shadow-[0_0_10px_#5eead4]" />
@@ -119,30 +130,62 @@ export default function SkillMap({ areas, groups }) {
           duration={700}
           className={`${mono} text-xs tracking-[0.2em] text-teal-200`}
         />
-        <motion.span
-          variants={{ off: { opacity: 0 }, on: { opacity: 1, transition: { delay: doneAt } } }}
-          className={`${mono} ml-auto flex items-center gap-3 text-[10px] text-slate-400`}
+        <button
+          type="button"
+          onClick={toggle}
+          aria-expanded={open}
+          aria-controls="skill-tree-body"
+          className={`${mono} relative ml-auto inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] tracking-wider transition-colors ${
+            open
+              ? "border-white/15 text-slate-300 hover:border-white/30"
+              : "border-teal-300/70 bg-teal-400/10 text-teal-100 shadow-[0_0_14px_rgba(45,212,191,0.35)] hover:bg-teal-400/20"
+          }`}
         >
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm border border-teal-400/60 bg-teal-400/20" />
-            程式・系統・資料
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <span className="h-2 w-2 rounded-sm border border-white/25" />
-            研究與設計方法
-          </span>
-        </motion.span>
+          {!open && <span aria-hidden className="absolute inset-0 rounded-full ring-1 ring-teal-300/60 motion-safe:animate-ping" />}
+          {open ? "收合" : "展開技能樹"}
+          <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
       </div>
 
-      {!booted && (
-        <p className={`${mono} relative text-[11px] text-slate-500`}>
-          &gt; 載入技能樹<span className="motion-safe:animate-pulse">▍</span>
-        </p>
+      {/* 收合時：一行摘要，點了也能打開 */}
+      {!open && (
+        <button type="button" onClick={toggle} className={`${mono} relative mt-2 block text-left text-[11px] text-slate-400 hover:text-teal-200`}>
+          &gt; {areas.length} 個方向・{skillCount} 項技術，點擊展開技能樹<span className="motion-safe:animate-pulse">▍</span>
+        </button>
       )}
+
+      {/* 分隔線：展開時由中間往兩側亮起，之後留下一條淡淡的線 */}
       <motion.div
-        variants={{ off: { height: 0 }, on: { height: "auto", transition: { duration: EXPAND, ease: [0.22, 1, 0.36, 1] } } }}
+        aria-hidden
+        variants={{
+          off: { scaleX: 0, opacity: 0 },
+          on: { scaleX: 1, opacity: [0, 1, 0.35], transition: { duration: 0.7, ease: "easeOut" } },
+        }}
+        className="relative mt-3 h-px origin-center bg-[linear-gradient(90deg,transparent,#5eead4,transparent)] shadow-[0_0_12px_#2dd4bf]"
+      />
+
+      <motion.div
+        id="skill-tree-body"
+        variants={{
+          off: { height: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+          on: { height: "auto", transition: { duration: EXPAND, ease: [0.22, 1, 0.36, 1] } },
+        }}
         className="relative overflow-hidden"
       >
+      {/* 圖例 */}
+      <motion.div
+        variants={{ off: { opacity: 0 }, on: { opacity: 1, transition: { delay: doneAt } } }}
+        className={`${mono} flex flex-wrap justify-end gap-3 pt-3 text-[10px] text-slate-400`}
+      >
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2 w-2 rounded-sm border border-teal-400/60 bg-teal-400/20" />
+          程式・系統・資料
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <span className="h-2 w-2 rounded-sm border border-white/25" />
+          研究與設計方法
+        </span>
+      </motion.div>
       <div ref={treeRef} className="relative pl-6 pt-1" onMouseLeave={() => setHoverId(null)}>
         {/* 主幹與沿主幹移動的訊號光點 */}
         <motion.span

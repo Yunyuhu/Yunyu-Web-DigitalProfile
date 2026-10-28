@@ -176,6 +176,7 @@ class Media {
         uniform vec2 uPlaneSizes;
         uniform sampler2D tMap;
         uniform float uBorderRadius;
+        uniform float uDevelop;
         varying vec2 vUv;
         
         // Rounded box SDF for UV space
@@ -201,11 +202,15 @@ class Media {
             discard;
           }
           
-          gl_FragColor = vec4(color.rgb, 1.0);
+          // 照片顯影：離中央越遠越像暗暗的黑白底片，轉到中央才慢慢洗出顏色
+          float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+          vec3 film = vec3(gray) * 0.32 + vec3(0.03, 0.035, 0.04);
+          gl_FragColor = vec4(mix(film, color.rgb, uDevelop), 1.0);
         }
       `,
       uniforms: {
         tMap: { value: texture },
+        uDevelop: { value: 0 },
         uPlaneSizes: { value: [0, 0] },
         uImageSizes: { value: [0, 0] },
         uSpeed: { value: 0 },
@@ -262,6 +267,11 @@ class Media {
         this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R)
       }
     }
+
+    // 顯影程度：照片越靠近畫面中央越高，並緩慢追上目標值，看起來像在顯影
+    const developTarget = 1 - Math.min(Math.max((Math.abs(x) - this.plane.scale.x * 0.35) / this.plane.scale.x, 0), 1)
+    this.develop = (this.develop ?? 0) + (developTarget - (this.develop ?? 0)) * 0.05
+    this.program.uniforms.uDevelop.value = this.develop
 
     this.speed = scroll.current - scroll.last
     this.program.uniforms.uTime.value += 0.04
