@@ -16,7 +16,7 @@ export const resumeContent = {
     headline: "人機互動研究｜UX 設計｜AI 與全端原型開發",
     contacts,
     summary:
-      "資管背景、政大數位內容碩士。以人機協作為研究主軸，能從使用者研究、實驗設計一路做到系統開發與數據分析。碩論自行開發 **pygame＋FastAPI 實驗系統**與 **Streamlit 分析工具**，成果發表於 TAICHI'25 與 SNU–UTokyo–NCCU 聯合發表會；作品曾獲 **TAICHI 2024 Best Demo**。",
+      "資管背景、政大數位內容碩士，以人機協作為研究主軸，精熟使用者研究、實驗設計、系統開發與數據分析。碩論自建 **pygame＋FastAPI 實驗系統**蒐集事件層級的行為日誌，並以 **Streamlit 分析儀表板**完成資料清理整併、行為指標建構與統計檢定，成果發表於 TAICHI'25 與 SNU–UTokyo–NCCU 聯合發表會；作品曾獲 **TAICHI 2024 Best Demo**。",
     labels: {
       experience: "經歷",
       projects: "精選專案",
@@ -34,10 +34,7 @@ export const resumeContent = {
         period: "2025.09–2025.12、2026.09–至今",
         role: "「人機互動設計」課程助教",
         org: "國立政治大學",
-        points: [
-          "兩學期支援 **35 組、139 位**學生的互動設計專題，指導使用者研究、互動原型與使用者評估。",
-          "批改作業並給予回饋，協助學生檢視需求、設計方案與測試結果是否一致。",
-        ],
+        points: ["兩學期支援 **35 組、139 位**學生的互動設計專題，指導使用者研究、互動原型與易用性測試。"],
       },
       {
         type: "industry",
@@ -45,7 +42,7 @@ export const resumeContent = {
         role: "設計研發組 實習生",
         org: "財團法人台灣設計研究院 TDRI",
         points: [
-          "串接 AI API 進行**評論情緒辨識與內容分類**，將非結構化文字轉為可分析的資料。",
+          "串接 AI API 完成**評論情緒分析與文本分類**，產出可直接分析的結構化標註資料。",
           "比較 AI 工具與研究案例，彙整競品分析並規劃 AI 協作使用情境。",
         ],
       },
@@ -54,7 +51,7 @@ export const resumeContent = {
         period: "2025.03–2025.07",
         role: "UX 設計師",
         org: "FreeSEED R2｜台灣在地 LLM 計畫",
-        points: ["負責社群主頁改版與社群遊戲設計，以**可操作原型**支援團隊開發討論與使用者驗證。"],
+        points: ["負責社群首頁改版與社群遊戲設計，交付**互動原型**，供團隊討論介面、互動需求與開發方案。"],
       },
       {
         type: "teaching",
@@ -75,7 +72,7 @@ export const resumeContent = {
         period: "2023.09–2024.02",
         role: "研究助理",
         org: "政大 媒體心理實驗室（林日璇教授）",
-        points: ["協助科技與幸福感實驗（醫療新聞遊戲、VR 敬畏感），負責招募受試者、主持實驗與資料整理。"],
+        points: ["支援醫療新聞遊戲與 VR 敬畏感實驗，完成受試者招募、實驗執行及資料整理。"],
       },
       {
         type: "industry",
@@ -95,7 +92,7 @@ export const resumeContent = {
         year: "2026",
         title: "碩士論文｜探索協調意圖對人機協作的影響",
         detail:
-          "2×2 組間實驗、60 名參與者；自建 pygame＋FastAPI 實驗系統與三層事件紀錄，以 Streamlit 分析工具串接問卷與逐筆過程數據，提出人機協調設計建議。",
+          "人與 AI 協作時，開放雙向溝通就能協調得更好嗎？以 2×2 組間實驗（60 名參與者）比較人類與 AI 能否表達協調意圖；自建系統蒐集事件層級日誌，整併問卷資料、建構訊號時機與反應等行為指標並進行統計檢定。發現人類能表達意圖時信任較高，但雙向溝通不等於雙向協調，據此提出確認回應、交接狀態提示等設計建議。",
       },
       {
         year: "2024",
@@ -106,43 +103,36 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard｜牆面危害 AI 辨識系統",
-        detail: "實作 YOLO 即時辨識牆壁狀態，串接生成式 AI API 產出民眾看得懂的風險報告。InnoFest@ICI 2024 受邀展出。",
+        detail: "實作 YOLO 即時辨識牆壁狀態，串接生成式 AI API 產出白話風險報告。InnoFest@ICI 2024 受邀展出。",
       },
       {
         year: "2025",
         title: "健保快易通 App Redesign 與 AI 設計流程評估",
-        detail: "以使用者研究重構資訊架構與核心流程，提出模組化資訊與主動提醒；並評估生成式 AI 在設計產出上的適用範圍。",
+        detail: "以使用者研究提出資訊架構改版與主動提醒方案；並實測生成式 AI 輔助設計，發現它適合 card sorting 等分類任務，但難以深入歸納使用者的情感與需求。",
       },
     ],
     education: [
       { school: "國立政治大學", degree: "數位內容碩士學位學程", period: "2023–2026" },
-      { school: "北京清華大學 美術學院", degree: "信息藝術設計系 交換生（未來實驗室）", period: "2026.01–06" },
+      { school: "北京清華大學 美術學院", degree: "信息藝術設計系 交換研修（未來實驗室）", period: "2026.01–06" },
       { school: "輔仁大學", degree: "資訊管理學系 學士｜GPA 3.8", period: "2019–2023" },
     ],
     research: [
       { year: "2025.11", title: "SNU–UTokyo–NCCU 三校聯合論文發表會", note: "代表政大於首爾發表" },
       { year: "2025.08", title: "TAICHI'25 台灣人機互動研討會", note: "碩論研究架構" },
-      { year: "2024", title: "TAICHI'24 Demo", note: "FlexiTouch｜Best Demo" },
       { year: "2022", title: "科技部大專學生研究計畫", note: "線上自主學習平台關鍵因素" },
       { year: "2021", title: "TANET／NCS 研討會", note: "兩篇論文獲接受發表" },
     ],
     skills: [
       { label: "程式與系統", items: "Python、JavaScript、React、React Native、FastAPI、Unity、Arduino、MySQL、Firebase、AWS、Git" },
-      { label: "資料與 AI", items: "資料清理、統計檢定、Streamlit、YOLO、電腦視覺、生成式 AI API、文字分類" },
+      { label: "資料與 AI", items: "事件日誌設計、資料清理與整併、行為指標建構、統計檢定、Streamlit 儀表板、YOLO 物件偵測、生成式 AI API、情緒分析與文本分類" },
       { label: "研究與設計", items: "實驗設計、問卷設計、使用者研究、服務設計、資訊架構、Figma" },
     ],
     awards: [
       { year: "2024", title: "TAICHI Best Demo", note: "FlexiTouch" },
       { year: "2024", title: "League of VR Final 最佳技術獎", note: "FlexiTouch" },
       { year: "2024", title: "AI Junior Award 決選入圍", note: "iHarbor" },
-      { year: "2024", title: "InnoFest@ICI 受邀展出", note: "WallGuard" },
       { year: "2023", title: "台灣大專院校創意遊戲設計競賽 決選入圍", note: "Tears of Ancestors" },
       { year: "2022", title: "資訊應用服務創新競賽 IPv4 組第一名", note: "DeepLink" },
-      { year: "2022", title: "智慧創新暨跨域整合創作競賽 最佳注目獎", note: "DeepLink" },
-    ],
-    community: [
-      { year: "2023", title: "DeepLink 營運公關與活動企劃", note: "協辦 25 場、主辦 5 場線上分享會" },
-      { year: "2019", title: "攝影社寒期攝影訓練營 總召", note: "籌辦 80 人、兩天一夜的營隊" },
     ],
   },
 
@@ -153,7 +143,7 @@ export const resumeContent = {
     headline: "HCI Research | UX Design | AI & Full-stack Prototyping",
     contacts,
     summary:
-      "Information management graduate and M.S. student in Digital Content at NCCU, researching human–AI collaboration. I work end to end from user research and experiment design to system development and data analysis; for my thesis I built a **pygame + FastAPI experiment system** and a **Streamlit analysis tool**. Winner of **TAICHI 2024 Best Demo**.",
+      "Information management graduate and M.S. student in Digital Content at NCCU, focused on human–AI collaboration and skilled in user research, experiment design, system development and data analysis. For my thesis I built a **pygame + FastAPI experiment system** that captures event-level behavioral logs, and a **Streamlit analysis dashboard** for data cleaning and merging, behavioral feature engineering and statistical testing. Winner of **TAICHI 2024 Best Demo**.",
     labels: {
       experience: "Experience",
       projects: "Selected Projects",
@@ -171,21 +161,21 @@ export const resumeContent = {
         period: "Sep–Dec 2025, Sep 2026–Present",
         role: "HCI Design Teaching Assistant",
         org: "National Chengchi University",
-        points: ["Supported **35 teams (139 students)** over two semesters in user research, prototyping and usability evaluation, and gave feedback on assignments."],
+        points: ["Supported **35 teams (139 students)** over two semesters in user research, prototyping and usability testing."],
       },
       {
         type: "industry",
         period: "Jul–Aug 2025",
         role: "Design R&D Intern",
         org: "Taiwan Design Research Institute (TDRI)",
-        points: ["Integrated AI APIs for **review sentiment analysis and content classification**, and benchmarked AI tools to map collaboration scenarios."],
+        points: ["Integrated AI APIs for **review sentiment analysis and text classification**, producing structured labeled data, and benchmarked AI tools to map collaboration scenarios."],
       },
       {
         type: "industry",
         period: "Mar–Jul 2025",
         role: "UX Designer",
         org: "FreeSEED R2 (Taiwan local LLM project)",
-        points: ["Redesigned the community homepage and community games, using **working prototypes** for team discussion and user validation."],
+        points: ["Led the community homepage redesign and community games, delivering **interactive prototypes** for team discussion of interface, interaction needs and implementation."],
       },
       {
         type: "teaching",
@@ -206,7 +196,7 @@ export const resumeContent = {
         period: "Sep 2023–Feb 2024",
         role: "Research Assistant",
         org: "Media Psychology Lab, NCCU",
-        points: ["Supported well-being studies (a medical news game, awe in VR) by recruiting participants, running sessions and organizing data."],
+        points: ["Supported a medical news game study and a VR awe study, handling participant recruitment, sessions and data organization."],
       },
       {
         type: "industry",
@@ -223,7 +213,7 @@ export const resumeContent = {
         year: "2026",
         title: "Master's Thesis | Coordination Intent in Human–AI Collaboration",
         detail:
-          "2×2 between-subjects study with 60 participants; built a pygame + FastAPI system with three-level event logs and a Streamlit tool linking surveys to process data.",
+          "Does two-way communication help humans and AI coordinate? A 2×2 study with 60 participants compared whether each side could signal intent; I captured event-level logs with a custom system, merged them with survey data, engineered behavioral features such as signal timing and responses, and ran statistical tests. Signaling raised trust, but two-way communication did not guarantee coordination, leading to design guidelines such as confirmation and handover cues.",
       },
       {
         year: "2024",
@@ -233,43 +223,35 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard | AI Wall-Hazard Detection",
-        detail: "Real-time YOLO detection of wall damage with generative-AI risk reports. Exhibited at InnoFest@ICI 2024.",
+        detail: "Real-time YOLO detection of wall damage with plain-language risk reports written by generative AI. Exhibited at InnoFest@ICI 2024.",
       },
       {
         year: "2025",
         title: "NHI App Redesign & AI Design-Process Study",
-        detail: "Restructured the information architecture and core flows from user research; evaluated where generative AI fits in design work.",
+        detail: "Proposed an IA redesign and proactive reminders from user research; tested generative AI in design work and found it suits card sorting but struggles with nuanced user needs.",
       },
     ],
     education: [
       { school: "National Chengchi University", degree: "M.S., Digital Content and Technologies", period: "2023–2026" },
-      { school: "Tsinghua University, Beijing", degree: "Exchange, Information Art & Design (Future Lab)", period: "Jan–Jun 2026" },
+      { school: "Tsinghua University, Beijing", degree: "Exchange Study, Information Art & Design (Future Lab)", period: "Jan–Jun 2026" },
       { school: "Fu Jen Catholic University", degree: "B.S. in Information Management | GPA 3.8", period: "2019–2023" },
     ],
     research: [
       { year: "2025", title: "SNU–UTokyo–NCCU Joint Symposium", note: "Presented for NCCU in Seoul" },
       { year: "2025", title: "TAICHI'25 (Taiwan HCI Conference)", note: "Thesis research framework" },
-      { year: "2024", title: "TAICHI'24 Demo", note: "FlexiTouch | Best Demo" },
-      { year: "2022", title: "MOST Undergraduate Research Grant", note: "Self-directed online learning platforms" },
       { year: "2021", title: "TANET / NCS Conference", note: "Two papers accepted and presented" },
     ],
     skills: [
       { label: "Programming & Systems", items: "Python, JavaScript, React, React Native, FastAPI, Unity, Arduino, MySQL, Firebase, AWS, Git" },
-      { label: "Data & AI", items: "Data cleaning, statistical testing, Streamlit, YOLO, computer vision, generative AI APIs, text classification" },
+      { label: "Data & AI", items: "Event logging, data cleaning & merging, behavioral feature engineering, statistical testing, Streamlit dashboards, YOLO detection, generative AI APIs, sentiment & text classification" },
       { label: "Research & Design", items: "Experiment design, survey design, user research, service design, information architecture, Figma" },
     ],
     awards: [
       { year: "2024", title: "TAICHI Best Demo", note: "FlexiTouch" },
       { year: "2024", title: "League of VR, Best Technical Award", note: "FlexiTouch" },
       { year: "2024", title: "AI Junior Award Finalist", note: "iHarbor" },
-      { year: "2024", title: "InnoFest@ICI Exhibition", note: "WallGuard" },
       { year: "2023", title: "Collegiate Game Design Finalist", note: "Tears of Ancestors" },
       { year: "2022", title: "Info. Application Innovation, 1st Place", note: "DeepLink (IPv4 track)" },
-      { year: "2022", title: "Smart Innovation, Spotlight Award", note: "DeepLink" },
-    ],
-    community: [
-      { year: "2023", title: "DeepLink Operations, PR & Events", note: "Co-hosted 25 and hosted 5 online talks" },
-      { year: "2019", title: "Director, Photography Club Winter Camp", note: "Two-day camp for 80 people" },
     ],
   },
 };
