@@ -16,6 +16,7 @@ import {
 import { projects } from "@/data/projects";
 import FadeIn from "@/components/FadeIn";
 import ProjectKeyNav from "@/components/ProjectKeyNav";
+import CaseStudy from "@/components/CaseStudy";
 
 // 連結類型統一成固定的按鈕文字與圖示，讓訪客點之前就知道會看到什麼
 const LINK_TYPES = {
@@ -146,31 +147,10 @@ export default async function ProjectDetail({ params }) {
           />
         </FadeIn>
 
-        <FadeIn className="mt-8"><section>
-          <h2 className="font-semibold mb-3">專案重點</h2>
-          <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700 leading-relaxed">
-            {project.highlights.map((point, i) => (
-              <li key={i}>{point}</li>
-            ))}
-          </ul>
-        </section></FadeIn>
-
-        <FadeIn className="mt-8"><section>
-          <h2 className="font-semibold mb-3">技術與方法</h2>
-          <div className="flex flex-wrap gap-2">
-            {project.stack.map((item, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-full border border-gray-200"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </section></FadeIn>
+        <CaseStudy caseStudy={project.caseStudy} stack={project.stack} />
 
         {project.links.length > 0 && (
-          <FadeIn className="mt-8"><section>
+          <FadeIn className="mt-12"><section>
             <h2 className="font-semibold mb-3">相關資源</h2>
             <div className="flex flex-wrap gap-3">
               {project.links.map((link) => {
