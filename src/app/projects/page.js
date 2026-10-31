@@ -16,6 +16,10 @@ const trackSpotlight = (e) => {
   e.currentTarget.style.setProperty("--spot-y", `${e.clientY - rect.top}px`);
 };
 
+// 把案例研究裡的所有文字攤平（含巢狀的陣列與物件），讓搜尋也找得到
+const collectText = (value) =>
+  typeof value === "string" ? [value] : value && typeof value === "object" ? Object.values(value).flatMap(collectText) : [];
+
 export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +31,7 @@ export default function Projects() {
       project.title,
       project.context,
       project.tagline,
-      ...project.highlights,
+      ...collectText(project.caseStudy),
       ...project.stack,
     ].join(" ").toLowerCase();
     return text.includes(term);
@@ -48,11 +52,11 @@ export default function Projects() {
       <div className="flex flex-col w-full">
         <h1 className="text-2xl font-bold">專案 / <DecodeText text="Projects" /><Fragment id="projects" /></h1>
         <h3 className="text-sm text-gray-600 mt-2">
-          人機互動研究、AI 應用與軟硬體互動原型的作品，精選專案排在最前面。點選卡片可查看專案重點與相關資源。
+          人機互動研究、AI 應用與軟硬體互動原型的作品，精選專案排在最前面。點選卡片可查看專案的過程、成果與相關資源。
         </h3>
         <input
           type="text"
-          placeholder="搜尋專案名稱、技術或關鍵字（例如 YOLO、Unity、使用者研究）"
+          placeholder="搜尋專案名稱、技術或關鍵字（例如 U-Net、Unity、使用者研究）"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -102,8 +106,9 @@ export default function Projects() {
               </p>
               <h2 className="text-base font-semibold break-words">{project.title}</h2>
               <p className="text-xs text-gray-700 mt-1 mb-3 leading-snug">{project.tagline}</p>
+              {/* 卡片只放前 3 個，完整技術與方法留在專案頁 */}
               <div className="flex flex-wrap gap-2 mt-auto">
-                {project.stack.map((item, i) => (
+                {project.stack.slice(0, 3).map((item, i) => (
                   <span
                     key={i}
                     className="px-2 py-0.5 text-[10px] bg-gray-200 text-gray-700 rounded-full"
