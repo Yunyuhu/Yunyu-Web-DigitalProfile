@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ImageDown, Printer } from "lucide-react";
 
-// 履歷外框：螢幕上依可用寬度等比縮小 A4 紙張，提供中英文切換、照片開關、「列印／存成 PDF」與「下載 PNG」；
-// 切換會改網址參數（?lang=en&photo=1），方便直接分享某個版本。列印時外框、按鈕都隱藏，只印紙張本身
+// 履歷外框：螢幕上依可用寬度等比縮小 A4 紙張，提供中文／English／中英合併切換、照片開關、「列印／存成 PDF」與「下載 PNG」；
+// 切換會改網址參數（?lang=en、?lang=both、?photo=1），方便直接分享某個版本。列印時外框、按鈕都隱藏，只印紙張本身
 export default function ResumeFrame({ lang, photo, fileName, children }) {
   const router = useRouter();
   const boxRef = useRef(null);
@@ -14,23 +14,25 @@ export default function ResumeFrame({ lang, photo, fileName, children }) {
   const [size, setSize] = useState({ scale: 1, height: null });
   const [busy, setBusy] = useState(false);
 
+  // 依一張紙的寬度決定縮放比例，外框高度則跟著全部內容（中英合併時是兩張紙）；切換版本時內容高度改變，也要重新計算
   useEffect(() => {
     const fit = () => {
-      const sheet = sheetRef.current?.firstElementChild;
+      const sheet = sheetRef.current?.querySelector(".resume-sheet");
       if (!sheet || !boxRef.current) return;
       const scale = Math.min(1, boxRef.current.clientWidth / sheet.offsetWidth);
-      setSize({ scale, height: sheet.offsetHeight * scale });
+      setSize({ scale, height: sheetRef.current.offsetHeight * scale });
     };
     fit();
     const observer = new ResizeObserver(fit);
     observer.observe(boxRef.current);
+    observer.observe(sheetRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [lang]);
 
   const setOptions = (next) => {
     const options = { lang, photo, ...next };
     const params = new URLSearchParams();
-    if (options.lang === "en") params.set("lang", "en");
+    if (options.lang !== "zh") params.set("lang", options.lang);
     if (options.photo) params.set("photo", "1");
     const query = params.toString();
     router.replace(query ? `/resume?${query}` : "/resume", { scroll: false });
@@ -69,6 +71,7 @@ export default function ResumeFrame({ lang, photo, fileName, children }) {
             {[
               { value: "zh", label: "中文" },
               { value: "en", label: "English" },
+              { value: "both", label: "中英合併" },
             ].map((option) => (
               <button
                 key={option.value}

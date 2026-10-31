@@ -112,8 +112,8 @@ export const resumeContent = {
       },
     ],
     education: [
-      { school: "國立政治大學", degree: "數位內容碩士學位學程", period: "2023–2026" },
-      { school: "北京清華大學 美術學院", degree: "信息藝術設計系 交換研修（未來實驗室）", period: "2026.01–06" },
+      { school: "國立政治大學", degree: "數位內容碩士學位學程｜GPA 4.29/4.3", period: "2023–2026" },
+      { school: "北京清華大學 美術學院", degree: "信息藝術設計系 交換研修（未來實驗室）｜GPA 4.0/4.0", period: "2026.01–06" },
       { school: "輔仁大學", degree: "資訊管理學系 學士｜GPA 3.8", period: "2019–2023" },
     ],
     research: [
@@ -232,8 +232,8 @@ export const resumeContent = {
       },
     ],
     education: [
-      { school: "National Chengchi University", degree: "M.S., Digital Content and Technologies", period: "2023–2026" },
-      { school: "Tsinghua University, Beijing", degree: "Exchange Study, Information Art & Design (Future Lab)", period: "Jan–Jun 2026" },
+      { school: "National Chengchi University", degree: "M.S., Digital Content and Technologies | GPA 4.29/4.3", period: "2023–2026" },
+      { school: "Tsinghua University, Beijing", degree: "Exchange Study, Information Art & Design (Future Lab) | GPA 4.0/4.0", period: "Jan–Jun 2026" },
       { school: "Fu Jen Catholic University", degree: "B.S. in Information Management | GPA 3.8", period: "2019–2023" },
     ],
     research: [

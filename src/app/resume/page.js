@@ -3,16 +3,19 @@ import AvatarImg from "@/../public/Avatar.jpg";
 import { resumeContent } from "@/data/resume";
 import ResumeFrame from "@/components/ResumeFrame";
 
-// 網址參數：?lang=en 切換英文版，?photo=1 顯示照片
+// 網址參數：?lang=en 切換英文版，?lang=both 中英文兩頁合併，?photo=1 顯示照片
+const LANGS = ["zh", "en", "both"];
 const readOptions = async (searchParams) => {
   const params = await searchParams;
-  return { lang: params?.lang === "en" ? "en" : "zh", photo: params?.photo === "1" };
+  return { lang: LANGS.includes(params?.lang) ? params.lang : "zh", photo: params?.photo === "1" };
 };
 
 // 分頁標題也是「另存為 PDF」時的預設檔名
+const fileNameOf = (lang) => (lang === "both" ? `${resumeContent.zh.fileName}_中英文` : resumeContent[lang].fileName);
+
 export async function generateMetadata({ searchParams }) {
   const { lang } = await readOptions(searchParams);
-  return { title: resumeContent[lang].fileName };
+  return { title: fileNameOf(lang) };
 }
 
 // 經歷類型的小色標：產業、研究、教學各一色
@@ -80,8 +83,7 @@ const Points = ({ items }) => (
 );
 
 // 一頁式履歷：固定 A4 尺寸，螢幕上由 ResumeFrame 等比縮放，列印與下載都以這張紙為準；英文較長，字級略小
-export default async function ResumePage({ searchParams }) {
-  const { lang, photo } = await readOptions(searchParams);
+const ResumeSheet = ({ lang, photo, id }) => {
   const t = resumeContent[lang];
   const sep = lang === "zh" ? "｜" : " · ";
   // 中文較短，用寬鬆的間距；英文較長，間距稍微收緊才放得進一頁
@@ -93,124 +95,140 @@ export default async function ResumePage({ searchParams }) {
   );
 
   return (
-    <ResumeFrame lang={lang} photo={photo} fileName={t.fileName}>
-      <article
-        id="resume-sheet"
-        lang={lang === "zh" ? "zh-Hant" : "en"}
-        className={`resume-sheet flex h-[297mm] w-[210mm] flex-col overflow-hidden bg-white px-[13mm] py-[10mm] text-gray-800 ${lang === "zh" ? "text-[10.5px] leading-[1.5]" : "text-[10px] leading-[1.45]"}`}
-      >
-        <header className="flex items-center gap-5 border-b-2 border-teal-600 pb-3">
-          {photo && (
-            <Image
-              src={AvatarImg}
-              alt=""
-              priority
-              sizes="96px"
-              className="h-[18mm] w-[18mm] shrink-0 rounded-full object-cover ring-2 ring-teal-600/30"
-            />
-          )}
-          <div className="min-w-0 flex-1">
-            <h1 className="text-[26px] font-bold leading-tight tracking-wide text-gray-900">
-              {t.name}
-              <span className="ml-2 text-[17px] font-semibold text-gray-500">{t.altName}</span>
-            </h1>
-            <p className="mt-1 text-[12px] font-medium text-teal-700">{t.headline}</p>
-          </div>
-          <ul className="space-y-0.5 text-right text-[9.5px] text-gray-600">
-            {t.contacts.map((contact) => (
-              <li key={contact.href}>
-                <a href={contact.href} className="hover:text-teal-700">
-                  {contact.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </header>
-
-        <p className="mt-3 rounded-md bg-teal-50/70 px-3 py-2 text-gray-700">
-          <Rich text={t.summary} />
-        </p>
-
-        <div className="mt-3.5 grid min-h-0 flex-1 grid-cols-[1fr_62mm] gap-x-[6mm]">
-          <div className={`flex flex-col ${roomy ? "gap-5" : "gap-4"}`}>
-            <Section title={t.labels.experience}>
-              <div className="space-y-2">
-                {t.experience.map((item) => (
-                  <div key={`${item.period}-${item.org}`}>
-                    <div className="flex items-baseline justify-between gap-3">
-                      <p className="text-[11px] font-semibold text-gray-900">
-                        <span className={`mr-1.5 inline-block rounded px-1 align-[1px] text-[8.5px] font-medium leading-[1.5] ring-1 ${TYPE_STYLES[item.type]}`}>
-                          {t.labels.types[item.type]}
-                        </span>
-                        {item.role}
-                        <span className="font-normal text-gray-500">
-                          {sep}
-                          {item.org}
-                        </span>
-                      </p>
-                      <Period>{item.period}</Period>
-                    </div>
-                    <Points items={item.points} />
-                  </div>
-                ))}
-                <p className="text-[9.5px] text-gray-600">
-                  <span className="font-medium text-gray-800">{t.labels.more}</span>
-                  {t.moreExperience}
-                </p>
-              </div>
-            </Section>
-
-            <Section title={t.labels.projects}>
-              <div className="space-y-2">
-                {t.projects.map((project) => (
-                  <div key={project.title}>
-                    <div className="flex items-baseline justify-between gap-3">
-                      <p className="text-[11px] font-semibold text-gray-900">{project.title}</p>
-                      <Period>{project.year}</Period>
-                    </div>
-                    <p className="text-gray-700">{project.detail}</p>
-                  </div>
-                ))}
-              </div>
-            </Section>
-
-            {lang === "zh" && researchSection}
-          </div>
-
-          {/* 右欄淡色底，和左欄的主要經歷分開 */}
-          <div className={`flex flex-col self-start rounded-lg bg-[#f1f7f7] px-[4mm] ${roomy ? "gap-4 py-[3.5mm]" : "gap-3 py-[3mm]"}`}>
-            <Section title={t.labels.education}>
-              <ul className="space-y-1.5">
-                {t.education.map((edu) => (
-                  <li key={edu.school}>
-                    <p className="font-semibold text-gray-900">{edu.school}</p>
-                    <p className="text-gray-700">{edu.degree}</p>
-                    <p className="text-[9.5px] text-gray-500 tabular-nums">{edu.period}</p>
-                  </li>
-                ))}
-              </ul>
-            </Section>
-
-            <Section title={t.labels.skills}>
-              <ul className="space-y-1.5">
-                {t.skills.map((group) => (
-                  <li key={group.label}>
-                    <p className="font-semibold text-teal-800">{group.label}</p>
-                    <p className="text-gray-700">{group.items}</p>
-                  </li>
-                ))}
-              </ul>
-            </Section>
-
-            {/* 英文較長，研究發表放右欄；中文放左欄，讓左右欄長度接近 */}
-            {lang === "en" && researchSection}
-
-            <Section title={t.labels.awards}>
-              <ShortList items={t.awards} />
-            </Section>
-          </div>
+    <article
+      id={id}
+      lang={lang === "zh" ? "zh-Hant" : "en"}
+      className={`resume-sheet flex h-[297mm] w-[210mm] flex-col overflow-hidden bg-white px-[13mm] py-[10mm] text-gray-800 ${lang === "zh" ? "text-[10.5px] leading-[1.5]" : "text-[10px] leading-[1.45]"}`}
+    >
+      <header className="flex items-center gap-5 border-b-2 border-teal-600 pb-3">
+        {photo && (
+          <Image
+            src={AvatarImg}
+            alt=""
+            priority
+            sizes="96px"
+            className="h-[18mm] w-[18mm] shrink-0 rounded-full object-cover ring-2 ring-teal-600/30"
+          />
+        )}
+        <div className="min-w-0 flex-1">
+          <h1 className="text-[26px] font-bold leading-tight tracking-wide text-gray-900">
+            {t.name}
+            <span className="ml-2 text-[17px] font-semibold text-gray-500">{t.altName}</span>
+          </h1>
+          <p className="mt-1 text-[12px] font-medium text-teal-700">{t.headline}</p>
         </div>
-      </article>
+        <ul className="space-y-0.5 text-right text-[9.5px] text-gray-600">
+          {t.contacts.map((contact) => (
+            <li key={contact.href}>
+              <a href={contact.href} className="hover:text-teal-700">
+                {contact.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </header>
+
+      <p className="mt-3 rounded-md bg-teal-50/70 px-3 py-2 text-gray-700">
+        <Rich text={t.summary} />
+      </p>
+
+      <div className="mt-3.5 grid min-h-0 flex-1 grid-cols-[1fr_62mm] gap-x-[6mm]">
+        <div className={`flex flex-col ${roomy ? "gap-5" : "gap-4"}`}>
+          <Section title={t.labels.experience}>
+            <div className="space-y-2">
+              {t.experience.map((item) => (
+                <div key={`${item.period}-${item.org}`}>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p className="text-[11px] font-semibold text-gray-900">
+                      <span className={`mr-1.5 inline-block rounded px-1 align-[1px] text-[8.5px] font-medium leading-[1.5] ring-1 ${TYPE_STYLES[item.type]}`}>
+                        {t.labels.types[item.type]}
+                      </span>
+                      {item.role}
+                      <span className="font-normal text-gray-500">
+                        {sep}
+                        {item.org}
+                      </span>
+                    </p>
+                    <Period>{item.period}</Period>
+                  </div>
+                  <Points items={item.points} />
+                </div>
+              ))}
+              <p className="text-[9.5px] text-gray-600">
+                <span className="font-medium text-gray-800">{t.labels.more}</span>
+                {t.moreExperience}
+              </p>
+            </div>
+          </Section>
+
+          <Section title={t.labels.projects}>
+            <div className="space-y-2">
+              {t.projects.map((project) => (
+                <div key={project.title}>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p className="text-[11px] font-semibold text-gray-900">{project.title}</p>
+                    <Period>{project.year}</Period>
+                  </div>
+                  <p className="text-gray-700">{project.detail}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          {lang === "zh" && researchSection}
+        </div>
+
+        {/* 右欄淡色底，和左欄的主要經歷分開 */}
+        <div className={`flex flex-col self-start rounded-lg bg-[#f1f7f7] px-[4mm] ${roomy ? "gap-4 py-[3.5mm]" : "gap-3 py-[3mm]"}`}>
+          <Section title={t.labels.education}>
+            <ul className="space-y-1.5">
+              {t.education.map((edu) => (
+                <li key={edu.school}>
+                  <p className="font-semibold text-gray-900">{edu.school}</p>
+                  <p className="text-gray-700">{edu.degree}</p>
+                  <p className="text-[9.5px] text-gray-500 tabular-nums">{edu.period}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+
+          <Section title={t.labels.skills}>
+            <ul className="space-y-1.5">
+              {t.skills.map((group) => (
+                <li key={group.label}>
+                  <p className="font-semibold text-teal-800">{group.label}</p>
+                  <p className="text-gray-700">{group.items}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+
+          {/* 英文較長，研究發表放右欄；中文放左欄，讓左右欄長度接近 */}
+          {lang === "en" && researchSection}
+
+          <Section title={t.labels.awards}>
+            <ShortList items={t.awards} />
+          </Section>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default async function ResumePage({ searchParams }) {
+  const { lang, photo } = await readOptions(searchParams);
+
+  return (
+    <ResumeFrame lang={lang} photo={photo} fileName={fileNameOf(lang)}>
+      {lang === "both" ? (
+        // 中英合併：中文、英文各一張 A4 上下排列。列印剛好兩頁；下載 PNG 是兩頁接在一起的長圖
+        <div id="resume-sheet" className="resume-pages flex w-[210mm] flex-col gap-[6mm] bg-gray-200 print:gap-0 print:bg-white">
+          <ResumeSheet lang="zh" photo={photo} />
+          <ResumeSheet lang="en" photo={photo} />
+        </div>
+      ) : (
+        <ResumeSheet lang={lang} photo={photo} id="resume-sheet" />
+      )}
     </ResumeFrame>
   );
 }
