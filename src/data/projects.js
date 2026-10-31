@@ -291,7 +291,8 @@ export const projects = [
       ],
       facts: [
         { label: "我的角色", value: "資訊開發組＋PM" },
-        { label: "團隊", value: "4 人（DesignLens），指導老師蔡炎龍" },
+        { label: "團隊", value: "4 人（DesignLens）" },
+        { label: "指導教授", value: "陳宜秀、蔡炎龍" },
         { label: "期間", value: "2024–2025" }
       ],
       why: {
@@ -1093,7 +1094,7 @@ export const projects = [
     },
     stack: ["使用者訪談", "任務觀察", "資訊架構", "流程優化"],
     image: VenueImg,
-    links: [{ type: "slides", href: "https://www.canva.com/design/DAGZmzkzDcI/InvboYhJsaX7k1mwEG9WNA/view" }]
+    links: [{ type: "slides", href: "https://canva.link/jali9hgnuhqxftq" }]
   },
   {
     year: "2023",
