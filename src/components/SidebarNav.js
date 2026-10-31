@@ -7,9 +7,9 @@ import { UserCircle, Sparkles, LayoutDashboard, BookOpenCheck } from "lucide-rea
 
 const NAV_ITEMS = [
   { href: "/about", label: "關於我", en: "About Me", icon: UserCircle },
-  { href: "/interests", label: "興趣", en: "Interests", icon: Sparkles },
   { href: "/projects", label: "專案", en: "Projects (UX & Dev)", icon: LayoutDashboard },
   { href: "/research", label: "研究與活動", en: "Research ＆ Activities", icon: BookOpenCheck },
+  { href: "/interests", label: "興趣", en: "Interests", icon: Sparkles },
 ];
 
 // 各尺寸都是同一份直式選單（圖示、中文、英文）；目前頁面以滑動的底色標示

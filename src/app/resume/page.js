@@ -68,24 +68,6 @@ const ShortList = ({ items }) => (
   </ul>
 );
 
-// 放在寬欄的一行式條目：標題與補充同一行，比 ShortList 省空間（研究發表）
-const InlineList = ({ items, dash }) => (
-  <ul className="space-y-0.5">
-    {items.map((item) => (
-      <li key={`${item.year}-${item.title}`} className="grid grid-cols-[2.9rem_1fr] gap-x-1.5">
-        <span className="pt-px text-[9.5px] text-gray-500 tabular-nums">{item.year}</span>
-        <span>
-          <span className="font-medium text-gray-900">{item.title}</span>
-          <span className="text-gray-600">
-            {dash}
-            {item.note}
-          </span>
-        </span>
-      </li>
-    ))}
-  </ul>
-);
-
 // 條列：重點色小圓點
 const Points = ({ items }) => (
   <ul className="mt-0.5 space-y-px">
@@ -102,6 +84,13 @@ export default async function ResumePage({ searchParams }) {
   const { lang, photo } = await readOptions(searchParams);
   const t = resumeContent[lang];
   const sep = lang === "zh" ? "｜" : " · ";
+  // 中文較短，用寬鬆的間距；英文較長，間距稍微收緊才放得進一頁
+  const roomy = lang === "zh";
+  const researchSection = (
+    <Section title={t.labels.research}>
+      <ShortList items={t.research} />
+    </Section>
+  );
 
   return (
     <ResumeFrame lang={lang} photo={photo} fileName={t.fileName}>
@@ -143,9 +132,9 @@ export default async function ResumePage({ searchParams }) {
         </p>
 
         <div className="mt-3.5 grid min-h-0 flex-1 grid-cols-[1fr_62mm] gap-x-[6mm]">
-          <div className="flex flex-col gap-3.5">
+          <div className={`flex flex-col ${roomy ? "gap-5" : "gap-4"}`}>
             <Section title={t.labels.experience}>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {t.experience.map((item) => (
                   <div key={`${item.period}-${item.org}`}>
                     <div className="flex items-baseline justify-between gap-3">
@@ -172,7 +161,7 @@ export default async function ResumePage({ searchParams }) {
             </Section>
 
             <Section title={t.labels.projects}>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {t.projects.map((project) => (
                   <div key={project.title}>
                     <div className="flex items-baseline justify-between gap-3">
@@ -185,14 +174,11 @@ export default async function ResumePage({ searchParams }) {
               </div>
             </Section>
 
-            <Section title={t.labels.research}>
-              {/* 英文較長，研究發表改成一行式才放得進一頁；中文保留兩行式讓左右欄平衡 */}
-              {lang === "zh" ? <ShortList items={t.research} /> : <InlineList items={t.research} dash=" — " />}
-            </Section>
+            {lang === "zh" && researchSection}
           </div>
 
           {/* 右欄淡色底，和左欄的主要經歷分開 */}
-          <div className="flex flex-col gap-3 self-start rounded-lg bg-[#f1f7f7] px-[4mm] py-[3mm]">
+          <div className={`flex flex-col self-start rounded-lg bg-[#f1f7f7] px-[4mm] ${roomy ? "gap-4 py-[3.5mm]" : "gap-3 py-[3mm]"}`}>
             <Section title={t.labels.education}>
               <ul className="space-y-1.5">
                 {t.education.map((edu) => (
@@ -216,12 +202,11 @@ export default async function ResumePage({ searchParams }) {
               </ul>
             </Section>
 
+            {/* 英文較長，研究發表放右欄；中文放左欄，讓左右欄長度接近 */}
+            {lang === "en" && researchSection}
+
             <Section title={t.labels.awards}>
               <ShortList items={t.awards} />
-            </Section>
-
-            <Section title={t.labels.community}>
-              <ShortList items={t.community} />
             </Section>
           </div>
         </div>

@@ -136,7 +136,7 @@ export default function About() {
     {
       label: "資料與 AI",
       emphasis: true,
-      items: ["資料清理", "統計檢定", "事件紀錄設計", "Streamlit 儀表板", "YOLO", "電腦視覺", "生成式 AI API", "AI 文字分類"],
+      items: ["資料清理與整併", "行為指標建構", "統計檢定", "事件日誌設計", "Streamlit 分析儀表板", "YOLO", "電腦視覺", "生成式 AI API", "情緒分析與文本分類"],
     },
     {
       label: "研究與設計方法",
@@ -151,7 +151,7 @@ export default function About() {
       title: "人機協作",
       en: "Human–AI Collaboration",
       summary: "自行開發 pygame 即時協作系統、FastAPI 後端與 Streamlit 分析工具，研究人與 AI 如何表達、理解彼此的意圖",
-      skills: ["實驗設計", "問卷設計", "Python", "pygame", "FastAPI", "資料清理", "統計檢定", "事件紀錄設計", "Streamlit 儀表板"],
+      skills: ["實驗設計", "問卷設計", "Python", "pygame", "FastAPI", "資料清理與整併", "行為指標建構", "統計檢定", "事件日誌設計", "Streamlit 分析儀表板"],
       evidence: [{ label: "碩士論文", href: "/projects/coordination-intent-thesis" }],
     },
     {
@@ -159,7 +159,7 @@ export default function About() {
       title: "AI 應用",
       en: "AI for Social Good",
       summary: "串接 AI API 做評論情緒辨識與內容分類，實作 YOLO 即時辨識牆壁狀態，把 AI 用在民眾日常的真實問題",
-      skills: ["Python", "AI 文字分類", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
+      skills: ["Python", "情緒分析與文本分類", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
       evidence: [
         { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
@@ -414,9 +414,9 @@ export default function About() {
                 en: "M.S. Student, Graduate Program in Digital Content and Technologies, National Chengchi University",
               },
               {
-                school: "北京清華大學 美術學院信息藝術設計系 交換生",
+                school: "北京清華大學 美術學院信息藝術設計系 交換研修",
                 period: "2026.01–2026.06",
-                en: "Exchange Student, Dept. of Information Art & Design, Academy of Arts & Design, Tsinghua University",
+                en: "Exchange Study, Dept. of Information Art & Design, Academy of Arts & Design, Tsinghua University",
                 note: "參與未來實驗室 Future Lab",
               },
               {
