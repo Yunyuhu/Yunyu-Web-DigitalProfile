@@ -409,12 +409,12 @@ export default function About() {
           <div className="space-y-3">
             {[
               {
-                school: "國立政治大學 數位內容碩士學位學程",
+                school: "國立政治大學 數位內容碩士學位學程｜GPA 4.29/4.3",
                 period: "2023–2026",
                 en: "M.S. Student, Graduate Program in Digital Content and Technologies, National Chengchi University",
               },
               {
-                school: "北京清華大學 美術學院信息藝術設計系 交換研修",
+                school: "北京清華大學 美術學院信息藝術設計系 交換研修｜GPA 4.0/4.0",
                 period: "2026.01–2026.06",
                 en: "Exchange Study, Dept. of Information Art & Design, Academy of Arts & Design, Tsinghua University",
                 note: "參與未來實驗室 Future Lab",

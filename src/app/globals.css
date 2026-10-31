@@ -169,4 +169,14 @@
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
+  /* 中英合併：中文、英文各占一張 A4，整份文件固定為兩頁。
+     不能 overflow: hidden，否則 Chrome 把整份文件當成不可分頁的區塊，第二頁會印成空白 */
+  html:has(.resume-pages),
+  html:has(.resume-pages) body {
+    height: 594mm;
+    overflow: visible;
+  }
+  .resume-pages .resume-sheet:not(:last-child) {
+    break-after: page;
+  }
 }

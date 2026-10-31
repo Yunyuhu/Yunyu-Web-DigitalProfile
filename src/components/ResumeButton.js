@@ -8,9 +8,10 @@ import { ChevronDown, FileDown } from "lucide-react";
 const OPTIONS = [
   { href: "/resume", label: "中文版" },
   { href: "/resume?lang=en", label: "English" },
+  { href: "/resume?lang=both", label: "中英合併" },
 ];
 
-// 「下載履歷」按鈕：點開選中文或英文版，前往 /resume 頁下載 PDF／PNG；點外面或按 Esc 收起
+// 「下載履歷」按鈕：點開選中文、英文或中英合併版，前往 /resume 頁下載 PDF／PNG；點外面或按 Esc 收起
 export default function ResumeButton() {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
