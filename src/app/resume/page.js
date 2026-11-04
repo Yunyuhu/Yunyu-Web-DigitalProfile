@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AvatarImg from "@/../public/Avatar.jpg";
+import ResumePhoto from "@/../public/resume-photo.jpg";
 import { resumeContent } from "@/data/resume";
 import ResumeFrame from "@/components/ResumeFrame";
 
@@ -103,11 +103,11 @@ const ResumeSheet = ({ lang, photo, id }) => {
       <header className="flex items-center gap-5 border-b-2 border-teal-600 pb-3">
         {photo && (
           <Image
-            src={AvatarImg}
+            src={ResumePhoto}
             alt=""
             priority
-            sizes="96px"
-            className="h-[18mm] w-[18mm] shrink-0 rounded-full object-cover ring-2 ring-teal-600/30"
+            sizes="160px"
+            className="h-[18mm] w-[14.4mm] shrink-0 rounded-sm object-cover"
           />
         )}
         <div className="min-w-0 flex-1">
