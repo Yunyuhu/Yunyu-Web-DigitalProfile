@@ -16,7 +16,7 @@ export const resumeContent = {
     headline: "人機互動研究｜UX 設計｜AI 與全端原型開發",
     contacts,
     summary:
-      "資管背景、政大數位內容碩士，以人機協作為研究主軸，精熟使用者研究、實驗設計、系統開發與數據分析。碩論自建 **pygame＋FastAPI 實驗系統**蒐集事件層級的行為日誌，並以 **Streamlit 分析儀表板**完成資料清理整併、行為指標建構與統計檢定，成果發表於 TAICHI'25 與 SNU–UTokyo–NCCU 聯合發表會；作品曾獲 **TAICHI 2024 Best Demo**。",
+      "資管背景的人機互動研究者，能從**研究設計、系統實作到資料分析**一手完成：碩論自建即時協作實驗系統與規則式 AI 隊友，研究人與 AI 如何表達協調意圖，並提出確認回應、交接狀態提示等設計建議。具 Python、React 開發與 U-Net 影像分割、ChatGPT API 串接經驗，也習慣以**文件與互動原型**協調不同職務的成員。希望投入 **AI 工具導入與 Agent 設計開發**。",
     labels: {
       experience: "經歷",
       projects: "精選專案",
@@ -143,7 +143,7 @@ export const resumeContent = {
     headline: "HCI Research | UX Design | AI & Full-stack Prototyping",
     contacts,
     summary:
-      "Information management graduate and M.S. student in Digital Content at NCCU, focused on human–AI collaboration and skilled in user research, experiment design, system development and data analysis. For my thesis I built a **pygame + FastAPI experiment system** that captures event-level behavioral logs, and a **Streamlit analysis dashboard** for data cleaning and merging, behavioral feature engineering and statistical testing. Winner of **TAICHI 2024 Best Demo**.",
+      "HCI researcher with an information management background who can **carry work from research design through implementation to data analysis**. For my thesis I built a real-time collaboration system and a rule-based AI teammate to study how humans and AI signal coordination intent, leading to design guidelines such as confirmation and handover cues. Experienced in Python, React, U-Net image segmentation and ChatGPT API integration, and in aligning teams through **documents and interactive prototypes**. Seeking roles in **AI tool adoption and agent design and development**.",
     labels: {
       experience: "Experience",
       projects: "Selected Projects",
