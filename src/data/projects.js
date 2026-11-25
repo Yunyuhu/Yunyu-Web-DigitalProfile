@@ -1270,26 +1270,31 @@ export const projects = [
     slug: "tears-of-ancestors",
     title: "Tears of Ancestors：敘事型 2D 遊戲",
     context: "台灣大專院校創意遊戲設計競賽 2023 決選",
-    tagline: "結合塔防與探索、以環境議題為背景的 2D 遊戲",
+    tagline: "結合守衛戰與地下探索解謎、以環境議題為背景的 2D 遊戲",
     caseStudy: {
-      question: "2D 遊戲多半只有一種玩法，能不能同時玩塔防與探索？",
+      question: "2D 遊戲多半只有一種玩法，能不能同時玩守衛戰與探索？",
       highlights: [{ value: "2023 決選", label: "台灣大專院校創意遊戲設計競賽" }],
       facts: [
         { label: "我的角色", value: "專案管理、企劃、開發" },
         { label: "團隊", value: "3 人，指導教授紀明德（政大）" },
         { label: "期間", value: "2023 年 12 月" }
       ],
+      contributions: [
+        "專案管理與企劃",
+        "開發地下探索：遊戲流程、主角控制、燈籠、礦車、寶物與血量",
+        "處理地上與地下兩條玩法共用的數值"
+      ],
       why: {
         headline: "多數 2D 遊戲只有一種玩法",
         body: "我們想讓玩家在不同玩法之間切換，也在遊玩之餘反思環境議題。"
       },
       solution: {
-        headline: "地上與地下雙線組合，在塔防與探索之間切換",
+        headline: "地上與地下雙線組合，在守衛戰與探索解謎之間切換",
         visuals: [
           {
             type: "cards",
             items: [
-              { title: "雙線玩法", detail: "結合塔防與探索，形成地上和地下的雙線組合，玩家可以在兩種遊戲核心之間切換。" },
+              { title: "雙線玩法", detail: "地上是守衛戰，布置祖先角色守住防線；地下是探索解謎，點亮燈籠、搭礦車、解開機關找寶物。玩家可以在兩種遊戲核心之間切換。" },
               { title: "環境議題", detail: "故事以環境議題包裝，讓玩家反思大自然反撲與相關的歷史事件。" }
             ]
           }
@@ -1299,7 +1304,7 @@ export const projects = [
         headline: "進入 2023 台灣大專院校創意遊戲設計競賽決選"
       }
     },
-    stack: ["遊戲企劃", "2D 遊戲開發", "專案管理"],
+    stack: ["遊戲企劃", "2D 遊戲開發", "Unity", "專案管理"],
     image: TearsImg,
     links: [
       { type: "video", href: "https://www.youtube.com/watch?v=utajysQgYvw" },
