@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { projects } from "@/data/projects";
+import { introParagraphs } from "@/data/intro";
 import SkillMap from "@/components/SkillMap";
 import DecodeText from "@/components/DecodeText";
 import { Fragment } from "@/components/Fragments";
@@ -122,6 +123,35 @@ const TABS = [
   { value: "awards", label: "🏆 獲獎展出" },
   { value: "community", label: "🤝 社群參與" },
 ];
+
+// 自我介紹：預設只顯示第一段（碩論），其餘收合，避免一大段文字把學歷與技能樹往下推
+const Introduction = () => {
+  const [open, setOpen] = useState(false);
+  const [first, ...rest] = introParagraphs;
+  return (
+    <section>
+      <h2 className="font-semibold mb-3">自我介紹 / Introduction</h2>
+      <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
+        <p>{first}</p>
+        <div id="intro-rest" hidden={!open} className="space-y-3">
+          {rest.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        aria-controls="intro-rest"
+        className="mt-3 inline-flex items-center gap-1 rounded-full border border-teal-200 px-3 py-1 text-xs font-medium text-teal-700 transition-colors hover:bg-teal-50 hover:text-teal-900"
+      >
+        {open ? "收合" : "展開完整自述"}
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+    </section>
+  );
+};
 
 export default function About() {
   const [activeTab, setActiveTab] = useState("work");
@@ -403,6 +433,8 @@ export default function About() {
       </div>
 
       <div className="sm:px-2 py-8 space-y-8 text-gray-800 w-full max-w-5xl">
+        <Introduction />
+
         {/* Education */}
         <section>
           <h2 className="font-semibold mb-3">學歷 / Education</h2>
