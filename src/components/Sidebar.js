@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Mail, Linkedin, Instagram, Menu, X } from "lucide-react";
+import { Mail, Linkedin, Github, Menu, X } from "lucide-react";
 import AvatarImg from "@/../public/Avatar.jpg";
 import SidebarNav from "@/components/SidebarNav";
 import { EASTER_EGG_EVENT } from "@/components/EasterEgg";
@@ -119,9 +119,9 @@ export default function Sidebar() {
               <Linkedin className="w-5 h-5 text-gray-600" />
             </div>
           </a>
-          <a href="https://www.instagram.com/yun._.yy_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(225,48,108,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
-              <Instagram className="w-5 h-5 text-gray-600" />
+          <a href="https://github.com/Yunyuhu" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(36,41,47,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
+              <Github className="w-5 h-5 text-gray-600" />
             </div>
           </a>
         </div>
