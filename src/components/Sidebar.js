@@ -9,6 +9,7 @@ import { Mail, Linkedin, Instagram, Menu, X } from "lucide-react";
 import AvatarImg from "@/../public/Avatar.jpg";
 import SidebarNav from "@/components/SidebarNav";
 import { EASTER_EGG_EVENT } from "@/components/EasterEgg";
+import useSiteStats from "@/lib/useSiteStats";
 
 // 滑過頭像時輪流冒出的小語，最後兩句順便提示彩蛋
 const FUN_FACTS = [
@@ -24,6 +25,7 @@ const FUN_FACTS = [
 // 頭像、名字、簡介在各尺寸都上下排列；1024px 以下頁面選單收在右上角的 ☰ 按鈕裡
 export default function Sidebar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const stats = useSiteStats();
   const pathname = usePathname();
 
   // 換頁後自動收起選單
@@ -104,23 +106,28 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {/* 社群連結 */}
-      <div className="flex gap-4 mt-4 lg:my-5 short:my-3 justify-center">
-        <a href="mailto:unayunyuhu@gmail.com" aria-label="Email">
-          <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(100,100,100,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
-            <Mail className="w-5 h-5 text-gray-600" />
-          </div>
-        </a>
-        <a href="https://www.linkedin.com/in/芸毓-胡-27a576213/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(0,119,181,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
-            <Linkedin className="w-5 h-5 text-gray-600" />
-          </div>
-        </a>
-        <a href="https://www.instagram.com/yun._.yy_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(225,48,108,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
-            <Instagram className="w-5 h-5 text-gray-600" />
-          </div>
-        </a>
+      {/* 社群連結與累計訪客（訪客數抓到才顯示） */}
+      <div className="mt-4 lg:my-5 short:my-3">
+        <div className="flex gap-4 justify-center">
+          <a href="mailto:unayunyuhu@gmail.com" aria-label="Email">
+            <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(100,100,100,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
+              <Mail className="w-5 h-5 text-gray-600" />
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/芸毓-胡-27a576213/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(0,119,181,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
+              <Linkedin className="w-5 h-5 text-gray-600" />
+            </div>
+          </a>
+          <a href="https://www.instagram.com/yun._.yy_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <div className="bg-white shadow-md hover:shadow-[0_0_10px_rgba(225,48,108,0.3)] hover:-translate-y-0.5 w-[40px] h-[40px] rounded-full flex items-center justify-center transition">
+              <Instagram className="w-5 h-5 text-gray-600" />
+            </div>
+          </a>
+        </div>
+        {stats?.visitors > 0 && (
+          <p className="mt-2 text-center text-[11px] text-gray-500 tabular-nums">累計 {stats.visitors.toLocaleString("zh-TW")} 位訪客</p>
+        )}
       </div>
 
       {/* 頁面切換：窄螢幕以高度展開／收合，桌機一律展開 */}

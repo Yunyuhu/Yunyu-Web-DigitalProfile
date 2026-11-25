@@ -1,0 +1,42 @@
+import { createSign } from "node:crypto";
+
+// 伺服器端向 GA4 Data API 讀數字：用唯讀的服務帳戶換存取權杖，再查報表。只能在伺服器端使用，金鑰不會送到瀏覽器。
+// 需要兩個 Vercel 環境變數：GA_PROPERTY_ID（GA4 資源編號，純數字）、GA_SERVICE_ACCOUNT（服務帳戶金鑰 JSON 檔的完整內容）
+
+const TOKEN_URL = "https://oauth2.googleapis.com/token";
+const SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
+
+const base64url = (value) => Buffer.from(value).toString("base64url");
+
+async function accessToken({ client_email, private_key }) {
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
+  const claims = base64url(JSON.stringify({ iss: client_email, scope: SCOPE, aud: TOKEN_URL, iat: now, exp: now + 3600 }));
+  const signature = createSign("RSA-SHA256").update(`${header}.${claims}`).sign(private_key, "base64url");
+  const res = await fetch(TOKEN_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: `${header}.${claims}.${signature}` }),
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error(`GA4 token ${res.status}: ${await res.text()}`);
+  return (await res.json()).access_token;
+}
+
+// 回傳查報表的函式（參數是 runReport 的請求內容）；環境變數沒設定時回傳 null
+export async function ga4Report() {
+  const propertyId = process.env.GA_PROPERTY_ID;
+  const serviceAccount = process.env.GA_SERVICE_ACCOUNT;
+  if (!propertyId || !serviceAccount) return null;
+  const token = await accessToken(JSON.parse(serviceAccount));
+  return async (body) => {
+    const res = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`GA4 report ${res.status}: ${await res.text()}`);
+    return res.json();
+  };
+}

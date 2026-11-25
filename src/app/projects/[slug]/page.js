@@ -49,6 +49,7 @@ const PagerCard = ({ project, direction }) => {
   return (
     <Link
       href={`/projects/${project.slug}`}
+      data-track-source="prev_next"
       className={`group flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 transition-all hover:border-teal-300 hover:shadow-md ${next ? "sm:flex-row-reverse sm:text-right" : ""}`}
     >
       <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-lg bg-gray-100">
@@ -98,7 +99,7 @@ export default async function ProjectDetail({ params }) {
             <ArrowLeft className="w-4 h-4" />
             返回專案列表
           </Link>
-          <nav aria-label="切換專案" className="flex items-center gap-1 text-xs text-gray-500">
+          <nav aria-label="切換專案" data-track-source="prev_next" className="flex items-center gap-1 text-xs text-gray-500">
             <span className="hidden lg:inline mr-2 text-[11px] text-gray-400">可用 ← → 切換</span>
             <Link
               href={`/projects/${prev.slug}`}
@@ -189,7 +190,7 @@ export default async function ProjectDetail({ params }) {
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div data-track-source="related" className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {related.map((p) => (
                 <Link
                   key={p.slug}

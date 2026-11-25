@@ -20,7 +20,7 @@ const rowAt = (index) => EXPAND + 0.45 + index * 0.14;
 const Evidence = ({ item }) => {
   if (item.href?.startsWith("/")) {
     return (
-      <Link href={item.href} className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
+      <Link href={item.href} data-track-source="skill_tree" className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
         {item.label}
         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
       </Link>

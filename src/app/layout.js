@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Analytics from "@/components/Analytics";
+import ProjectClickTracker from "@/components/ProjectClickTracker";
 import EasterEgg from "@/components/EasterEgg";
 import { FragmentProgress } from "@/components/Fragments";
 
@@ -43,6 +44,7 @@ export default function RootLayout({ children }) {
         <FragmentProgress />
         <EasterEgg />
         <Analytics />
+        <ProjectClickTracker />
       </body>
     </html>
   );

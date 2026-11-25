@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,6 +8,8 @@ import { ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import DecodeText from "@/components/DecodeText";
 import { Fragment } from "@/components/Fragments";
+import { trackProjectImpressions } from "@/lib/tracking";
+import useSiteStats from "@/lib/useSiteStats";
 
 // 把游標在卡片內的位置寫進 CSS 變數，給柔光效果使用
 const trackSpotlight = (e) => {
@@ -24,6 +26,7 @@ export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+  const stats = useSiteStats();
 
   const filteredProjects = projects.filter((project) => {
     const term = searchTerm.trim().toLowerCase();
@@ -42,6 +45,36 @@ export default function Projects() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  // 卡片有一半以上進入畫面才算「被看到」，同一次造訪同一張卡只記一次；短時間內看到的卡片合併成一筆送出
+  const listRef = useRef(null);
+  const seenRef = useRef(new Set());
+  const visibleKey = currentItems.map((project) => project.slug).join(",");
+  useEffect(() => {
+    const queue = [];
+    let timer;
+    const flush = () => queue.length && trackProjectImpressions(queue.splice(0));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const { projectSlug: slug, projectIndex } = entry.target.dataset;
+          if (!entry.isIntersecting || seenRef.current.has(slug)) return;
+          seenRef.current.add(slug);
+          queue.push({ slug, index: Number(projectIndex) });
+          observer.unobserve(entry.target);
+        });
+        clearTimeout(timer);
+        timer = setTimeout(flush, 500);
+      },
+      { threshold: 0.5 }
+    );
+    listRef.current?.querySelectorAll("[data-project-slug]").forEach((card) => observer.observe(card));
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+      flush();
+    };
+  }, [visibleKey]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
@@ -67,7 +100,7 @@ export default function Projects() {
         <div className="w-full h-px bg-gray-200 mt-4" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full">
+      <div ref={listRef} className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-6 w-full">
         {currentItems.map((project, index) => (
           <motion.div
             key={project.slug}
@@ -78,6 +111,8 @@ export default function Projects() {
           >
           <Link
             href={`/projects/${project.slug}`}
+            data-project-slug={project.slug}
+            data-project-index={(currentPage - 1) * itemsPerPage + index}
             onMouseMove={trackSpotlight}
             className="group relative w-full rounded-2xl border shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white overflow-hidden flex flex-col"
           >
@@ -117,10 +152,16 @@ export default function Projects() {
                   </span>
                 ))}
               </div>
-              <span className="inline-flex items-center gap-1 mt-3 pt-3 border-t border-gray-200 text-xs font-medium text-green-800">
-                查看專案
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
+              {/* 右邊的點擊次數在 GA4 有資料後才出現 */}
+              <div className="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-gray-200 text-xs">
+                <span className="inline-flex items-center gap-1 font-medium text-green-800">
+                  查看專案
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+                {stats?.clicks?.[project.slug] > 0 && (
+                  <span className="text-[11px] text-gray-500 tabular-nums">點擊 {stats.clicks[project.slug].toLocaleString("zh-TW")} 次</span>
+                )}
+              </div>
             </div>
           </Link>
           </motion.div>
