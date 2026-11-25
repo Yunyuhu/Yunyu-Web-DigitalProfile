@@ -24,6 +24,8 @@ import QuantTradingImg from "@/image/projects/quant-trading.png";
 import YoushiImg from "@/image/projects/youshi.png";
 // import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
 import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
+import DizzylandImg from "@/image/projects/dizzyland.jpg";
+import DizzylandSkewerImg from "@/image/projects/dizzyland-skewer.jpg";
 
 // 每個專案的欄位：
 // context   場域、專案類型或獲獎，顯示在年份旁
@@ -988,6 +990,57 @@ export const projects = [
     stack: ["ChatGPT GPTs", "對話設計", "角色設計", "知識庫建置"],
     image: Zooly,
     links: [{ type: "live", href: "https://chatgpt.com/g/g-68072a68d8f88191b212901315bb76c4-zooly-taipei-zoo" }]
+  },
+  {
+    year: "2025",
+    slug: "dizzyland",
+    title: "菸酒生馬拉松樂園：研究生生活網頁遊戲",
+    context: "12 人團隊網頁遊戲",
+    tagline: "在運動與美食小遊戲之間做選擇，塑造自己的研究生人生曲線",
+    caseStudy: {
+      question: "研究生在健康與享樂之間的拉扯，能不能變成一座可以玩的樂園？",
+      facts: [
+        { label: "我的角色", value: "串燒遊戲開發、全體遊戲串接整合" },
+        { label: "團隊", value: "12 人，每人負責一款小遊戲" },
+        { label: "期間", value: "2025 年 6 月" }
+      ],
+      contributions: [
+        "從零開發串燒遊戲：接住掉落的食材、依目標順序串燒、計分與連擊",
+        "串接 12 款小遊戲與樂園地圖之間的換頁流程與主頁面按鈕"
+      ],
+      why: {
+        headline: "研究生的日常，總在健康與享樂之間拉扯",
+        body: "日夜顛倒、口試遙遙無期，只能靠運動或美食撐下去，我們把這種拉扯做成可以選擇的遊戲。"
+      },
+      solution: {
+        headline: "走進樂園挑戰小遊戲，每個選擇都會改變體態",
+        visuals: [
+          {
+            type: "flow",
+            steps: [
+              { title: "探索樂園", detail: "用方向鍵在地圖上移動，走到攤位旁按空白鍵進入小遊戲。", tools: ["Next.js", "React"] },
+              { title: "選擇挑戰", detail: "左邊是運動區、右邊是美食區；通關一項運動體態 -1，通關一項美食體態 +1。" },
+              { title: "人生曲線", detail: "依體態成為健身型壯士、圓潤系快樂廢物，或找到兩者的平衡。" }
+            ]
+          },
+          {
+            type: "image",
+            src: DizzylandSkewerImg,
+            alt: "串燒遊戲的規則畫面，上方是目標串燒與分數",
+            caption: "我做的串燒遊戲：按 → 接住掉落的食材，依目標順序串對 +2 分、串錯 -2 分，拿到 6 分過關。"
+          }
+        ]
+      },
+      outcome: {
+        headline: "已上線，可以直接在瀏覽器遊玩"
+      }
+    },
+    stack: ["Next.js", "React", "遊戲設計", "GitHub 協作"],
+    image: DizzylandImg,
+    links: [
+      { type: "play", href: "https://web-finalproject-group2.vercel.app" },
+      { type: "code", href: "https://github.com/hsuchingchun/web-finalproject" }
+    ]
   },
   {
     year: "2024",
