@@ -29,7 +29,7 @@ import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 // context   場域、專案類型或獲獎，顯示在年份旁
 // tagline   一句話說明這是什麼、為誰而做
 // stack     使用的技術與方法（不放主題形容詞）
-// links     { type, href, label? }，顯示在專案頁的「相關資源」，type 決定按鈕文字與圖示，見 projects/[slug]/page.js 的 LINK_TYPES
+// links     { type, href, label? }，顯示在專案頁的「相關資源」，type 決定按鈕文字與圖示，見 projects/[slug]/page.js 的 LINK_TYPES（code 是程式碼、play 是線上遊玩）
 // featured  精選專案，排在最前面
 // slug      專案頁網址 /projects/{slug}
 // subtitle  英文正式名稱等副標，只顯示在專案頁（選填）
@@ -282,7 +282,10 @@ export const projects = [
     },
     stack: ["柔性感測", "微控制器", "觸覺回饋", "遊戲互動設計"],
     image: FlexiImg,
-    links: [{ type: "video", href: "https://www.youtube.com/watch?v=zUyFzP0OjnA" }]
+    links: [
+      { type: "video", href: "https://www.youtube.com/watch?v=zUyFzP0OjnA" },
+      { type: "code", href: "https://github.com/Junchaii/FlexiTouch" }
+    ]
   },
   {
     featured: true,
@@ -1298,7 +1301,10 @@ export const projects = [
     },
     stack: ["遊戲企劃", "2D 遊戲開發", "專案管理"],
     image: TearsImg,
-    links: [{ type: "video", href: "https://www.youtube.com/watch?v=utajysQgYvw" }]
+    links: [
+      { type: "video", href: "https://www.youtube.com/watch?v=utajysQgYvw" },
+      { type: "code", href: "https://github.com/Andy0223/Unity_Final" }
+    ]
   },
   {
     year: "2022",
@@ -1354,7 +1360,10 @@ export const projects = [
     },
     stack: ["Scrum", "遊戲化設計", "以使用者為中心設計", "醫療人員訪談"],
     image: MedicalReviewImg,
-    links: []
+    links: [
+      { type: "prototype", href: "https://medical-services-team.github.io/BoostrapTest/home.html" },
+      { type: "code", href: "https://github.com/Medical-Services-Team/BoostrapTest" }
+    ]
   },
   {
     year: "2022",

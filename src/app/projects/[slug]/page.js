@@ -9,6 +9,8 @@ import {
   ChevronLeft,
   ChevronRight,
   FileText,
+  Gamepad2,
+  Github,
   MousePointerClick,
   PlayCircle,
   Presentation,
@@ -25,6 +27,8 @@ const LINK_TYPES = {
   slides: { label: "專案簡報", icon: Presentation },
   doc: { label: "專案報告", icon: FileText },
   live: { label: "線上試用", icon: Bot },
+  play: { label: "線上遊玩", icon: Gamepad2 },
+  code: { label: "程式碼", icon: Github },
   archive: { label: "網站存檔", icon: Archive },
 };
 
