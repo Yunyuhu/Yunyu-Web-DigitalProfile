@@ -15,6 +15,9 @@ import MizutoImg from "@/image/projects/mizuto.png";
 import MetroMateImg from "@/image/projects/metromate.png";
 import RobotsImg from "@/image/projects/jellyfish-lizard-robots-cover.png";
 import RobotsPhotoImg from "@/image/projects/jellyfish-lizard-robots.jpg";
+import RobotJellyArchImg from "@/image/projects/robot-architecture-jellyfish.png";
+import RobotLizardArchImg from "@/image/projects/robot-architecture-lizard.png";
+import Jelly3DImg from "@/image/projects/jellyfish-3d-models.png";
 import MedicalReviewImg from "@/image/projects/medical-review.png";
 import FoodRescueImg from "@/image/projects/food-rescue.png";
 import QuantTradingImg from "@/image/projects/quant-trading.png";
@@ -733,26 +736,55 @@ export const projects = [
     slug: "jellyfish-lizard-robots",
     title: "水母與蜥蜴機器人 Jellyfish & Lizard Robots",
     context: "北京清華大學 未來實驗室",
-    tagline: "以水母與蜥蜴為原型的兩隻角色機器人，分別探索柔性觸手與口部動作",
+    tagline: "以水母與蜥蜴為原型，用齒輪爪夾、木偶彈簧與鼓風機做出生物般的動作",
     caseStudy: {
       question: "怎麼把生物柔軟的外型與動作，轉譯成機器人的機構，表現出生命感？",
       facts: [
         { label: "期間", value: "2026 年春季，清華大學美術學院交換期間" },
-        { label: "形式", value: "兩隻角色機器人原型" }
+        { label: "形式", value: "兩隻角色機器人原型" },
+        { label: "控制", value: "Arduino 控制伺服馬達與鼓風機" }
       ],
       why: {
-        headline: "練習把生物的型態與動態，轉譯為機構與互動設計"
+        headline: "練習把生物的型態與動態，轉譯為機構與互動設計",
+        body: "水母靠傘狀的身體一縮一放前進，蜥蜴有晃動的頭與四肢和伸出的舌頭。兩隻機器人各挑最有代表性的動作，用機構重現出來。"
       },
       solution: {
-        headline: "兩隻機器人都從外型、機構走到致動與控制",
+        headline: "三種機構，讓兩隻機器人動起來",
+        body: "兩隻都由 Arduino 控制，再依想表現的動作選擇不同的機構。",
         visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "水母｜齒輪帶動爪夾", detail: "伺服馬達來回轉動，經齒輪帶動夾在水母頭骨架上的爪夾。爪夾一開一合，水母頭就跟著一縮一放，像真的水母在鼓動。" },
+              { title: "蜥蜴｜木偶結構加彈簧", detail: "頭和雙手用木偶結構連接，由伺服馬達帶動。彈簧在動作停下後還會回彈幾下，讓動作帶點誇張的晃動，像動畫角色一樣有生命感。" },
+              { title: "蜥蜴｜鼓風機吹出舌頭", detail: "舌頭不用馬達推，而是由鼓風機送風，把柔軟的舌頭吹出來。" }
+            ]
+          },
+          {
+            type: "image",
+            src: RobotJellyArchImg,
+            alt: "水母機器人系統架構：Arduino 送出 PWM 訊號給伺服馬達，伺服馬達轉動齒輪組，齒輪帶動爪夾，爪夾開合讓水母頭一縮一放，柔性觸手掛在水母頭下方",
+            caption: "水母機器人的系統架構。虛線框內是 3D 建模的零件。"
+          },
+          {
+            type: "image",
+            src: RobotLizardArchImg,
+            alt: "蜥蜴機器人系統架構：Arduino 控制伺服馬達與鼓風機；伺服馬達帶動木偶結構，彈簧回彈讓頭與雙手晃動；鼓風機送風把舌頭吹出",
+            caption: "蜥蜴機器人的系統架構。上方是頭與雙手，下方是舌頭。"
+          },
+          {
+            type: "image",
+            src: Jelly3DImg,
+            alt: "水母頭（尺寸修訂版）與齒輪的 3D 模型線框",
+            caption: "水母頭與齒輪的 3D 模型。水母頭經過尺寸修訂，之後又做出新版。"
+          },
           {
             type: "table",
             head: ["", "水母機器人", "蜥蜴機器人"],
             rows: [
-              ["外型", "水母頭、齒輪與其他元件以 3D 建模，水母頭經過尺寸修訂後做出新版", "以蜥蜴為角色，設計桌上型的外型"],
-              ["機構", "以柔性外型與觸手結構為重點，讓觸手能呈現動態", "設計口部與舌頭的動作機構"],
-              ["致動與控制", "完成致動器接線與控制邏輯", "完成致動器接線，以 Arduino 控制程式驅動動作"]
+              ["外型", "水母頭、齒輪與爪夾零件以 3D 建模，水母頭經過尺寸修訂後做出新版；觸手用荷葉邊與柔性材質", "以蜥蜴為角色，設計桌上型的外型"],
+              ["機構", "伺服馬達經齒輪帶動爪夾，讓水母頭鼓動", "頭與雙手是木偶結構加彈簧；舌頭由鼓風機吹出"],
+              ["致動與控制", "伺服馬達，以 Arduino 控制", "伺服馬達與鼓風機，以 Arduino 控制"]
             ]
           },
           {
@@ -764,7 +796,7 @@ export const projects = [
         ]
       }
     },
-    stack: ["機器人設計", "柔性結構", "機構設計", "Arduino", "致動器控制"],
+    stack: ["機器人設計", "3D 建模", "機構設計", "伺服馬達", "Arduino"],
     image: RobotsImg,
     links: []
   },
