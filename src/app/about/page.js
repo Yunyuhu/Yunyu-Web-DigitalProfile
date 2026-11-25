@@ -409,18 +409,19 @@ export default function About() {
           <div className="space-y-3">
             {[
               {
-                school: "國立政治大學 數位內容碩士學位學程｜GPA 4.3",
+                school: "國立政治大學 數位內容碩士學位學程｜GPA 4.3（A+）",
                 period: "2023–2026",
                 en: "M.S. Student, Graduate Program in Digital Content and Technologies, National Chengchi University",
+                note: ["資訊科學系 × 傳播學院（雙指導教授制）", "曾任媒體心理實驗室（林日璇教授）與 MR 創意實驗室（周嘉年教授）研究助理"],
               },
               {
-                school: "北京清華大學 美術學院信息藝術設計系 交換研修｜GPA 4.0",
+                school: "北京清華大學 美術學院信息藝術設計系 交換研修｜GPA 4.0（A）",
                 period: "2026.01–2026.06",
                 en: "Exchange Study, Dept. of Information Art & Design, Academy of Arts & Design, Tsinghua University",
                 note: "參與未來實驗室 Future Lab",
               },
               {
-                school: "輔仁大學 資訊管理學系 學士｜GPA 3.8",
+                school: "輔仁大學 資訊管理學系 學士｜GPA 3.8（A）",
                 period: "2019–2023",
                 en: "B.S. in Information Management, Fu Jen Catholic University",
                 note: "修畢電子商務學分學程、跨域醫療服務設計思考微學程",
@@ -432,7 +433,9 @@ export default function About() {
                   <p className="text-xs text-gray-500 shrink-0">{edu.period}</p>
                 </div>
                 <p className="text-sm text-gray-500 mt-0.5">{edu.en}</p>
-                {edu.note && <p className="text-sm text-gray-700 mt-1">{edu.note}</p>}
+                {[].concat(edu.note ?? []).map((note) => (
+                  <p key={note} className="text-sm text-gray-700 mt-1">{note}</p>
+                ))}
               </div>
             ))}
           </div>

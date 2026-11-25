@@ -12,8 +12,11 @@ import Onetwothree from "@/image/projects/onetwothree.png";
 import Zooly from "@/image/projects/zooly.png";
 import MizutoImg from "@/image/projects/mizuto.png";
 import MetroMateImg from "@/image/projects/metromate.png";
-import JellyfishImg from "@/image/projects/jellyfish-robot.jpg";
-import LizardImg from "@/image/projects/lizard-robot.jpg";
+import RobotsImg from "@/image/projects/jellyfish-lizard-robots.jpg";
+import MedicalReviewImg from "@/image/projects/medical-review.png";
+import FoodRescueImg from "@/image/projects/food-rescue.png";
+import QuantTradingImg from "@/image/projects/quant-trading.png";
+import YoushiImg from "@/image/projects/youshi.png";
 // import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
 import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 
@@ -561,14 +564,20 @@ export const projects = [
       question: "疫情讓交流搬到線上，怎麼讓每一場知識分享累積成講者的數位履歷？",
       highlights: [
         { value: "第一名", label: "2022 大專院校資訊應用服務創新競賽 IPv4" },
-        { value: "30 場", label: "2023 年線上分享會" }
+        { value: "30 場", label: "2023 年線上分享會" },
+        { value: "100+", label: "真實使用者" }
       ],
       facts: [
-        { label: "我的角色", value: "開發、營運公關與活動企劃" },
+        { label: "我的角色", value: "UI/UX、React 開發、DevOps 維運與營運推廣" },
         { label: "團隊", value: "輔仁大學資管系畢業專題（產學合作）" },
         { label: "期間", value: "2021–2023" }
       ],
-      contributions: ["平台開發", "2023 年負責平台的營運公關與活動企劃"],
+      contributions: [
+        "UI/UX 體驗設計與 React 程式開發",
+        "DevOps 維運：訂定驗收流程，上線前以 Firebase Hosting 測試，並定期更新版本文件、重構與模組化",
+        "規劃社群推播與線下推廣並行的 OMO 營運策略",
+        "2023 年負責平台的營運公關與活動企劃"
+      ],
       why: {
         headline: "疫情讓交流搬到線上，也凸顯了資訊不對稱",
         body: "線下交流變少，DeepLink 想讓人透過線上研討會直接向他人學習、和感興趣的人建立聯繫。"
@@ -588,8 +597,16 @@ export const projects = [
       },
       solution: {
         headline: "一站式整合活動發想、直播與成果紀錄",
-        body: "支援同步與非同步互動，把分享成果轉為講者可展示的數位履歷。Webinar 依目的分成三種形式：",
+        body: "平台由三個功能組成，支援同步與非同步互動，把分享成果轉為講者可展示的數位履歷；其中 Webinar 依目的再分成三種形式。",
         visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "Webinar", detail: "隨時發起或參與線上會議，當下直接與參與者討論；會後留存影音、資料連結、檔案與討論留言，也能透過主講者留下的聯絡方式進一步聯繫。", accent: true },
+              { title: "Wish", detail: "以許願和打榜的機制，媒合主講者與參與者的供需，鞏固 Webinar 的需求。" },
+              { title: "Notify", detail: "串接 LINE 官方帳號與 Email，拉近與使用者的距離，引導定期回訪。" }
+            ]
+          },
           {
             type: "cards",
             items: [
@@ -601,8 +618,18 @@ export const projects = [
         ]
       },
       outcome: {
-        headline: "競賽第一名，畢業後由系上接手營運",
+        headline: "競賽第一名、100+ 位真實使用者，畢業後由系上接手營運",
+        body: "平台也被收入系上官網作為宣傳。",
         visuals: [
+          {
+            type: "flow",
+            steps: [
+              { title: "使用前", detail: "資訊不對稱，身邊沒有相同目標的夥伴。" },
+              { title: "使用中", detail: "參與分享會，自由選擇感興趣的場次，直接與他人討論。" },
+              { title: "使用後", detail: "針對相同話題與感興趣的人，會後聯繫、累積人脈。" },
+              { title: "自我突破", detail: "近 1/3 的使用者嘗試舉辦分享會，回饋自己的成長。" }
+            ]
+          },
           {
             type: "bars",
             title: "2023 年線上分享會（共 30 場）",
@@ -620,7 +647,7 @@ export const projects = [
         ]
       }
     },
-    stack: ["Web 平台", "產品規劃", "活動營運"],
+    stack: ["React", "Firebase", "UI/UX", "DevOps", "活動營運"],
     image: DeepLinkImg,
     links: [{ type: "archive", href: "https://web.archive.org/web/20250327225514/https://deeplink.tw/" }]
   },
@@ -662,68 +689,36 @@ export const projects = [
   },
   {
     year: "2026",
-    slug: "jellyfish-robot",
-    title: "水母機器人 Jellyfish Robot",
+    slug: "jellyfish-lizard-robots",
+    title: "水母與蜥蜴機器人 Jellyfish & Lizard Robots",
     context: "北京清華大學 未來實驗室",
-    tagline: "以水母為原型、強調柔性外型與觸手動態的互動機器人",
+    tagline: "以水母與蜥蜴為原型的兩隻角色機器人，分別探索柔性觸手與口部動作",
     caseStudy: {
-      question: "怎麼把水母柔軟的外型與觸手的動態，轉譯成機器人的機構？",
+      question: "怎麼把生物柔軟的外型與動作，轉譯成機器人的機構，表現出生命感？",
       facts: [
         { label: "期間", value: "2026 年春季，清華大學美術學院交換期間" },
-        { label: "形式", value: "角色機器人原型" }
+        { label: "形式", value: "兩隻角色機器人原型" }
       ],
       why: {
         headline: "練習把生物的型態與動態，轉譯為機構與互動設計"
       },
       solution: {
-        headline: "從 3D 建模、機構到致動器控制，做出水母角色原型",
+        headline: "兩隻機器人都從外型、機構走到致動與控制",
         visuals: [
           {
-            type: "flow",
-            steps: [
-              { title: "3D 建模", detail: "水母頭、齒輪與其他元件以 3D 建模；水母頭經過尺寸修訂，再做出新版。", tools: ["3D 建模", "STL"] },
-              { title: "機構設計", detail: "以柔性外型與觸手結構為重點，讓觸手能呈現動態。", tools: ["柔性結構", "齒輪"] },
-              { title: "致動與控制", detail: "完成致動器接線與控制邏輯。", tools: ["致動器", "控制程式"] }
+            type: "table",
+            head: ["", "水母機器人", "蜥蜴機器人"],
+            rows: [
+              ["外型", "水母頭、齒輪與其他元件以 3D 建模，水母頭經過尺寸修訂後做出新版", "以蜥蜴為角色，設計桌上型的外型"],
+              ["機構", "以柔性外型與觸手結構為重點，讓觸手能呈現動態", "設計口部與舌頭的動作機構"],
+              ["致動與控制", "完成致動器接線與控制邏輯", "完成致動器接線，以 Arduino 控制程式驅動動作"]
             ]
           }
         ]
       }
     },
-    stack: ["機器人設計", "柔性結構", "致動器控制"],
-    image: JellyfishImg,
-    links: []
-  },
-  {
-    year: "2026",
-    slug: "lizard-robot",
-    title: "蜥蜴機器人 Lizard Robot",
-    context: "北京清華大學 未來實驗室",
-    tagline: "具口部與舌頭動作機構的桌上型角色機器人",
-    caseStudy: {
-      question: "桌上型機器人能不能靠口部與舌頭的動作，表現出生命感？",
-      facts: [
-        { label: "期間", value: "2026 年春季，清華大學美術學院交換期間" },
-        { label: "形式", value: "桌上型角色機器人原型" }
-      ],
-      why: {
-        headline: "透過角色化的外型與動作機構，探索桌上型機器人的表現方式"
-      },
-      solution: {
-        headline: "以 Arduino 驅動口部與舌頭的動作機構",
-        visuals: [
-          {
-            type: "flow",
-            steps: [
-              { title: "角色外型", detail: "以蜥蜴為角色，設計桌上型的外型。", tools: ["角色設計"] },
-              { title: "動作機構", detail: "設計口部與舌頭的動作機構。", tools: ["機構設計"] },
-              { title: "接線與控制", detail: "完成致動器接線，以 Arduino 控制程式驅動動作。", tools: ["Arduino", "致動器"] }
-            ]
-          }
-        ]
-      }
-    },
-    stack: ["Arduino", "機構設計", "致動器控制", "角色設計"],
-    image: LizardImg,
+    stack: ["機器人設計", "柔性結構", "機構設計", "Arduino", "致動器控制"],
+    image: RobotsImg,
     links: []
   },
   // {
@@ -1225,5 +1220,197 @@ export const projects = [
     stack: ["遊戲企劃", "2D 遊戲開發", "專案管理"],
     image: TearsImg,
     links: [{ type: "video", href: "https://www.youtube.com/watch?v=utajysQgYvw" }]
+  },
+  {
+    year: "2022",
+    slug: "medical-review-platform",
+    title: "醫療好評網：遊戲化的醫療評價網站",
+    context: "醫療敏捷與服務設計專題",
+    tagline: "用遊戲化把就診追蹤、疾病控管與衛教任務帶進日常，讓民眾平時就重視健康",
+    caseStudy: {
+      question: "民眾多半生病時才想到醫療，怎麼讓衛教、例行檢測與疾病預防也走進日常？",
+      facts: [
+        { label: "我的角色", value: "PO（產品負責人），統籌專案進度並帶組員學程式" },
+        { label: "團隊", value: "跨領域組員，以 Scrum 協作" },
+        { label: "期間", value: "2022 年 9 月起" }
+      ],
+      contributions: [
+        "以 PO 身分統籌專案進度，訂定組織規範與每次開會前、中、後的進度追蹤與目標",
+        "規劃並教學組員的程式學習",
+        "接洽醫療人員，了解醫療專業知識與真實需求"
+      ],
+      why: {
+        headline: "「醫」給人的印象總是冰冷疏離，多數人只在生病時才想到",
+        body: "醫療的重要性需要深入日常，除了治病，也包含衛教、例行檢測與疾病預防。"
+      },
+      insight: {
+        headline: "先聽醫療人員與使用者怎麼說，再決定遊戲化怎麼放進來",
+        visuals: [
+          {
+            type: "methods",
+            items: [
+              { label: "醫療人員深度訪談", detail: "了解醫療專業知識與真實需求" },
+              { label: "使用者接洽", detail: "了解導入遊戲化的真實使用意願" }
+            ]
+          }
+        ]
+      },
+      solution: {
+        headline: "把看診、疾病控管與衛教變成可以追蹤的任務",
+        visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "就診追蹤", detail: "把預約到領藥的看診流程做成可視化進度，民眾隨時知道現在到哪一步，也能即時針對流程回饋，協助醫院優化。" },
+              { title: "疾病控管", detail: "整合個人就診資訊，提供醫師建議的在家任務，例如服藥、飲水量與飲食限制，並加入裝置互動，讓使用者有意識地管理生活。" },
+              { title: "健檢與衛教任務", detail: "建立衛教知識測驗與定期健檢任務，從達成率了解民眾對衛教與健檢的重視程度。" }
+            ]
+          }
+        ]
+      },
+      outcome: {
+        headline: "第一次帶不同背景的組員，學會用規範與進度追蹤讓每個人都能參與",
+        body: "組員來自不同科系，對程式的認知與接觸過的語言都不同，因此先訂定組織規範，再依進度規劃大家的程式學習。"
+      }
+    },
+    stack: ["Scrum", "遊戲化設計", "以使用者為中心設計", "醫療人員訪談"],
+    image: MedicalReviewImg,
+    links: []
+  },
+  {
+    year: "2022",
+    slug: "quant-trading",
+    title: "量化交易：以數據策略打造自動化交易",
+    context: "量化交易",
+    tagline: "以當沖與波段兩種主題設計交易策略，讓電腦依規則判斷進出場",
+    caseStudy: {
+      question: "能不能用數據取代直覺，讓電腦依規則判斷市場與進出場時機？",
+      facts: [
+        { label: "期間", value: "2022 年 3 月至 6 月" },
+        { label: "工具", value: "MultiChart（PowerLanguage Editor、QuoteManager）" }
+      ],
+      why: {
+        headline: "用數據驗證、避開人性的弱點，更理性地判斷進出場時機"
+      },
+      solution: {
+        headline: "以「當沖」與「波段」兩個主題切入，設計濾網與指標的策略組合",
+        body: "以 MultiChart 撰寫策略程式，設計各式濾網與指標，在策略組合中找出績效最好的一組。"
+      },
+      outcome: {
+        headline: "最佳策略組合的回測勝率達 90%",
+        body: "以下為歷史資料的回測結果，不代表實際交易的獲利。",
+        visuals: [
+          {
+            type: "stats",
+            items: [
+              { value: "90%", label: "最佳策略組合的回測勝率" },
+              { value: "NT$4,456,200", label: "回測中的最高淨利" }
+            ]
+          }
+        ]
+      }
+    },
+    stack: ["MultiChart", "PowerLanguage", "量化策略", "回測"],
+    image: QuantTradingImg,
+    links: []
+  },
+  {
+    year: "2020",
+    slug: "food-rescue-platform",
+    title: "剩食平台：社區剩食媒合 App",
+    context: "系統分析與設計",
+    tagline: "串起社區型商家的剩食與需要的人，也讓更多人關注惜食",
+    caseStudy: {
+      question: "社區型商家每天的剩食，能不能更快送到需要的人手上？",
+      facts: [
+        { label: "期間", value: "2020 年 3 月至 6 月" },
+        { label: "課程", value: "系統分析與設計" },
+        { label: "團隊", value: "多人協作開發" }
+      ],
+      contributions: [
+        "自行翻閱官方文件，從零學會以 React Native 開發 App",
+        "為了多人開發，深入了解 GitLab 的協作流程"
+      ],
+      why: {
+        headline: "全球三分之一的食物被丟棄，台灣每年約有 140 萬公噸廚餘",
+        body: "同時，世界上卻有 10 億人正在挨餓。",
+        visuals: [
+          {
+            type: "stats",
+            items: [
+              { value: "1/3", label: "全球生產的食物被丟棄", source: "聯合國糧食及農業組織（FAO）" },
+              { value: "9,400 億美元", label: "食物浪費造成的經濟損失", source: "聯合國糧食及農業組織（FAO）" },
+              { value: "140 萬公噸", label: "台灣每年的廚餘量", source: "環保署，2019 年統計" }
+            ]
+          }
+        ]
+      },
+      scope: {
+        headline: "聚焦社區型商家的剩食，再把受眾擴大到一般消費者",
+        body: "希望提高社會對惜食環保的關注，也促進社區的凝聚力。"
+      },
+      insight: {
+        headline: "最難的是定義使用者範圍，以及剩食的分類與處置流程",
+        visuals: [
+          {
+            type: "methods",
+            items: [
+              { label: "競品分析", detail: "剖析市場趨勢，以及現有服務的不足與痛點" },
+              { label: "實地打工", detail: "到學生餐廳打工，了解社區型商家如何處置剩食、遇到哪些困境" },
+              { label: "使用者訪談", detail: "了解需要領取剩食的族群有什麼需求與動機" }
+            ]
+          }
+        ]
+      },
+      solution: {
+        headline: "用定位、收藏與限時媒合，縮短剩食送到人手上的時間",
+        visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "GPS 定位", detail: "串接 GPS，即時找到最近的營業服務站。" },
+              { title: "個人化紀錄與分類", detail: "收藏與過往紀錄保存，未來可做使用者數據分析與推薦。" },
+              { title: "限時快速媒合", detail: "設計來回確認與咎責綁定的流程，提供供需雙方協商的彈性與事前預訂機制。" }
+            ]
+          }
+        ]
+      }
+    },
+    stack: ["React Native", "GitLab", "GPS 定位", "競品分析", "使用者訪談"],
+    image: FoodRescueImg,
+    links: []
+  },
+  {
+    year: "2019",
+    slug: "youshi",
+    title: "遊食：用遊戲決定今天吃什麼",
+    context: "創新與設計思考",
+    tagline: "把「今天吃什麼」的選擇困難，變成有期待感的遊戲",
+    caseStudy: {
+      question: "選項太多反而讓人更難決定，遊戲能不能讓選擇變成一種期待？",
+      facts: [
+        { label: "期間", value: "2019 年 9 月至 2020 年 1 月" },
+        { label: "課程", value: "創新與設計思考" }
+      ],
+      why: {
+        headline: "現代人需要快速決定吃什麼，琳瑯滿目的選擇卻成了痛苦"
+      },
+      solution: {
+        headline: "用遊戲化縮小選擇範圍，再依使用習慣推薦",
+        visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "遊戲化選擇", detail: "以遊戲化的互動，協助使用者縮小個人的選擇。" },
+              { title: "GPS 定位", detail: "串接 GPS，即時找到最近的店家。" },
+              { title: "使用習慣推薦", detail: "替每個食品標註標籤並記錄使用者的習慣，下次刷新頁面時更新推薦。" }
+            ]
+          }
+        ]
+      }
+    },
+    stack: ["遊戲化設計", "GPS 定位", "推薦機制", "設計思考"],
+    image: YoushiImg,
+    links: []
   }
 ];
