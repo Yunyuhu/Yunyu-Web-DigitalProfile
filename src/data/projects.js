@@ -13,7 +13,8 @@ import Onetwothree from "@/image/projects/onetwothree.png";
 import Zooly from "@/image/projects/zooly.png";
 import MizutoImg from "@/image/projects/mizuto.png";
 import MetroMateImg from "@/image/projects/metromate.png";
-import RobotsImg from "@/image/projects/jellyfish-lizard-robots.jpg";
+import RobotsImg from "@/image/projects/jellyfish-lizard-robots-cover.png";
+import RobotsPhotoImg from "@/image/projects/jellyfish-lizard-robots.jpg";
 import MedicalReviewImg from "@/image/projects/medical-review.png";
 import FoodRescueImg from "@/image/projects/food-rescue.png";
 import QuantTradingImg from "@/image/projects/quant-trading.png";
@@ -753,6 +754,12 @@ export const projects = [
               ["機構", "以柔性外型與觸手結構為重點，讓觸手能呈現動態", "設計口部與舌頭的動作機構"],
               ["致動與控制", "完成致動器接線與控制邏輯", "完成致動器接線，以 Arduino 控制程式驅動動作"]
             ]
+          },
+          {
+            type: "image",
+            src: RobotsPhotoImg,
+            alt: "左：粉紅色的水母機器人與柔性觸手；右：綠色蜥蜴機器人張嘴吐出紅色舌頭，旁邊是 Arduino 與接線",
+            caption: "左：水母機器人；右：蜥蜴機器人與 Arduino 控制板。"
           }
         ]
       }
