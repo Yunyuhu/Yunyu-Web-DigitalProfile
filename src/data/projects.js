@@ -4,6 +4,7 @@ import FlexiImg from "@/image/projects/flexitouch.png";
 import FlexiDemoImg from "@/image/projects/flexitouch-demo.jpg";
 import MizutoStatesImg from "@/image/projects/mizuto-states.jpg";
 import WallImg from "@/image/projects/wall-ai.png";
+import WallMasksImg from "@/image/projects/wallguard-masks.png";
 import VenueImg from "@/image/projects/nccu-venue.png";
 import IHarborImg from "@/image/projects/iharbor.png";
 import TearsImg from "@/image/projects/tears-of-ancestors.png";
@@ -285,7 +286,7 @@ export const projects = [
     slug: "wallguard",
     title: "WallGuard：牆面危害 AI 辨識系統",
     context: "InnoFest@ICI 2024 展出",
-    tagline: "以電腦視覺即時辨識牆面損傷，並生成民眾看得懂的風險報告",
+    tagline: "拍一張牆面照片，AI 分辨裂縫、壁癌與鏽蝕，標出範圍與面積，再生成看得懂的處理建議",
     caseStudy: {
       question: "牆面出現裂縫或壁癌，嚴不嚴重？該找誰？",
       highlights: [
@@ -294,13 +295,13 @@ export const projects = [
       ],
       facts: [
         { label: "我的角色", value: "資訊開發組＋PM" },
-        { label: "團隊", value: "4 人（DesignLens）" },
+        { label: "團隊", value: "4 人（DesignLens）：胡芸毓、羅聿安、揭宜蓁、黃宣銘" },
         { label: "指導教授", value: "陳宜秀、蔡炎龍" },
         { label: "期間", value: "2024–2025" }
       ],
       why: {
         headline: "一半以上的房屋超過 30 年，北部七成是要共同決策的集合住宅",
-        body: "修繕評估需要專業，又要和同棟所有權人協商，多數人只能等出問題才找人修。",
+        body: "壁癌、裂縫和鋼筋外露在生活中處處可見，但多數人分不清差異，更不知道各自該怎麼處理，常錯過最佳處理時間。老屋潛在的結構風險增加，也提高了遭遇天災時的災後風險；修繕評估又需要專業，還要和同棟所有權人協商，多數人只能等出問題才找人修。",
         visuals: [
           {
             type: "stats",
@@ -336,7 +337,16 @@ export const projects = [
       },
       insight: {
         headline: "在乎居住安全，卻缺知識，也不知道該找誰",
+        body: "專家和民眾之間有明顯的知識落差，民眾無法只靠肉眼辨識結構問題，也就缺乏風險意識。",
         visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "專家端", detail: "對震害的定義缺乏一致標準，有時用定性、有時用定量，取決於研究者的判斷。" },
+              { title: "民眾端", detail: "無法掌握專業知識，相關內容繁雜，也缺乏逐一了解的動機。" },
+              { title: "判斷上", detail: "看不出房屋狀況和潛在危險之間的關聯，又擔心請專業人士評估的額外費用。" }
+            ]
+          },
           {
             type: "methods",
             items: [
@@ -377,12 +387,31 @@ export const projects = [
           {
             type: "flow",
             steps: [
-              { title: "資料蒐集", detail: "使用 Roboflow Universe 的公開資料集，針對壁癌、裂縫、鏽蝕三類。", tools: ["Roboflow"] },
-              { title: "前處理", detail: "統一圖片尺寸，產生每張圖對應的 mask。", tools: ["OpenCV"] },
-              { title: "影像分割", detail: "判斷一張圖中的多個牆損特徵與範圍。", tools: ["U-Net"] },
+              { title: "資料蒐集", detail: "使用 Roboflow Universe 的公開資料集，共 3,000 張室內牆面照片，分為裂縫、壁癌、鏽蝕三類。", tools: ["Roboflow"] },
+              { title: "前處理", detail: "照片統一調整為 224×224。含鏽蝕與鋼筋外露 mask 的資料集很難取得，因此用 OpenCV 把每張照片轉成灰階、標註缺損區域，存成二值化 mask，用於訓練與驗證。", tools: ["OpenCV"] },
+              { title: "影像分割", detail: "從初版的整張照片分類，改成 U-Net 影像分割，同時標出一張照片裡多種牆損的位置與範圍。", tools: ["ResNet50V2", "U-Net"] },
+              { title: "面積計算", detail: "依分割結果換算各類缺損的面積（mm²），方便判斷嚴重程度與後續處理。", tools: ["Python"] },
               { title: "生成式 AI", detail: "把辨識結果轉成對話，以分階段的引導式 prompt 問答，並降低幻覺。", tools: ["ChatGPT API", "Prompt", "RAG"] },
               { title: "部署與測試", detail: "測試資訊正確性、批次回答良率，以及未知牆損、無法辨識圖像等例外情境。", tools: ["Next.js", "Python", "Node.js", "Firebase", "GCP Cloud Run"] }
             ]
+          },
+          {
+            type: "table",
+            head: ["", "初版", "最終"],
+            rows: [
+              ["任務", "替整張照片分類：裂縫、壁癌或鏽蝕", "影像分割，標出三種缺損各自的區域"],
+              ["模型", "預訓練的 ResNet50V2，移除頂層後加上全連接層", "U-Net，以多層卷積與最大池化擷取特徵，再以上採樣與拼接還原空間尺寸"],
+              ["訓練", "損失函數 categorical cross-entropy，Adam 最佳化，訓練 8 個 epoch", "Adam 最佳化，搭配 EarlyStopping、ModelCheckpoint、ReduceLROnPlateau；受硬體限制，訓練 10 個 epoch、batch size 4"],
+              ["訓練集表現", "準確率 98.87%", "準確率 91.13%，損失 11.82%"],
+              ["限制", "只知道整張照片屬於哪一類，看不出位置與大小", "受限於 mask 的生成方式，有時會把壁癌和鏽蝕混在一起"]
+            ],
+            caption: "表中的準確率都是訓練集上的數字。最終版雖然分數較低，但能標出位置、計算面積，更貼近民眾實際要判斷的事。"
+          },
+          {
+            type: "image",
+            src: WallMasksImg,
+            alt: "原始牆面照片，以及模型分割出的三種缺損遮罩與換算面積",
+            caption: "左起為原始照片與三種缺損的分割遮罩，右側是換算出的缺損面積（出自專案海報）。"
           }
         ]
       },
@@ -397,11 +426,22 @@ export const projects = [
               { title: "減少溝通成本", detail: "連結相關資源，提升處理意願和效率。" },
               { title: "增強居住意識", detail: "建立正確的房屋安全認知與防範意識。" }
             ]
+          },
+          {
+            type: "table",
+            head: ["應用場域", "怎麼用"],
+            rows: [
+              ["災後重建與應急響應", "地震、颱風、洪水後快速評估建築物損傷，協助判斷優先修復的區域，也讓民眾參與通報災損。"],
+              ["建築檢修與維護", "日常維護時及早發現牆體問題，減少人力檢查的時間與成本，特別適合高樓、橋梁等不易接近的牆體。"],
+              ["政府與公共建設", "用於基礎設施的定期檢查與監控，減少大型工程的人工檢查量。"],
+              ["保險業", "評估建築物的保險風險，更準確地定價保單，理賠時也能快速驗證損壞情況。"],
+              ["房地產", "買賣前預先檢測，向買家提供建築狀況報告；翻新前也能及早發現問題。"]
+            ]
           }
         ]
       }
     },
-    stack: ["電腦視覺", "U-Net", "生成式 AI API"],
+    stack: ["電腦視覺", "U-Net", "ResNet50V2", "OpenCV", "生成式 AI API"],
     image: WallImg,
     links: [{ type: "video", href: "https://www.youtube.com/watch?v=pVikml-YPsw" }]
   },

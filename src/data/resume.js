@@ -103,7 +103,7 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard｜牆面危害 AI 辨識系統",
-        detail: "實作 YOLO 即時辨識牆壁狀態，串接生成式 AI API 產出白話風險報告。InnoFest@ICI 2024 受邀展出。",
+        detail: "以 U-Net 影像分割辨識裂縫、壁癌與鏽蝕並換算面積，再串接生成式 AI API 產出白話風險報告。InnoFest@ICI 2024 受邀展出。",
       },
       {
         year: "2025",
@@ -124,7 +124,7 @@ export const resumeContent = {
     ],
     skills: [
       { label: "程式與系統", items: "Python、JavaScript、React、React Native、FastAPI、Unity、Arduino、MySQL、Firebase、AWS、Git" },
-      { label: "資料與 AI", items: "事件日誌設計、資料清理與整併、行為指標建構、統計檢定、Streamlit 儀表板、YOLO 物件偵測、生成式 AI API、情緒分析與文本分類" },
+      { label: "資料與 AI", items: "事件日誌設計、資料清理與整併、行為指標建構、統計檢定、Streamlit 儀表板、U-Net 影像分割、生成式 AI API、情緒分析與文本分類" },
       { label: "研究與設計", items: "實驗設計、問卷設計、使用者研究、服務設計、資訊架構、Figma" },
     ],
     awards: [
@@ -223,7 +223,7 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard | AI Wall-Hazard Detection",
-        detail: "Real-time YOLO detection of wall damage with plain-language risk reports written by generative AI. Exhibited at InnoFest@ICI 2024.",
+        detail: "U-Net segmentation of cracks, efflorescence and corrosion with area estimates, plus plain-language risk reports from generative AI. Exhibited at InnoFest@ICI 2024.",
       },
       {
         year: "2025",
@@ -243,7 +243,7 @@ export const resumeContent = {
     ],
     skills: [
       { label: "Programming & Systems", items: "Python, JavaScript, React, React Native, FastAPI, Unity, Arduino, MySQL, Firebase, AWS, Git" },
-      { label: "Data & AI", items: "Event logging, data cleaning & merging, behavioral feature engineering, statistical testing, Streamlit dashboards, YOLO detection, generative AI APIs, sentiment & text classification" },
+      { label: "Data & AI", items: "Event logging, data cleaning & merging, behavioral feature engineering, statistical testing, Streamlit dashboards, U-Net image segmentation, generative AI APIs, sentiment & text classification" },
       { label: "Research & Design", items: "Experiment design, survey design, user research, service design, information architecture, Figma" },
     ],
     awards: [

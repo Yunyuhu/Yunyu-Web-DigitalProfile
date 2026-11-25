@@ -136,7 +136,7 @@ export default function About() {
     {
       label: "資料與 AI",
       emphasis: true,
-      items: ["資料清理與整併", "行為指標建構", "統計檢定", "事件日誌設計", "Streamlit 分析儀表板", "YOLO", "電腦視覺", "生成式 AI API", "情緒分析與文本分類"],
+      items: ["資料清理與整併", "行為指標建構", "統計檢定", "事件日誌設計", "Streamlit 分析儀表板", "U-Net 影像分割", "電腦視覺", "生成式 AI API", "情緒分析與文本分類"],
     },
     {
       label: "研究與設計方法",
@@ -158,8 +158,8 @@ export default function About() {
       id: "ai",
       title: "AI 應用",
       en: "AI for Social Good",
-      summary: "串接 AI API 做評論情緒辨識與內容分類，實作 YOLO 即時辨識牆壁狀態，把 AI 用在民眾日常的真實問題",
-      skills: ["Python", "情緒分析與文本分類", "YOLO", "電腦視覺", "生成式 AI API", "對話設計"],
+      summary: "串接 AI API 做評論情緒辨識與內容分類，以 U-Net 影像分割辨識牆面損傷與範圍，把 AI 用在民眾日常的真實問題",
+      skills: ["Python", "情緒分析與文本分類", "U-Net", "電腦視覺", "生成式 AI API", "對話設計"],
       evidence: [
         { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
