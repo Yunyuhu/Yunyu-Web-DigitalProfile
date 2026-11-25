@@ -8,6 +8,9 @@ const SCOPE = "https://www.googleapis.com/auth/analytics.readonly";
 
 const base64url = (value) => Buffer.from(value).toString("base64url");
 
+// 失敗時的錯誤帶有 step，說明卡在哪一步（不含機密），/api/stats 會回傳它，方便從網址直接檢查
+const fail = (step, detail) => Object.assign(new Error(`GA4 ${step}: ${detail}`), { step });
+
 async function accessToken({ client_email, private_key }) {
   const now = Math.floor(Date.now() / 1000);
   const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
@@ -19,7 +22,7 @@ async function accessToken({ client_email, private_key }) {
     body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion: `${header}.${claims}.${signature}` }),
     cache: "no-store",
   });
-  if (!res.ok) throw new Error(`GA4 token ${res.status}: ${await res.text()}`);
+  if (!res.ok) throw fail(`token_failed_${res.status}`, await res.text());
   return (await res.json()).access_token;
 }
 
@@ -28,15 +31,22 @@ export async function ga4Report() {
   const propertyId = process.env.GA_PROPERTY_ID;
   const serviceAccount = process.env.GA_SERVICE_ACCOUNT;
   if (!propertyId || !serviceAccount) return null;
-  const token = await accessToken(JSON.parse(serviceAccount));
+  let credentials;
+  try {
+    credentials = JSON.parse(serviceAccount);
+  } catch {
+    throw fail("bad_credentials", "GA_SERVICE_ACCOUNT 不是完整的 JSON");
+  }
+  if (!credentials.client_email || !credentials.private_key) throw fail("bad_credentials", "金鑰 JSON 缺少 client_email 或 private_key");
+  const token = await accessToken(credentials);
   return async (body) => {
-    const res = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId}:runReport`, {
+    const res = await fetch(`https://analyticsdata.googleapis.com/v1beta/properties/${propertyId.trim()}:runReport`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify(body),
       cache: "no-store",
     });
-    if (!res.ok) throw new Error(`GA4 report ${res.status}: ${await res.text()}`);
+    if (!res.ok) throw fail(`report_failed_${res.status}`, await res.text());
     return res.json();
   };
 }
