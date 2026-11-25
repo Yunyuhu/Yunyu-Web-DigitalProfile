@@ -395,7 +395,7 @@ export const projects = [
               { title: "前處理", detail: "照片統一調整為 224×224。含鏽蝕與鋼筋外露 mask 的資料集很難取得，因此用 OpenCV 把每張照片轉成灰階、標註缺損區域，存成二值化 mask，用於訓練與驗證。", tools: ["OpenCV"] },
               { title: "影像分割", detail: "從初版的整張照片分類，改成 U-Net 影像分割，同時標出一張照片裡多種牆損的位置與範圍。", tools: ["ResNet50V2", "U-Net"] },
               { title: "面積計算", detail: "依分割結果換算各類缺損的面積（mm²），方便判斷嚴重程度與後續處理。", tools: ["Python"] },
-              { title: "生成式 AI", detail: "把辨識結果轉成對話，以分階段的引導式 prompt 問答，並降低幻覺。", tools: ["ChatGPT API", "Prompt", "RAG"] },
+              { title: "生成式 AI", detail: "把辨識結果轉成對話，以分階段的引導式 prompt 問答，產出白話的風險說明與處理建議。", tools: ["ChatGPT API", "Prompt"] },
               { title: "部署與測試", detail: "測試資訊正確性、批次回答良率，以及未知牆損、無法辨識圖像等例外情境。", tools: ["Next.js", "Python", "Node.js", "Firebase", "GCP Cloud Run"] }
             ]
           },
@@ -421,7 +421,7 @@ export const projects = [
       },
       outcome: {
         headline: "受邀在 InnoFest@ICI 2024 展出，並參加 2025 AI Award",
-        body: "下一步規劃內部測試與專家意見，完善建議內容並連結地區服務。",
+        body: "下一步規劃以 RAG 提升建議內容的精準度、減少幻覺，並透過內部測試與專家意見完善建議、連結地區服務。",
         visuals: [
           {
             type: "cards",
