@@ -26,6 +26,8 @@ import YoushiImg from "@/image/projects/youshi.png";
 import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 import DizzylandImg from "@/image/projects/dizzyland.jpg";
 import DizzylandSkewerImg from "@/image/projects/dizzyland-skewer.jpg";
+import HungryFrogImg from "@/image/projects/hungry-frog.jpg";
+import HungryFrogWinImg from "@/image/projects/hungry-frog-win.png";
 
 // 每個專案的欄位：
 // context   場域、專案類型或獲獎，顯示在年份旁
@@ -1363,6 +1365,50 @@ export const projects = [
       { type: "video", href: "https://www.youtube.com/watch?v=utajysQgYvw" },
       { type: "code", href: "https://github.com/Andy0223/Unity_Final" }
     ]
+  },
+  {
+    year: "2023",
+    slug: "hungry-frog",
+    title: "Hungry Frog：飢餓青蛙捕蟲遊戲",
+    context: "團隊 Unity 遊戲",
+    tagline: "在餓死之前多吃幾隻蟲，關卡越往後，蟲飛得越快",
+    caseStudy: {
+      question: "一款小遊戲要怎麼在幾分鐘內，讓節奏一關比一關緊張？",
+      facts: [
+        { label: "我的角色", value: "關卡互動機制設計、關卡開發與關卡串接" },
+        { label: "期間", value: "2023 年 10–11 月" }
+      ],
+      contributions: [
+        "設計關卡的互動機制",
+        "開發其中的關卡",
+        "串起開始、過關、失敗與最終勝利之間的關卡連動"
+      ],
+      solution: {
+        headline: "飢餓值倒數加上越來越快的蟲，讓節奏一關比一關緊張",
+        visuals: [
+          {
+            type: "cards",
+            items: [
+              { title: "吃蟲求生", detail: "用左右鍵移動、空白鍵伸出舌頭；飢餓值隨時間下降，吃到蟲才能補充並得分。" },
+              { title: "不同的蟲", detail: "蒼蠅、蜻蜓、蚊子等蟲，出現在古井、池塘旁等場景。" },
+              { title: "關卡連動", detail: "過關後進入下一關，蟲移動得更快；全部過關進入最終勝利，餓死則失敗。" }
+            ]
+          },
+          {
+            type: "image",
+            src: HungryFrogWinImg,
+            alt: "Hungry Frog 的過關畫面，可以重玩或進入下一關",
+            caption: "過關畫面：可以重玩，或進入下一關。"
+          }
+        ]
+      },
+      outcome: {
+        headline: "完成兩個關卡，以及開始、過關、失敗與最終勝利的完整流程"
+      }
+    },
+    stack: ["Unity", "C#", "關卡設計", "遊戲機制設計"],
+    image: HungryFrogImg,
+    links: [{ type: "code", href: "https://github.com/Nerdvana333/GDTeamProject" }]
   },
   {
     year: "2022",
