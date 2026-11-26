@@ -454,7 +454,10 @@ export const projects = [
     },
     stack: ["電腦視覺", "U-Net", "ResNet50V2", "OpenCV", "生成式 AI API"],
     image: WallImg,
-    links: [{ type: "video", href: "https://www.youtube.com/watch?v=pVikml-YPsw" }]
+    links: [
+      { type: "video", href: "https://www.youtube.com/watch?v=pVikml-YPsw" },
+      { type: "code", href: "https://github.com/Yunyuhu/WallGuard" }
+    ]
   },
   {
     featured: true,
