@@ -71,7 +71,8 @@ const allProjects = [
       facts: [
         { label: "我的角色", value: "研究設計、實驗系統與分析工具開發、實驗執行、資料分析與訪談編碼" },
         { label: "指導教授", value: "陳宜秀、蔡炎龍" },
-        { label: "寫給誰", value: "設計 AI 代理人與人機協作介面的研究者和設計師" }
+        { label: "寫給誰", value: "設計 AI 代理人與人機協作介面的研究者和設計師" },
+        { label: "程式碼", value: "含參與者實驗資料，不公開" }
       ],
       contributions: [
         "提出研究問題，設計 2×2 組間實驗",
