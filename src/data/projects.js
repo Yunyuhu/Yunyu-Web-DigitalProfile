@@ -27,6 +27,9 @@ import DizzylandImg from "@/image/projects/dizzyland.jpg";
 import DizzylandSkewerImg from "@/image/projects/dizzyland-skewer.jpg";
 import HungryFrogImg from "@/image/projects/hungry-frog.jpg";
 import HungryFrogWinImg from "@/image/projects/hungry-frog-win.png";
+import WeatherAssistantImg from "@/image/projects/weather-assistant.jpg";
+import ChatDemoImg from "@/image/projects/chat-demo.jpg";
+import HandwritingImg from "@/image/projects/handwriting-notebook.jpg";
 
 // 每個專案的欄位：
 // context   場域、專案類型或獲獎，顯示在年份旁
@@ -812,6 +815,158 @@ const allProjects = [
     stack: ["機器人設計", "3D 建模", "機構設計", "伺服馬達", "Arduino"],
     image: RobotsImg,
     links: []
+  },
+  {
+    year: "2026",
+    slug: "weather-assistant",
+    title: "天氣問問：查天氣，也能直接問 AI",
+    context: "可直接試用的 AI Demo",
+    tagline: "選一個縣市看中央氣象署接下來 36 小時的預報，再問 AI 要不要帶傘、怎麼穿",
+    caseStudy: {
+      question: "怎麼讓 AI 回答天氣問題時，不會憑空亂講？",
+      facts: [
+        { label: "形式", value: "網頁 Demo，打開就能用" },
+        { label: "期間", value: "2026" },
+        { label: "架構", value: "前端 GitHub Pages、API 部署在 Vercel，金鑰只存在伺服器" }
+      ],
+      why: {
+        headline: "預報是一堆數字，直接問 AI 又不一定根據最新資料",
+        body: "預報給的是時段、溫度與降雨機率，民眾真正想知道的是「要不要帶傘、穿什麼」；但直接問聊天機器人，它不一定是根據今天的官方預報回答。"
+      },
+      solution: {
+        headline: "先拿到官方預報，再讓 AI 只根據這份資料回答",
+        visuals: [
+          {
+            type: "flow",
+            steps: [
+              { title: "取得預報", detail: "伺服器讀取中央氣象署的 36 小時縣市預報，整理成三個時段。", tools: ["中央氣象署開放資料"] },
+              { title: "檢查欄位", detail: "溫度、降雨機率、天氣描述都驗證過才往下送，資料不完整就停止，不讓 AI 猜。", tools: ["Vercel Functions"] },
+              { title: "依資料回答", detail: "把同一份預報和使用者的問題交給模型，只回答三個時段能支持的內容。", tools: ["OpenAI API"] },
+              { title: "看得懂的介面", detail: "天空依天氣變色，溫度範圍條與降雨水滴並排比較；回答裡的數字自動標出，方便對照。", tools: ["JavaScript", "SVG"] }
+            ]
+          },
+          {
+            type: "cards",
+            items: [
+              { title: "快捷提問", detail: "「要帶傘嗎？」「要穿什麼？」點一下就問。" },
+              { title: "可以核對", detail: "每則回答都附上預報的發布時間，數值以氣象署為準。" },
+              { title: "等待不空白", detail: "後端喚醒時顯示骨架畫面與說明，出錯時提示原因。" }
+            ]
+          }
+        ]
+      },
+      outcome: {
+        headline: "公開上線，任何人都能直接試用"
+      }
+    },
+    stack: ["JavaScript", "Vercel Functions", "OpenAI API", "開放資料串接", "GitHub Pages"],
+    image: WeatherAssistantImg,
+    links: [
+      { type: "live", href: "https://yunyuhu.github.io/Weather-Assistant/" },
+      { type: "code", href: "https://github.com/Yunyuhu/Weather-Assistant" }
+    ]
+  },
+  {
+    year: "2026",
+    slug: "chat-demo",
+    title: "聊聊：會記得上下文的 AI 對話",
+    context: "可直接試用的 AI Demo",
+    tagline: "跟會追問口味的電影推薦角色聊天，或把一段筆記交給 AI，先抓關鍵字再寫成短文",
+    caseStudy: {
+      question: "怎麼讓 AI 記得前面說過的話，也讓整理過程看得見？",
+      facts: [
+        { label: "形式", value: "網頁 Demo，打開就能用" },
+        { label: "期間", value: "2026" },
+        { label: "架構", value: "前端 GitHub Pages、API 部署在 Vercel，金鑰只存在伺服器" }
+      ],
+      why: {
+        headline: "一問一答的 AI 容易忘記脈絡，整理出來的結果也看不出依據",
+        body: "推薦要先了解偏好，整理文字要看得出抓了哪些重點；兩者都需要把「上下文」和「中間步驟」設計進流程裡。"
+      },
+      solution: {
+        headline: "把上下文交給模型，把整理拆成看得見的兩步",
+        visuals: [
+          {
+            type: "flow",
+            steps: [
+              { title: "角色設定", detail: "電影推薦與文字修潤兩個角色，設定寫在伺服器，訪客不能改寫。", tools: ["Prompt 設計"] },
+              { title: "多輪對話", detail: "每次送出都附上整段對話紀錄，角色才記得你前面說過什麼；一段對話最多 8 輪。", tools: ["OpenAI API"] },
+              { title: "兩步驟整理", detail: "第一次只抓關鍵字，第二次把原文和關鍵字一起交給模型寫成短文，中間結果直接顯示。", tools: ["OpenAI API"] },
+              { title: "安全與成本", detail: "只接受展示頁的來源、限制每分鐘次數、輸入長度上限，並不保存對話。", tools: ["Vercel Functions"] }
+            ]
+          },
+          {
+            type: "cards",
+            items: [
+              { title: "像訊息 App", detail: "對話清單、泡泡、輸入中動畫，Enter 直接送出。" },
+              { title: "不知道問什麼也能開始", detail: "每個角色都有建議訊息，點一下就送出。" },
+              { title: "失敗不吃字", detail: "沒送出的訊息留在輸入框，可以直接重送。" }
+            ]
+          }
+        ]
+      },
+      outcome: {
+        headline: "公開上線，任何人都能直接試用"
+      }
+    },
+    stack: ["JavaScript", "OpenAI API", "Prompt 設計", "Vercel Functions", "GitHub Pages"],
+    image: ChatDemoImg,
+    links: [
+      { type: "live", href: "https://yunyuhu.github.io/AI-Dialogue-Demo/" },
+      { type: "code", href: "https://github.com/Yunyuhu/AI-Dialogue-Demo" }
+    ]
+  },
+  {
+    year: "2026",
+    slug: "handwriting-notebook",
+    title: "數字辨識筆記：在瀏覽器裡跑的手寫辨識",
+    context: "可直接試用的 AI Demo",
+    tagline: "手寫一個數字，神經網路邊看邊猜，還能看到它眼中的 28×28 影像與學習紀錄",
+    caseStudy: {
+      question: "神經網路怎麼「看」一個手寫數字？又在哪裡容易搞混？",
+      highlights: [
+        { value: "93.23%", label: "MNIST 測試集正確率" }
+      ],
+      facts: [
+        { label: "形式", value: "網頁 Demo，打開就能用，不需要伺服器" },
+        { label: "期間", value: "2026" },
+        { label: "模型", value: "全連接神經網路 784 → 11 → 73 → 52 → 61 → 10" }
+      ],
+      why: {
+        headline: "只給一個準確率，看不到模型看到了什麼、又錯在哪裡",
+        body: "想讓人直接感受模型的判斷：寫的時候就看到分數變化，也看得到它把筆跡縮成什麼樣子、最常把哪些數字搞混。"
+      },
+      solution: {
+        headline: "用 NumPy 訓練，在瀏覽器裡推論，再把評估畫成圖",
+        visuals: [
+          {
+            type: "flow",
+            steps: [
+              { title: "訓練", detail: "以 NumPy 從頭訓練 30 輪：訓練 54,000 張、驗證 6,000 張，固定隨機種子並依驗證集選模。", tools: ["NumPy"] },
+              { title: "匯出權重", detail: "權重存成 JSON，瀏覽器載入後直接計算，筆跡不會離開使用者的電腦。", tools: ["JSON"] },
+              { title: "前處理", detail: "把筆跡裁切、縮放並依重心置中成 28×28，貼近訓練資料的樣子。", tools: ["Canvas"] },
+              { title: "視覺化", detail: "邊寫邊更新十類分數；用學習曲線、每個數字的正確率與混淆矩陣呈現模型表現。", tools: ["JavaScript", "SVG"] }
+            ]
+          },
+          {
+            type: "stats",
+            items: [
+              { value: "93.23%", label: "10,000 張測試資料的正確率", source: "MNIST 測試集" },
+              { value: "88.8%", label: "最難的數字 5 的正確率", source: "最常被看成 3" }
+            ]
+          }
+        ]
+      },
+      outcome: {
+        headline: "公開上線，任何人都能直接試用"
+      }
+    },
+    stack: ["NumPy", "神經網路", "JavaScript", "Canvas", "GitHub Pages"],
+    image: HandwritingImg,
+    links: [
+      { type: "live", href: "https://yunyuhu.github.io/AI-Vision-Demos/" },
+      { type: "code", href: "https://github.com/Yunyuhu/AI-Vision-Demos" }
+    ]
   },
   {
     year: "2025",
