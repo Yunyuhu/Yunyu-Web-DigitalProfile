@@ -22,7 +22,6 @@ import MedicalReviewImg from "@/image/projects/medical-review.png";
 import FoodRescueImg from "@/image/projects/food-rescue.png";
 import QuantTradingImg from "@/image/projects/quant-trading.png";
 import YoushiImg from "@/image/projects/youshi.png";
-// import ParametricImg from "@/image/projects/parametric-3d-modeling.jpg";
 import MemoryMazeImg from "@/image/projects/memory-maze.jpg";
 import DizzylandImg from "@/image/projects/dizzyland.jpg";
 import DizzylandSkewerImg from "@/image/projects/dizzyland-skewer.jpg";
@@ -811,16 +810,6 @@ const allProjects = [
     image: RobotsImg,
     links: []
   },
-  // {
-  //   year: "2026",
-  //   title: "多維參數化3D建模",
-  //   context: "北京清華大學 未來實驗室",
-  //   tagline: "以參數化演算生成骨骼狀多維結構，並列印成裝置藝術與可穿戴飾品",
-  //   highlights: [],
-  //   stack: ["參數化建模", "3D列印", "生成設計"],
-  //   image: ParametricImg,
-  //   links: []
-  // },
   {
     year: "2025",
     slug: "mizuto",
