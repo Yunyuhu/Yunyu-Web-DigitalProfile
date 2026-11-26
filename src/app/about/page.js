@@ -195,7 +195,7 @@ export default function About() {
         { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
         { label: "天氣問問", href: "/projects/weather-assistant" },
-        { label: "聊聊", href: "/projects/chat-demo" },
+        { label: "數字辨識筆記", href: "/projects/handwriting-notebook" },
       ],
     },
     {
