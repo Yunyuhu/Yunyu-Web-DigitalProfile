@@ -400,7 +400,8 @@ const allProjects = [
             steps: [
               { title: "資料蒐集", detail: "使用 Roboflow Universe 的公開資料集，共 3,000 張室內牆面照片，分為裂縫、壁癌、鏽蝕三類。", tools: ["Roboflow"] },
               { title: "前處理", detail: "照片統一調整為 224×224。含鏽蝕與鋼筋外露 mask 的資料集很難取得，因此用 OpenCV 把每張照片轉成灰階，以門檻二值化產生 mask，用於訓練與驗證。", tools: ["OpenCV"] },
-              { title: "影像分割", detail: "從初版的整張照片分類，改成 U-Net 影像分割，標出缺損的位置與範圍。", tools: ["ResNet50V2", "U-Net"] },
+              { title: "種類判斷", detail: "以預訓練的 ResNet50V2 做遷移學習，判斷整張照片屬於裂縫、壁癌或鏽蝕。", tools: ["ResNet50V2"] },
+              { title: "影像分割", detail: "以 U-Net 影像分割標出缺損的位置與範圍，和種類判斷結果一起交給後續步驟。", tools: ["U-Net"] },
               { title: "面積計算", detail: "依分割結果換算缺損面積（mm²，以每像素 0.5 mm 粗估），方便判斷嚴重程度與後續處理。", tools: ["Python"] },
               { title: "生成式 AI", detail: "把辨識結果轉成對話，以分階段的引導式 prompt 問答，產出白話的風險說明與處理建議。", tools: ["ChatGPT API", "Prompt"] },
               { title: "部署與測試", detail: "測試資訊正確性、批次回答良率，以及未知牆損、無法辨識圖像等例外情境。", tools: ["Next.js", "Python", "Node.js", "Firebase", "GCP Cloud Run"] }
@@ -408,27 +409,27 @@ const allProjects = [
           },
           {
             type: "table",
-            head: ["", "初版", "最終"],
+            head: ["", "ResNet50V2：判斷種類", "U-Net：標出範圍"],
             rows: [
               ["任務", "替整張照片分類：裂縫、壁癌或鏽蝕", "影像分割，標出缺損的位置與範圍"],
               ["模型", "預訓練的 ResNet50V2，移除頂層後加上全連接層", "U-Net，以多層卷積與最大池化擷取特徵，再以上採樣與拼接還原空間尺寸"],
               ["訓練", "損失函數 categorical cross-entropy，Adam 最佳化，訓練 8 個 epoch", "Adam 最佳化，搭配 EarlyStopping、ModelCheckpoint、ReduceLROnPlateau；受硬體限制，訓練 5 個 epoch、batch size 4"],
               ["表現", "準確率 98.97%（以訓練資料評估）", "驗證集準確率 90.42%，損失 0.124"],
-              ["限制", "只知道整張照片屬於哪一類，看不出位置與大小", "mask 以灰階門檻產生，實際只分出明暗區域；驗證集也只有壁癌照片"]
+              ["限制", "只知道整張照片屬於哪一類，看不出位置與大小", "mask 以灰階門檻產生，只能依明暗標出範圍、無法分辨種類；驗證集也只有壁癌照片"]
             ],
-            caption: "初版的準確率以訓練資料評估，最終版以驗證集評估。最終版雖然分數較低，但能標出位置、計算面積，更貼近民眾實際要判斷的事。"
+            caption: "開發時先各自實驗兩個模型：ResNet50V2 知道是哪一種牆損、看不出位置，U-Net 能標出位置、卻分不出種類，展出版本因此把兩者整合。表中數字來自開發階段：ResNet50V2 以訓練資料評估，U-Net 以驗證集評估。"
           },
           {
             type: "image",
             src: WallMasksImg,
-            alt: "原始牆面照片，以及最終版模型輸出的遮罩與換算面積",
-            caption: "左起為原始照片與最終版三個輸出通道的遮罩，右側是換算出的面積（出自專案海報）。"
+            alt: "原始牆面照片，以及 U-Net 輸出的遮罩與換算面積",
+            caption: "左起為原始照片與 U-Net 三個輸出通道的遮罩，右側是換算出的面積（出自專案海報）。"
           }
         ]
       },
       outcome: {
         headline: "受邀在 InnoFest@ICI 2024 展出，並參加 2025 AI Award",
-        body: "下一步規劃以 RAG 提升建議內容的精準度、減少幻覺，並透過內部測試與專家意見完善建議、連結地區服務。2026 年整理出合併兩種做法的完整版，程式碼公開在 GitHub。",
+        body: "下一步規劃以 RAG 提升建議內容的精準度、減少幻覺，並透過內部測試與專家意見完善建議、連結地區服務。展出版本的原始整合程式已遺失，2026 年依展出流程重新整理成完整版，並修正原始程式的問題，程式碼公開在 GitHub。",
         visuals: [
           {
             type: "cards",
