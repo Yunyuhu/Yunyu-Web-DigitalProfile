@@ -195,7 +195,9 @@ export default function About() {
         { label: "WallGuard", href: "/projects/wallguard" },
         { label: "Zooly", href: "/projects/zooly" },
         { label: "MetroMate", href: "/projects/metromate" },
-        { label: "AI 互動 Demo", href: "https://github.com/Yunyuhu/AI-Practice-2024" },
+        { label: "天氣問問", href: "/projects/weather-assistant" },
+        { label: "聊聊", href: "/projects/chat-demo" },
+        { label: "數字辨識筆記", href: "/projects/handwriting-notebook" },
       ],
     },
     {
