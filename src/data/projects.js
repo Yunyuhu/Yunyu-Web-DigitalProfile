@@ -35,6 +35,7 @@ import HungryFrogWinImg from "@/image/projects/hungry-frog-win.png";
 // stack     使用的技術與方法（不放主題形容詞）
 // links     { type, href, label? }，顯示在專案頁的「相關資源」，type 決定按鈕文字與圖示，見 projects/[slug]/page.js 的 LINK_TYPES（code 是程式碼、play 是線上遊玩）
 // featured  精選專案，排在最前面
+// hidden    先不放在網站上（資料保留，要恢復時拿掉這個欄位就好）
 // slug      專案頁網址 /projects/{slug}
 // subtitle  英文正式名稱等副標，只顯示在專案頁（選填）
 //
@@ -52,7 +53,7 @@ import HungryFrogWinImg from "@/image/projects/hungry-frog-win.png";
 // 每章 { headline, body, visuals: [視覺] }，視覺的 type 與欄位見 components/CaseVisuals.js：
 // stats、list、bars（互動長條圖）、mapping（痛點與做法的互動對應）、scope、methods、flow、spectrum、relations、matrix、scale、table、cards、tags、image
 
-export const projects = [
+const allProjects = [
   {
     featured: true,
     year: "2026",
@@ -1474,6 +1475,7 @@ export const projects = [
   },
   {
     year: "2022",
+    hidden: true,
     slug: "quant-trading",
     title: "量化交易：以數據策略打造自動化交易",
     context: "量化交易",
@@ -1511,6 +1513,7 @@ export const projects = [
   },
   {
     year: "2020",
+    hidden: true,
     slug: "food-rescue-platform",
     title: "剩食平台：社區剩食媒合 App",
     context: "系統分析與設計",
@@ -1577,6 +1580,7 @@ export const projects = [
   },
   {
     year: "2019",
+    hidden: true,
     slug: "youshi",
     title: "遊食：用遊戲決定今天吃什麼",
     context: "創新與設計思考",
@@ -1609,3 +1613,5 @@ export const projects = [
     links: []
   }
 ];
+
+export const projects = allProjects.filter((project) => !project.hidden);
