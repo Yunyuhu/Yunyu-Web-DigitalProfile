@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { projects } from "@/data/projects";
 import { introParagraphs } from "@/data/intro";
 import SkillMap from "@/components/SkillMap";
@@ -11,15 +11,18 @@ import DecodeText from "@/components/DecodeText";
 import { Fragment } from "@/components/Fragments";
 import ResumeButton from "@/components/ResumeButton";
 
-// 「查看專案」固定放在每一列的右側，各分頁同一種樣式；手機只留箭頭，避免擠壓左側文字
+// 「查看專案」固定放在每一列的右側，各分頁同一種樣式；手機只留箭頭，避免擠壓左側文字。
+// 開新分頁，看完專案關掉就回到原本讀到的經歷位置
 const ProjectLink = ({ href }) => (
   <Link
     href={href}
-    aria-label="查看專案"
+    target="_blank"
+    rel="noopener"
+    aria-label="查看專案（開新分頁）"
     className="group shrink-0 inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-teal-200 p-1.5 sm:px-3 sm:py-1 text-xs font-medium text-teal-700 transition-colors hover:bg-teal-50 hover:text-teal-900"
   >
     <span className="hidden sm:inline">查看專案</span>
-    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+    <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
   </Link>
 );
 

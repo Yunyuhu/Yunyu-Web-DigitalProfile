@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import DecodeText from "@/components/DecodeText";
 
 const mono = "font-[family-name:var(--font-geist-mono)]";
@@ -16,13 +16,13 @@ const EXPAND = 0.6;
 const TRUNK_AT = EXPAND + 0.15;
 const rowAt = (index) => EXPAND + 0.45 + index * 0.14;
 
-// 依證據類型顯示：站內專案、外部連結，或沒有連結的經歷
+// 依證據類型顯示：站內專案、外部連結，或沒有連結的經歷；站內專案也開新分頁，讀完回來技能樹還停在原處
 const Evidence = ({ item }) => {
   if (item.href?.startsWith("/")) {
     return (
-      <Link href={item.href} data-track-source="skill_tree" className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
+      <Link href={item.href} target="_blank" rel="noopener" data-track-source="skill_tree" className="group inline-flex items-center gap-0.5 text-teal-300 hover:text-teal-100">
         {item.label}
-        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+        <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
     );
   }
