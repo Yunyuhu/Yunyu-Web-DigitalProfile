@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { projects } from "@/data/projects";
 import { introParagraphs } from "@/data/intro";
 import SkillMap from "@/components/SkillMap";
 import DecodeText from "@/components/DecodeText";
@@ -76,7 +75,7 @@ const EntryList = ({ items }) => (
   </ul>
 );
 
-// 依年份分組（專案設計與開發、獲獎展出）：年份當小標題只出現一次；跨年的項目歸在結束那年，並標出完整期間
+// 依年份分組（獲獎展出）：年份當小標題只出現一次；跨年的項目歸在結束那年，並標出完整期間
 const YearGroups = ({ items }) => {
   const groups = [];
   items.forEach((item) => {
@@ -121,7 +120,6 @@ const YearGroups = ({ items }) => {
 
 const TABS = [
   { value: "work", label: "💼 工作與教學" },
-  { value: "projects", label: "💻 專案設計與開發" },
   { value: "research", label: "🧪 研究與發表" },
   { value: "awards", label: "🏆 獲獎展出" },
   { value: "community", label: "🤝 社群參與" },
@@ -196,11 +194,8 @@ export default function About() {
       evidence: [
         { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
-        { label: "Zooly", href: "/projects/zooly" },
-        { label: "MetroMate", href: "/projects/metromate" },
         { label: "天氣問問", href: "/projects/weather-assistant" },
         { label: "聊聊", href: "/projects/chat-demo" },
-        { label: "數字辨識筆記", href: "/projects/handwriting-notebook" },
       ],
     },
     {
@@ -400,16 +395,6 @@ export default function About() {
       },
       { year: "2019", title: "攝影社 活動幹部" },
     ],
-    // 專案內容與專案頁共用同一份資料，避免兩邊說法不一致；時間軸依結束年份由新到舊
-    projects: [...projects]
-      .sort((a, b) => b.year.slice(-4) - a.year.slice(-4))
-      .map(({ slug, year, title, tagline, stack }) => ({
-        year,
-        title,
-        description: tagline,
-        tags: stack,
-        href: `/projects/${slug}`,
-      })),
     awards: [
       { year: "2024", title: "TAICHI 2024 台灣人機互動研討會", description: "Best Demo｜FlexiTouch", href: "/projects/flexitouch" },
       { year: "2024", title: "League of VR Final 2024", description: "最佳技術獎｜FlexiTouch", href: "/projects/flexitouch" },
@@ -519,9 +504,6 @@ export default function About() {
 
           <TabsContent value="work">
             <EntryList items={experience} />
-          </TabsContent>
-          <TabsContent value="projects">
-            <YearGroups items={data.projects} />
           </TabsContent>
           <TabsContent value="research">
             <EntryList items={data.research} />
