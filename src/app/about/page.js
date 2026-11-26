@@ -125,7 +125,22 @@ const TABS = [
   { value: "community", label: "🤝 社群參與" },
 ];
 
-// 自我介紹：預設只顯示第一段（碩論），其餘收合，避免一大段文字把學歷與技能樹往下推
+// 自述中用 **…** 標記的重點：螢光筆式底色（只塗文字下半部），換行時每一行各自上色
+const Highlighted = ({ text }) =>
+  text.split(/(\*\*[^*]+\*\*)/).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <mark
+        key={i}
+        className="bg-transparent bg-[linear-gradient(transparent_55%,#ccfbf1_55%)] box-decoration-clone px-0.5 font-medium text-gray-900"
+      >
+        {part.slice(2, -2)}
+      </mark>
+    ) : (
+      part
+    )
+  );
+
+// 自我介紹：預設只顯示第一段（總覽），其餘收合，避免一大段文字把學歷與技能樹往下推
 const Introduction = () => {
   const [open, setOpen] = useState(false);
   const [first, ...rest] = introParagraphs;
@@ -133,10 +148,10 @@ const Introduction = () => {
     <section>
       <h2 className="font-semibold mb-3">自我介紹 / Introduction</h2>
       <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
-        <p>{first}</p>
+        <p><Highlighted text={first} /></p>
         <div id="intro-rest" hidden={!open} className="space-y-3">
           {rest.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+            <p key={paragraph}><Highlighted text={paragraph} /></p>
           ))}
         </div>
       </div>
