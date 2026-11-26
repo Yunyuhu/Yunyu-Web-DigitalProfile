@@ -189,7 +189,7 @@ export default function About() {
       title: "AI 應用",
       en: "AI for Social Good",
       summary: "串接 AI API 做評論情緒辨識與內容分類，以 U-Net 影像分割辨識牆面損傷與範圍，把 AI 用在民眾日常的真實問題",
-      skills: ["Python", "情緒分析與文本分類", "U-Net", "電腦視覺", "生成式 AI API", "對話設計"],
+      skills: ["Python", "情緒分析與文本分類", "U-Net 影像分割", "電腦視覺", "生成式 AI API", "對話設計"],
       evidence: [
         { label: "台灣設計研究院實習" },
         { label: "WallGuard", href: "/projects/wallguard" },
