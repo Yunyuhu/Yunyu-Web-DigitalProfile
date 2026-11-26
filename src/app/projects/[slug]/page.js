@@ -8,6 +8,7 @@ import {
   Bot,
   ChevronLeft,
   ChevronRight,
+  Database,
   FileText,
   Gamepad2,
   Github,
@@ -29,6 +30,7 @@ const LINK_TYPES = {
   live: { label: "線上試用", icon: Bot },
   play: { label: "線上遊玩", icon: Gamepad2 },
   code: { label: "程式碼", icon: Github },
+  data: { label: "訓練資料", icon: Database },
   archive: { label: "網站存檔", icon: Archive },
 };
 

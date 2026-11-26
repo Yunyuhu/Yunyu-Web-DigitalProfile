@@ -32,7 +32,7 @@ import HungryFrogWinImg from "@/image/projects/hungry-frog-win.png";
 // context   場域、專案類型或獲獎，顯示在年份旁
 // tagline   一句話說明這是什麼、為誰而做
 // stack     使用的技術與方法（不放主題形容詞）
-// links     { type, href, label? }，顯示在專案頁的「相關資源」，type 決定按鈕文字與圖示，見 projects/[slug]/page.js 的 LINK_TYPES（code 是程式碼、play 是線上遊玩）
+// links     { type, href, label? }，顯示在專案頁的「相關資源」，type 決定按鈕文字與圖示，見 projects/[slug]/page.js 的 LINK_TYPES（code 是程式碼、data 是訓練資料、play 是線上遊玩）
 // featured  精選專案，排在最前面
 // hidden    先不放在網站上（資料保留，要恢復時拿掉這個欄位就好）
 // slug      專案頁網址 /projects/{slug}
@@ -456,7 +456,8 @@ const allProjects = [
     image: WallImg,
     links: [
       { type: "video", href: "https://www.youtube.com/watch?v=pVikml-YPsw" },
-      { type: "code", href: "https://github.com/Yunyuhu/WallGuard" }
+      { type: "code", href: "https://github.com/Yunyuhu/WallGuard" },
+      { type: "data", href: "https://github.com/Yunyuhu/dtaidataset" }
     ]
   },
   {
