@@ -104,7 +104,7 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard｜牆面危害 AI 辨識系統",
-        detail: "以 ResNet50V2 判斷裂縫、壁癌或鏽蝕，搭配 U-Net 影像分割標出範圍並換算面積，再串接生成式 AI API 產出白話風險報告。InnoFest@ICI 2024 受邀展出。",
+        detail: "以 U-Net 逐像素分出裂縫、壁癌與鏽蝕的範圍並各自換算面積，再串接生成式 AI API 產出白話風險報告。InnoFest@ICI 2024 受邀展出。",
       },
       {
         year: "2025",
@@ -224,7 +224,7 @@ export const resumeContent = {
       {
         year: "2024",
         title: "WallGuard | AI Wall-Hazard Detection",
-        detail: "ResNet50V2 classifies cracks, efflorescence and corrosion while U-Net segmentation marks damage areas, plus plain-language risk reports from generative AI. Exhibited at InnoFest@ICI 2024.",
+        detail: "Per-pixel U-Net segmentation separates cracks, efflorescence and corrosion and estimates each area, plus plain-language risk reports from generative AI. Exhibited at InnoFest@ICI 2024.",
       },
       {
         year: "2025",
