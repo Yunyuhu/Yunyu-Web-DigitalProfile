@@ -404,24 +404,23 @@ const allProjects = [
             steps: [
               { title: "資料蒐集", detail: "使用 Roboflow Universe 的公開資料集，共 3,000 張室內牆面照片，分為裂縫、壁癌、鏽蝕三類。", tools: ["Roboflow"] },
               { title: "前處理", detail: "照片統一調整為 224×224。含鏽蝕與鋼筋外露 mask 的資料集很難取得，因此用 OpenCV 把每張照片轉成灰階，以門檻二值化產生 mask，用於訓練與驗證。", tools: ["OpenCV"] },
-              { title: "種類判斷", detail: "以預訓練的 ResNet50V2 做遷移學習，判斷整張照片屬於裂縫、壁癌或鏽蝕。", tools: ["ResNet50V2"] },
-              { title: "影像分割", detail: "以 U-Net 影像分割標出缺損的位置與範圍，和種類判斷結果一起交給後續步驟。", tools: ["U-Net"] },
-              { title: "面積計算", detail: "依分割結果換算缺損面積（mm²，以每像素 0.5 mm 粗估），方便判斷嚴重程度與後續處理。", tools: ["Python"] },
+              { title: "影像分割", detail: "以 U-Net 替每個像素分類，同一張照片裡的裂縫、壁癌、鏽蝕可以分開標出位置與範圍。", tools: ["U-Net"] },
+              { title: "面積計算", detail: "依分割結果分別換算各種牆損的面積（mm²，以每像素 0.5 mm 粗估），方便判斷嚴重程度與後續處理。", tools: ["Python"] },
               { title: "生成式 AI", detail: "把辨識結果轉成對話，以分階段的引導式 prompt 問答，產出白話的風險說明與處理建議。", tools: ["ChatGPT API", "Prompt"] },
               { title: "部署與測試", detail: "測試資訊正確性、批次回答良率，以及未知牆損、無法辨識圖像等例外情境。", tools: ["Next.js", "Python", "Node.js", "Firebase", "GCP Cloud Run"] }
             ]
           },
           {
             type: "table",
-            head: ["", "ResNet50V2：判斷種類", "U-Net：標出範圍"],
+            head: ["", "ResNet50V2：判斷種類", "U-Net：分出各種牆損的範圍"],
             rows: [
-              ["任務", "替整張照片分類：裂縫、壁癌或鏽蝕", "影像分割，標出缺損的位置與範圍"],
+              ["任務", "替整張照片分類：裂縫、壁癌或鏽蝕", "逐像素分類，標出各種牆損的位置與範圍"],
               ["模型", "預訓練的 ResNet50V2，移除頂層後加上全連接層", "U-Net，以多層卷積與最大池化擷取特徵，再以上採樣與拼接還原空間尺寸"],
               ["訓練", "損失函數 categorical cross-entropy，Adam 最佳化，訓練 8 個 epoch", "Adam 最佳化，搭配 EarlyStopping、ModelCheckpoint、ReduceLROnPlateau；受硬體限制，訓練 5 個 epoch、batch size 4"],
               ["表現", "準確率 98.97%（以訓練資料評估）", "驗證集準確率 90.42%，損失 0.124"],
               ["限制", "只知道整張照片屬於哪一類，看不出位置與大小", "mask 以灰階門檻產生，只能依明暗標出範圍、無法分辨種類；驗證集也只有壁癌照片"]
             ],
-            caption: "開發時先各自實驗兩個模型：ResNet50V2 知道是哪一種牆損、看不出位置，U-Net 能標出位置、卻分不出種類，展出版本因此把兩者整合。表中數字來自開發階段：ResNet50V2 以訓練資料評估，U-Net 以驗證集評估。"
+            caption: "開發時先試 ResNet50V2，只能替整張照片給一個答案、看不出位置；之後改用 U-Net 替每個像素分類，分出各種牆損的範圍並換算面積，展出時用的就是這個做法。表中數字來自開發階段：ResNet50V2 以訓練資料評估，U-Net 以驗證集評估。當時的 mask 只依明暗產生，2026 公開的完整版改進標註方式後重新訓練，三種牆損都能分開標出。"
           },
           {
             type: "image",
