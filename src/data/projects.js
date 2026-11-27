@@ -1615,10 +1615,7 @@ const allProjects = [
     },
     stack: ["Scrum", "遊戲化設計", "以使用者為中心設計", "醫療人員訪談"],
     image: MedicalReviewImg,
-    links: [
-      { type: "prototype", href: "https://medical-services-team.github.io/BoostrapTest/home.html" },
-      { type: "code", href: "https://github.com/Medical-Services-Team/BoostrapTest" }
-    ]
+    links: []
   },
   {
     year: "2022",
